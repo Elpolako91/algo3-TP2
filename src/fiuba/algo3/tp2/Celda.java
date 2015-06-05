@@ -15,7 +15,7 @@ public class Celda {
 		return contenido;
 	}
 
-	public void colocarEdificioEnCelda(Edificio edificio) {
+	public void colocarEdificioEnCelda(EdificioTerran edificio) {
 		
 		this.contenido = edificio;
 		

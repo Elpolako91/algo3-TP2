@@ -7,11 +7,11 @@ public class Mapa {
 	
 	private Map<Posicion, Celda> mapa;
 	
-	public Mapa(int tamanio){
+	public Mapa(int tamaño){
 		
 		this.mapa = new HashMap<>();
-		for (int i = 1; i <= tamanio; i++){
-			for (int j = 1; j <= tamanio; j++){
+		for (int i = 1; i <= tamaño; i++){
+			for (int j = 1; j <= tamaño; j++){
 				Posicion p = new Posicion(i,j);
 				mapa.put(p, new CeldaVacia() );
 			}
@@ -43,7 +43,7 @@ public class Mapa {
 	}
 
 
-	public void colocarEdificiosDelJugador(Edificio edificio, Posicion posicion) {
+	public void colocarEdificiosDelJugador(EdificioTerran edificio, Posicion posicion) {
 		
 		if ( this.validarPosicion(edificio, posicion) == false ){
 			
@@ -56,7 +56,7 @@ public class Mapa {
 		
 	}
 	
-	public boolean validarPosicion(Edificio edificio, Posicion posicion) {
+	public boolean validarPosicion(EdificioTerran edificio, Posicion posicion) {
 		
 		CeldaVacia c = new CeldaVacia();
 		for ( int i = 0; i <= 1; i++ ) {
@@ -87,7 +87,7 @@ public class Mapa {
 		return false;
 	}
 	
-	private void colocarEdificioEnMapa(Edificio edificio, Posicion posicion, Celda celda){
+	private void colocarEdificioEnMapa(EdificioTerran edificio, Posicion posicion, Celda celda){
 	
 	for ( int i = 0; i <= 1; i++ ) {
 		
@@ -100,7 +100,7 @@ public class Mapa {
 }
 
 
-	public void colocarEdificioDeRecoleccion(Edificio edificioRecolector, Posicion posicion) {
+	public void colocarEdificioDeRecoleccion(EdificioTerran edificioRecolector, Posicion posicion) {
 		
 		if ( this.validarPosicion(edificioRecolector, posicion) ){
 			return; /*Excepcion que no hay recursos ahi*/
