@@ -11,8 +11,7 @@ public class TestsEdificiosRazaProtos {
 		
 		EdificioCentral edCentral = new EdificioCentral();
 		
-		assertEquals(2000, edCentral.getVidaActual() );
-		assertEquals(1000, edCentral.getEscudoActual() );
+		assertEquals(2000, edCentral.vidaActual() );
 		
 	}
 	
@@ -21,8 +20,7 @@ public class TestsEdificiosRazaProtos {
 		
 		RecolectorMineral ceMineral = new RecolectorMineral();
 		
-		assertEquals(500, ceMineral.getVidaActual() );
-		assertEquals(250, ceMineral.getEscudoActual() );
+		assertEquals(500, ceMineral.vidaActual() );
 		
 	}
 	
@@ -31,9 +29,7 @@ public class TestsEdificiosRazaProtos {
 		
 		RecolectorGasVespeno recGas = new RecolectorGasVespeno();
 		
-		assertEquals(750, recGas.getVidaActual() );
-		assertEquals(450, recGas.getEscudoActual() );
+		assertEquals(750, recGas.vidaActual() );
 		
-	}
-
+	}	
 }

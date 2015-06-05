@@ -11,7 +11,7 @@ public class TestsEdificiosRazaTerran {
 		
 		EdificioCentral edCentral = new EdificioCentral();
 		
-		assertEquals(2000, edCentral.getVidaActual() );
+		assertEquals(2000, edCentral.vidaActual() );
 		
 	}
 	
@@ -20,7 +20,7 @@ public class TestsEdificiosRazaTerran {
 		
 		RecolectorMineral ceMineral = new RecolectorMineral();
 		
-		assertEquals(500, ceMineral.getVidaActual() );
+		assertEquals(500, ceMineral.vidaActual() );
 		
 	}
 	
@@ -29,7 +29,17 @@ public class TestsEdificiosRazaTerran {
 		
 		RecolectorGasVespeno recGas = new RecolectorGasVespeno();
 		
-		assertEquals(750, recGas.getVidaActual() );
+		assertEquals(750, recGas.vidaActual() );
+		
+	}
+	
+	@Test
+	public void testCrearBarraca() {
+		
+		Barraca edificio = new Barraca();
+		
+		assertEquals(1000, edificio.vidaActual() );
+		assertEquals(edificio.nombre(), "barraca");
 		
 	}
 

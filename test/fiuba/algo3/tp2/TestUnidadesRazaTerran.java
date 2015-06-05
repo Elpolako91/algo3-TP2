@@ -9,10 +9,52 @@ public class TestUnidadesRazaTerran {
 	@Test
 	public void testCrearMarine(){
 		
-		Unidad marine= new UnidadBasica("Terran");
+		UnidadTerran unidad= new UnidadMarine();
 		
-		assertEquals(marine.vidaMaxima(),40);	
+		assertEquals(unidad.nombre(),"marine");
+		assertEquals(unidad.vidaMaxima(),40);
+		assertEquals(unidad.danioTierra(), 6);
+		assertEquals(unidad.danioAire(), 6);
 		
 	}
-
+	
+	@Test
+	public void testCrearGolliat(){
+		
+		UnidadTerran unidad= new UnidadGolliat();
+		
+		assertEquals(unidad.nombre(),"golliat");
+		assertEquals(unidad.vidaMaxima(),125);
+		assertEquals(unidad.danioTierra(), 12);
+		assertEquals(unidad.danioAire(), 10);
+	}
+	
+	@Test
+	public void testCrearEspectro(){
+		
+		UnidadTerran unidad= new UnidadEspectro();
+		
+		assertEquals(unidad.nombre(),"espectro");
+		assertEquals(unidad.vidaMaxima(),120);
+		assertEquals(unidad.danioTierra(), 8);
+		assertEquals(unidad.danioAire(), 20);
+	}
+	
+	@Test
+	public void testCrearNaveCiencia(){
+		
+		UnidadTerran unidad= new UnidadNaveCiencia();
+		
+		assertEquals(unidad.nombre(),"nave ciencia");
+		assertEquals(unidad.vidaMaxima(),200);
+	}
+	
+	@Test
+	public void testCrearNaveTransporte(){
+		
+		UnidadTerran unidad= new UnidadNaveTransporte();
+		
+		assertEquals(unidad.nombre(),"nave transporte");
+		assertEquals(unidad.vidaMaxima(),150);
+	}
 }
