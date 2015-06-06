@@ -77,11 +77,11 @@ public class Mapa {
 	}
 
 
-	private boolean posicionValidada(Celda celdaActual, Celda c) {
+	private boolean posicionValidada(Celda celdaActual, CeldaVacia c) {
 		
 		if ( celdaActual.equals(c) ){
 			
-			return true;
+			return true;					/*celdaActual es CeldaVacia devuelve true*/
 		}
 		
 		return false;
@@ -121,6 +121,22 @@ public class Mapa {
 		celda = mapa.get(posicion);
 		RecolectorMineral recolectorAux = (RecolectorMineral) celda.getContenidoDeCelda();
 		recolectorAux.reducirLaCantidadDeRecursoDisponible();
+		
+	}
+
+
+	public void colocarUnidadMovil(UnidadTerran marine, Posicion posicion) {
+		
+		Celda celdaActual = new Celda();
+		CeldaVacia c = new CeldaVacia();
+		celdaActual = this.mapa.get(posicion);
+		
+		if (this.posicionValidada(celdaActual, c) ){
+			
+			celdaActual.colocarUnidadMovil(marine);
+			mapa.put(posicion, celdaActual);
+			
+		}
 		
 	}
 

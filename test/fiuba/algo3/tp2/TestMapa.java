@@ -117,15 +117,16 @@ public class TestMapa {
 	@Test
 	public void testColocarUnidadesMovilesEnMapa(){
 		
-		assertTrue(false);
+		Mapa mapa = new Mapa(1000);
+		Posicion posicion = new Posicion(100,55);
+		UnidadTerran marine = new UnidadMarine();
+		
+		mapa.colocarUnidadMovil(marine, posicion);
+		
+		assertEquals(marine, mapa.getContenido(posicion));
+
 		
 	}
 	
-	@Test
-	public void testCrearUnJugador(){
-
-		assertTrue(false);
-		
-	}
 
 }

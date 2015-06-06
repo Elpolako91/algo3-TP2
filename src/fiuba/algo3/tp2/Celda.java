@@ -33,5 +33,11 @@ public class Celda {
 		return true;
 	}
 
+	public void colocarUnidadMovil(UnidadTerran unidad) {
+		
+		this.contenido = unidad;
+		
+	}
+
 
 }
