@@ -1,5 +1,8 @@
 package fiuba.algo3.tp2;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 
 public class TestsIntegracion {
