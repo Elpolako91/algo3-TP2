@@ -9,7 +9,10 @@ public class Barraca extends EdificioTerran{
 		this.vidaActual = 1000;
 		this.vidaMaxima = 1000;
 	}
-	
-	
+
+	public UnidadMarine construirUnidad() {
+		UnidadMarine unidad = new UnidadMarine();
+		return unidad;
+	}
 
 }

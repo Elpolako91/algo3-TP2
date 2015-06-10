@@ -4,6 +4,9 @@ public class Celda {
 	
 	protected Object contenido;
 
+	public Celda() {
+	}
+
 	public void colocarRecursoEnCelda(Recurso recurso) {
 		
 		this.contenido = recurso;
@@ -36,6 +39,11 @@ public class Celda {
 	public void colocarUnidadMovil(UnidadTerran unidad) {
 		
 		this.contenido = unidad;
+		
+	}
+
+	public void contenido(Object objeto) {
+		contenido = objeto;
 		
 	}
 

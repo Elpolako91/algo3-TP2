@@ -13,6 +13,7 @@ public class TestMapa {
 		Mapa mapa = new Mapa(1000);
 		
 		assertEquals(false, mapa.estaVacio());
+		assertTrue(mapa.getContenido(new Posicion(1,1)) instanceof Terreno);
 		
 	}
 	
@@ -84,7 +85,7 @@ public class TestMapa {
 		Posicion posicion3 = new Posicion(101, 100);
 		Posicion posicion4 = new Posicion(101, 101);
 		
-		mapa.colocarEdificiosDelJugador(edfCentral, posicion1);
+		mapa.colocarEdificio(edfCentral, posicion1);
 		
 		assertEquals(edfCentral, mapa.getContenido(posicion1));
 		assertEquals(edfCentral, mapa.getContenido(posicion2));
@@ -121,7 +122,7 @@ public class TestMapa {
 		Posicion posicion = new Posicion(100,55);
 		UnidadTerran marine = new UnidadMarine();
 		
-		mapa.colocarUnidadMovil(marine, posicion);
+		mapa.colocarUnidad(marine, posicion);
 		
 		assertEquals(marine, mapa.getContenido(posicion));
 

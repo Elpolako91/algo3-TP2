@@ -129,15 +129,81 @@ public class Mapa {
 		
 		Celda celdaActual = new Celda();
 		CeldaVacia c = new CeldaVacia();
-		celdaActual = this.mapa.get(posicion);
+		celdaActual = this.mapa.get(posicion);		
 		
-		if (this.posicionValidada(celdaActual, c) ){
-			
-			celdaActual.colocarUnidadMovil(marine);
-			mapa.put(posicion, celdaActual);
-			
+		while (! this.posicionValidada(celdaActual, c)){
+			posicion= posicion.obtenerPosicionAlrededor();			
+			celdaActual = this.mapa.get(posicion);
+		}			
+		marine.posicion(posicion);
+		celdaActual.colocarUnidadMovil(marine);
+		mapa.put(posicion, celdaActual);
+	}
+		
+	public void colocarUnidad(UnidadTerran unidad, Posicion edificioPosicion){
+		
+		Posicion posicionAux = edificioPosicion;
+		Celda c = new Celda();
+		c.contenido(unidad);
+		while(!this.hayTerrenoVacio(posicionAux)){
+			posicionAux = posicionAux.obtenerPosicionAlrededor();
 		}
+		unidad.posicion(posicionAux);
+		mapa.put(posicionAux, c);
 		
 	}
+	
+	private boolean hayTerrenoVacio(Posicion posicion){
+		if (mapa.get(posicion) instanceof CeldaVacia)return true;
+		else return false;
+	}
+	
+	public boolean colocarEdificio(EdificioTerran unEdificio, Posicion posicion) {
+		boolean condicion;
+		if (!this.validarPosicionParaObjetoConTamanio(posicion)) condicion= false;
+		else{
+			this.colocarObjetoConTamanio(unEdificio, posicion);
+			condicion = true;	
+		}
+		return condicion;
+	}
+	private boolean validarPosicionParaObjetoConTamanio(Posicion posicion){
+		
+		boolean condicion = true;		
+		
+		for ( int i = 0; i <= 1; i++ ) {			
+			for ( int j = 0; j <=1; j++){				
+				Posicion posicionAux = new Posicion(posicion.x()+i, posicion.y()+j);
+				if (!(mapa.get(posicionAux) instanceof CeldaVacia)) condicion= false;									
+			}
+		}
+		return condicion;
+	}
+	
+	private void colocarObjetoConTamanio(Object unObjetoConTamanio, Posicion posicion){		
+		for ( int i = 0; i <= 1; i++ ) {			
+			for ( int j = 0; j <=1; j++){		
+				Celda c = new Celda();
+				c.contenido(unObjetoConTamanio);
+				Posicion posicionAux = new Posicion(posicion.x()+i, posicion.y()+j );
+				mapa.put(posicionAux, c);
+			}
+		}
+	}
+
+	public boolean moverUnidad(UnidadTerran unidad, Posicion posicionDestino) {
+		Posicion direccionDestino = unidad.posicion().direccion(posicionDestino);
+		
+		if (this.hayTerrenoVacio(direccionDestino)){
+			mapa.put(unidad.posicion(), new CeldaVacia());
+			Celda c= new Celda();
+			c.contenido(unidad);
+			mapa.put(direccionDestino, c);
+			unidad.posicion(direccionDestino);
+			return true;			
+		}
+		return false;
+	}
+	
 
 }

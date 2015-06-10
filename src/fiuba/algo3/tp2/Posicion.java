@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2;
 
+import java.util.Random;
+
 public class Posicion {
 	
 	private int x;
@@ -47,6 +49,44 @@ public class Posicion {
 		
 		return ( this.y + j );
 		
+	}
+	
+	public int distancia(Posicion p2){
+		
+		int distancia= (int) Math.sqrt(Math.pow(this.x-p2.x, 2)+Math.pow(this.y-p2.y,2));
+		
+		return distancia;
+	}
+
+	public Posicion obtenerPosicionAlrededor() {	//IMPLEMENTAR BIEN CON RANDOM DE incremento de -1 a 1
+		 		
+		Posicion posicion = new Posicion(this.x +1, this.y +1);
+		return posicion;
+	}
+	
+	public int x(){
+		return x;
+	}
+
+	public int y() {
+		return y;
+	}
+
+	public Posicion direccion(Posicion p2) {
+		int i=0,j=0;
+		if (this.x> p2.x())i=-1;
+		else 
+			if(this.x < p2.x()) i =1;
+			
+		if (this.y> p2.y())j =-1;
+		else
+		if(this.y < p2.y()) j = 1;
+						
+		i=i+ this.x;
+		j=j+ this.y;
+		
+		Posicion direccion= new Posicion(i,j);
+		return direccion;
 	}
 
 

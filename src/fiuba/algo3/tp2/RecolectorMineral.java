@@ -1,9 +1,11 @@
 package fiuba.algo3.tp2;
 
 public class RecolectorMineral extends EdificioTerran {
-
+	
+	private int cantRecursoDisponible;
+	private int almacenamiento;
+	
 	public RecolectorMineral() {
-		
 		this.vidaMaxima = 500;
 		this.vidaActual = 500;
 		this.cantRecursoDisponible = 500;

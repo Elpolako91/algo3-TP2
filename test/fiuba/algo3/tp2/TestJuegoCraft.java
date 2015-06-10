@@ -11,15 +11,18 @@ public class TestJuegoCraft {
 	public void testCrearJuegoConJugadores(){
 
 		JuegoCraft juego = new JuegoCraft();
-		juego.cargarJugador1("facu","rojo","terran");
-		juego.cargarJugador2("tincho","verde","protos");
+		Mapa mapa = new Mapa(1000);
+		Jugador jugador1 = new Jugador("facu","rojo","terran");
+		Jugador jugador2 = new Jugador("tincho","verde","protos");
+		
+		juego.crearPartida(jugador1, jugador2, mapa);
 
-		assertEquals(juego.jugador1Nombre(),"facu");
-		assertEquals(juego.jugador2Nombre(),"tincho");
+		assertEquals(jugador1.nombre(),"facu");
+		assertEquals(jugador2.nombre(),"tincho");
 
 		Assert.assertFalse(juego.mapaestavacio());
+		assertFalse(juego.mapaestavacio());
+		assertFalse(jugador1.juego().mapaestavacio());
 		
 	}
-	
-
 }
