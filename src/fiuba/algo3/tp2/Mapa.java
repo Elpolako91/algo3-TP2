@@ -39,7 +39,7 @@ public class Mapa {
 		if (mapa.get(posicion).contenido() instanceof UnidadTerran)return true;
 		else return false;
 	}
-	private boolean hayVaporVespeno(Posicion posicionDestino) {
+	public boolean hayVaporVespeno(Posicion posicionDestino) {
 		if (mapa.get(posicionDestino).contenido() instanceof VaporVespeno) return true;
 		else return false;
 	}
@@ -136,11 +136,10 @@ public class Mapa {
 	}
 
 	public void colocarEdificioVespeno(RecolectorGasVespeno recGas, Posicion posicionDestino) {
-		if (this.hayVaporVespeno(posicionDestino)){
+		
 			Celda celda = new Celda();
 			celda.contenido(recGas);
-			mapa.put(posicionDestino,celda);
-		}			
+			mapa.put(posicionDestino,celda);			
 	}
 
 }

@@ -2,7 +2,6 @@ package fiuba.algo3.tp2;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Jugador {
 	
@@ -10,6 +9,7 @@ public class Jugador {
 	private String color;
 	private String raza;
 	private JuegoCraft juego;
+	private EdificioCentral base;
 	private List<EdificioTerran> edificios = new ArrayList<EdificioTerran> ();
 	private List<UnidadTerran> unidades = new ArrayList<UnidadTerran> ();
 	private RecursoDelJugador recursos;
@@ -22,6 +22,7 @@ public class Jugador {
 		raza = unaRaza;
 		suministros = new Suministro();
 		recursos = new RecursoDelJugador(1000,1000);
+		base = new EdificioCentral();
 	}
 	
 	public String nombre() {		
@@ -102,5 +103,32 @@ public class Jugador {
 					unidades.remove(unidadAtacada);					//ACA DEBE IR UNIDADES DEL ENEMIGO ! ! !
 				}
 			}
-		}		
+		}
+
+	public Barraca construirBarraca(Posicion posicion) {
+		
+		Barraca barraca = base.construirBarraca();
+		this.construirEdificio(posicion, barraca);
+		return barraca;
+		
+	}
+
+	public RecolectorGasVespeno construirRecolectorGasVespeno(Posicion posicion) {
+		
+		RecolectorGasVespeno recolectorVespeno = base.construirRecolectorGasVespeno();
+		juego.construirRecolectorVaporVespeno(posicion, recolectorVespeno);
+		return recolectorVespeno;
+	}
+
+	public RecolectorMineral construirRecolectorMineral(Posicion posicion) {
+		
+		RecolectorMineral recMineral = base.construirRecolectorMineral();
+		juego.construirRecolectorMineral(posicion, recMineral);
+		return recMineral;
+	}
+
+	public EdificioTerran base() {
+		
+		return base;
+	}	
 }

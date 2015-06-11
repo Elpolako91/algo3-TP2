@@ -44,7 +44,7 @@ public class TestsIntegracion {
 		}
 		
 		//deberia eliminar unidad
-		while(jugador2.unidades()==0){
+		while(jugador2.unidades()== 0){
 			jugador1.atacar(marine1, marine2.posicion());
 			jugador1.pasarTurno();
 			jugador2.pasarTurno();
