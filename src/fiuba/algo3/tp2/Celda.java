@@ -13,7 +13,7 @@ public class Celda {
 		
 	}
 
-	public Object getContenidoDeCelda() {
+	public Object contenido() {
 	
 		return contenido;
 	}

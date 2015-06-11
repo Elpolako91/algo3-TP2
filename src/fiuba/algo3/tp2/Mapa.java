@@ -7,11 +7,11 @@ public class Mapa {
 	
 	private Map<Posicion, Celda> mapa;
 	
-	public Mapa(int tamaño){
+	public Mapa(int tamanio){
 		
 		this.mapa = new HashMap<>();
-		for (int i = 1; i <= tamaño; i++){
-			for (int j = 1; j <= tamaño; j++){
+		for (int i = 1; i <= tamanio; i++){
+			for (int j = 1; j <= tamanio; j++){
 				Posicion p = new Posicion(i,j);
 				mapa.put(p, new CeldaVacia() );
 			}
@@ -39,7 +39,7 @@ public class Mapa {
 		
 		Celda celdaActual = this.mapa.get(posicion);
 		
-		return celdaActual.getContenidoDeCelda(); 
+		return celdaActual.contenido(); 
 	}
 
 
@@ -119,7 +119,7 @@ public class Mapa {
 		recMineral.obtenerMineralPorTruno();
 		Celda celda = new Celda();
 		celda = mapa.get(posicion);
-		RecolectorMineral recolectorAux = (RecolectorMineral) celda.getContenidoDeCelda();
+		RecolectorMineral recolectorAux = (RecolectorMineral) celda.contenido();
 		recolectorAux.reducirLaCantidadDeRecursoDisponible();
 		
 	}
@@ -154,8 +154,10 @@ public class Mapa {
 	}
 	
 	private boolean hayTerrenoVacio(Posicion posicion){
-		if (mapa.get(posicion) instanceof CeldaVacia)return true;
-		else return false;
+		if (mapa.get(posicion) instanceof CeldaVacia)
+			return true;
+		else 
+			return false;
 	}
 	
 	public boolean colocarEdificio(EdificioTerran unEdificio, Posicion posicion) {
@@ -204,6 +206,25 @@ public class Mapa {
 		}
 		return false;
 	}
+
+
+	public boolean hayUnidad(Posicion posicion){
+		
+		if (mapa.get(posicion).contenido() instanceof UnidadTerran)
+			return true;
+		else 
+			return false;
+	}
+	
+	public void atacar(Posicion posicion, UnidadTerran unidad){
+		
+		if ( this.hayUnidad(posicion) ){
+			
+			UnidadTerran unidadAux = (UnidadTerran)mapa.get(posicion).contenido();
+			unidadAux.disminuirVida(unidad.danioTierra());			
+		}
+	}
+				
 	
 
 }

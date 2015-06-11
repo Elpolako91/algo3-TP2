@@ -23,11 +23,11 @@ public class Jugador {
 		
 		return this.nombre;
 	}
-	public Object color() {
+	public String color() {
 		
 		return this.color;
 	}
-	public Object raza() {
+	public String raza() {
 		
 		return this.raza;
 	}
@@ -65,19 +65,31 @@ public class Jugador {
 	}
 	
 	public void colocarUnidad(Posicion edificioPosicion, UnidadTerran unidad) {
+		
 		juego.mapa().colocarUnidad(unidad, edificioPosicion);
 		
 	}
-	public int edificios() {		
+	
+	public int edificios() {
+		
 		return edificios.size();
 	}
-	public int unidades() {		
+	
+	public int unidades() {
+		
 		return unidades.size();
 	}
+	
 	public void moverUnidad(UnidadTerran unidad, Posicion posicionDestino) {
 		
 		for(int i=0; i<30; i++)								//controlar si la unidad tiene movimientos
 		juego.mapa().moverUnidad(unidad, posicionDestino);
 		
 	}
+	public void atacar(Posicion posicion, UnidadTerran unidad) {
+		
+				
+			juego.mapa().atacar(posicion, unidad);
+		}
+		
 }

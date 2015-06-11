@@ -8,6 +8,7 @@ public class UnidadMarine extends UnidadTerran {
 		this.vidaMaxima = 40;
 		this.vidaActual = 40;
 		this.danioAire = 6;
-		this.danioTierra = 6;	
-	}	
+		this.danioTierra = 6;
+	}
+
 }
