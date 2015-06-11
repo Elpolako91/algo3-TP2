@@ -21,7 +21,7 @@ public class TestAtaque {
 		Posicion posicionDestinoUnidad1 = new Posicion(60,50);
 		Posicion PosicionDestinoUnidad2 = new Posicion(60,51);
 		
-		jugador1.colocarEdificio(posicionBarraca, barraca);
+		jugador1.construirEdificio(posicionBarraca, barraca);
 		UnidadTerran unidad1 = jugador1.construirMarine(barraca);
 		UnidadTerran unidad2 = jugador1.construirMarine(barraca);
 		jugador1.moverUnidad(unidad2, PosicionDestinoUnidad2);
@@ -47,7 +47,7 @@ public class TestAtaque {
 		Posicion posicionDestinoUnidad1 = new Posicion(60,50);
 		Posicion PosicionDestinoUnidad2 = new Posicion(60,54);
 		
-		jugador1.colocarEdificio(posicionBarraca, barraca);
+		jugador1.construirEdificio(posicionBarraca, barraca);
 		UnidadTerran unidad1 = jugador1.construirMarine(barraca);
 		UnidadTerran unidad2 = jugador1.construirMarine(barraca);
 		jugador1.moverUnidad(unidad2, PosicionDestinoUnidad2);
@@ -73,7 +73,7 @@ public class TestAtaque {
 		Posicion posicionDestinoUnidad1 = new Posicion(60,50);
 		Posicion PosicionDestinoUnidad2 = new Posicion(60,55);
 		
-		jugador1.colocarEdificio(posicionBarraca, barraca);
+		jugador1.construirEdificio(posicionBarraca, barraca);
 		UnidadTerran unidad1 = jugador1.construirMarine(barraca);
 		UnidadTerran unidad2 = jugador1.construirMarine(barraca);
 		jugador1.moverUnidad(unidad2, PosicionDestinoUnidad2);
@@ -99,7 +99,7 @@ public class TestAtaque {
 		Posicion posicionDestinoUnidad1 = new Posicion(60,50);
 		Posicion PosicionDestinoUnidad2 = new Posicion(60,54);
 		
-		jugador1.colocarEdificio(posicionBarraca, barraca);
+		jugador1.construirEdificio(posicionBarraca, barraca);
 		UnidadTerran unidad1 = jugador1.construirMarine(barraca);
 		UnidadTerran unidad2 = jugador1.construirMarine(barraca);
 		jugador1.moverUnidad(unidad2, PosicionDestinoUnidad2);

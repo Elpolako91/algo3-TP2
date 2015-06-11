@@ -38,4 +38,21 @@ public class JuegoCraft {
 	public void crearMapa(int tamanio) {
 		mapa = new Mapa(tamanio);		
 	}
+
+	public boolean colocarEdificio(EdificioTerran unEdificio, Posicion posicion) {
+		if(mapa.hayTerrenoConTamanio(posicion)){
+			mapa.colocarObjetoConTamanio(unEdificio, posicion);
+			unEdificio.posicion(posicion);
+			return true;	
+		
+		}
+		else return false;
+	}
+
+	public boolean colocarUnidad(UnidadTerran unaUnidad, EdificioTerran unEdificio) {
+		Posicion posicionUnidad = mapa.encontrarPosicionParaUnidad(unEdificio.posicion());
+		unaUnidad.posicion(posicionUnidad);
+		mapa.colocarObjeto(unaUnidad, posicionUnidad);
+		return true;
+	}
 }

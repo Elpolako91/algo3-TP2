@@ -39,7 +39,7 @@ public abstract class Terran {
 		else	vidaActual = vidaActual - danio;
 	}
 	
-	public RecursoDelJugador costo(){
+	public RecursoDelJugador costoRecursos(){
 		return costoRecurso;
 	}
 	public boolean estaDestruido(){

@@ -20,6 +20,7 @@ public class Jugador {
 		nombre = unNombre;
 		color = unColor;
 		raza = unaRaza;
+		suministros = new Suministro();
 		recursos = new RecursoDelJugador(1000,1000);
 	}
 	
@@ -40,7 +41,7 @@ public class Jugador {
 	}
 	
 	public void juego(JuegoCraft unJuego) {
-		juego = unJuego;		
+		juego = unJuego;
 	}
 	
 	public JuegoCraft juego(){
@@ -63,23 +64,24 @@ public class Jugador {
 		if(juego.turno()==this)return true; else return false;
 	}
 	
-	public void colocarEdificio(Posicion posicion, EdificioTerran unEdificio) {
-		if(recursos.cantidadSuficiente(unEdificio.costo())){
-			if(juego.mapa().colocarEdificio(unEdificio, posicion)){
-				recursos.descontar(unEdificio.costo());
-				unEdificio.posicion(posicion);
-				edificios.add(unEdificio);
+	public void construirEdificio(Posicion posicion, EdificioTerran unEdificio) {
+		if(recursos.cantidadSuficiente(unEdificio.costoRecursos())){
+			if(juego.colocarEdificio(unEdificio,posicion)){
+					edificios.add(unEdificio);
+					recursos.descontar(unEdificio.costoRecursos());
 			}
 		}
 	}
 	
 	public UnidadMarine construirMarine(Barraca unaBarraca){
 		UnidadMarine marine= unaBarraca.construirUnidad();
-			if (recursos.cantidadSuficiente(marine.costo())){
-				recursos.descontar(marine.costo());
-				juego.mapa().colocarUnidad(marine, unaBarraca.posicion());
-				unidades.add(marine);
-				return marine;
+			if (recursos.cantidadSuficiente(marine.costoRecursos())&&(suministros.cantidadSuficiente(marine.costoSuministro()))){
+				if(juego.colocarUnidad(marine,unaBarraca)){
+					unidades.add(marine);
+					recursos.descontar(marine.costoRecursos());
+					suministros.descontar(marine.costoSuministro());
+					return marine;
+				}
 			}
 		return null;
 	}

@@ -20,11 +20,11 @@ public class TestsIntegracion {
 		Posicion posicion3 = new Posicion(97,94);
 		
 		Barraca barraca1 = new Barraca();
-		jugador1.colocarEdificio(posicionBarraca1,barraca1);
+		jugador1.construirEdificio(posicionBarraca1,barraca1);
 		jugador1.pasarTurno();
 				
 		Barraca barraca2 = new Barraca();
-		jugador2.colocarEdificio(posicionBarraca2, barraca2);
+		jugador2.construirEdificio(posicionBarraca2, barraca2);
 		jugador2.pasarTurno();
 						
 		UnidadTerran marine1 = jugador1.construirMarine(barraca1);
@@ -42,13 +42,15 @@ public class TestsIntegracion {
 			jugador2.moverUnidad(marine2,marine1.posicion());
 			jugador2.pasarTurno();
 		}
-		while(jugador1.unidades()==0){
+		
+		//deberia eliminar unidad
+		while(jugador2.unidades()==0){
 			jugador1.atacar(marine1, marine2.posicion());
 			jugador1.pasarTurno();
 			jugador2.pasarTurno();
 		}
 		assertTrue(marine1.posicion().distancia(marine2.posicion())==1);
-		assertTrue(juego.mapa().contenido(marine1.posicion()) instanceof Terreno);
+		assertTrue(juego.mapa().contenido(marine2.posicion()) instanceof Terreno);
 	}
 
 }

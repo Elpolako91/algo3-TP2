@@ -5,6 +5,11 @@ public abstract class UnidadTerran extends Terran {
 	protected int danioAire;
 	protected int danioTierra;
 	protected int rango;
+	protected int costoSuministro;
+	
+	public int costoSuministro(){
+		return costoSuministro;
+	}
 	
 	public int danioTierra() {
 		

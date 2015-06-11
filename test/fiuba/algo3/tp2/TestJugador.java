@@ -59,7 +59,7 @@ public class TestJugador {
 		
 		juego.iniciarPartida();		
 		Barraca barraca = new Barraca();
-		jugador1.colocarEdificio(new Posicion(1,5), barraca);
+		jugador1.construirEdificio(new Posicion(1,5), barraca);
 		
 		assertEquals(jugador1.recursos().mineral(), 850);
 		assertEquals(jugador1.recursos().vespeno(), 1000);
@@ -74,7 +74,7 @@ public class TestJugador {
 		
 		juego.iniciarPartida();		
 		Barraca barraca = new Barraca();
-		jugador1.colocarEdificio(new Posicion(1,5), barraca);
+		jugador1.construirEdificio(new Posicion(1,5), barraca);
 		jugador1.construirMarine(barraca);
 		
 		

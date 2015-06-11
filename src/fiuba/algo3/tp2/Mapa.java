@@ -26,6 +26,43 @@ public class Mapa {
 		Celda celda = this.mapa.get(posicion);
 		return celda.contenido(); 
 	}
+
+	/*********** METODOS PREGUNTAR TIPO DE CONTENIDO *****************************/
+	
+	public boolean hayTerreno(Posicion posicion){
+		if (mapa.get(posicion) instanceof CeldaTerreno)	return true;
+		else return false;
+	}
+	
+	public boolean hayUnidad(Posicion posicion){
+		
+		if (mapa.get(posicion).contenido() instanceof UnidadTerran)return true;
+		else return false;
+	}
+	private boolean hayVaporVespeno(Posicion posicionDestino) {
+		if (mapa.get(posicionDestino).contenido() instanceof VaporVespeno) return true;
+		else return false;
+	}
+
+	public boolean hayMineral(Posicion posicionDestino) {
+		if (mapa.get(posicionDestino).contenido() instanceof Mineral) return true;
+		else return false;
+	}
+	
+	public boolean hayTerrenoConTamanio(Posicion posicion){
+		
+		boolean hayTerreno = true;		
+		
+		for ( int i = 0; i < 2; i++ ) {			
+			for ( int j = 0; j < 2; j++){				
+				Posicion posicionActual = new Posicion(posicion.x()+i, posicion.y()+j);
+				if (!(this.hayTerreno(posicionActual))) hayTerreno= false;									
+			}
+		}
+		return hayTerreno;
+	}
+	
+	/********************************************************************/
 	
 	public void recolectarMineralDeLaPosicion(Posicion posicion, RecolectorMineral recMineral) {
 		recMineral.obtenerMineralPorTruno();
@@ -34,56 +71,28 @@ public class Mapa {
 		RecolectorMineral recolectorAux = (RecolectorMineral) celda.contenido();
 		recolectorAux.reducirLaCantidadDeRecursoDisponible();
 	}
-
-	public void colocarUnidad(UnidadTerran unidad, Posicion edificioPosicion){
+	
+	public Posicion encontrarPosicionParaUnidad(Posicion unaPosicion){
+		Posicion posicionUnidad = unaPosicion;
+		while(!this.hayTerreno(posicionUnidad)){
+			posicionUnidad = posicionUnidad.obtenerPosicionAlrededor();
+		}
+		return posicionUnidad;
 		
-		Posicion posicionAux = edificioPosicion;
+	}
+	
+	public void colocarObjeto(Object unObjeto, Posicion posicionDestino) {
+		
 		Celda c = new Celda();
-		c.contenido(unidad);
-		while(!this.hayTerreno(posicionAux)){
-			posicionAux = posicionAux.obtenerPosicionAlrededor();
-		}
-		unidad.posicion(posicionAux);
-		mapa.put(posicionAux, c);
+		c.contenido(unObjeto);
+		mapa.put(posicionDestino, c);
 		
 	}
-	
-	private boolean hayTerreno(Posicion posicion){
-		if (mapa.get(posicion) instanceof CeldaTerreno)
-			return true;
-		else 
-			return false;
-	}
-	
-	public boolean colocarEdificio(EdificioTerran unEdificio, Posicion posicion) {
-		boolean condicion;
-		if (!this.validarPosicionParaObjetoConTamanio(posicion)) condicion= false;
-		else{
-			this.colocarObjetoConTamanio(unEdificio, posicion);
-			condicion = true;	
-		}
-		return condicion;
-	}
-	private boolean validarPosicionParaObjetoConTamanio(Posicion posicion){
 		
-		boolean condicion = true;		
-		
-		for ( int i = 0; i < 2; i++ ) {			
-			for ( int j = 0; j < 2; j++){				
-				Posicion posicionAux = new Posicion(posicion.x()+i, posicion.y()+j);
-				if (!(mapa.get(posicionAux) instanceof CeldaTerreno)) condicion= false;									
-			}
-		}
-		return condicion;
-	}
-	
-	private void colocarObjetoConTamanio(Object unObjetoConTamanio, Posicion posicion){		
+	public void colocarObjetoConTamanio(Object unObjetoConTamanio, Posicion posicion){		
 		for ( int i = 0; i < 2; i++ ) {			
 			for ( int j = 0; j < 2; j++){		
-				Celda c = new Celda();
-				c.contenido(unObjetoConTamanio);
-				Posicion posicionAux = new Posicion(posicion.x()+i, posicion.y()+j );
-				mapa.put(posicionAux, c);
+				this.colocarObjeto(unObjetoConTamanio, new Posicion(posicion.x()+i, posicion.y()+j));
 			}
 		}
 	}
@@ -102,14 +111,6 @@ public class Mapa {
 		return false;
 	}
 
-	public boolean hayUnidad(Posicion posicion){
-		
-		if (mapa.get(posicion).contenido() instanceof UnidadTerran)
-			return true;
-		else 
-			return false;
-	}
-	
 	public void atacar(UnidadTerran unidad, Posicion posicionDestino){
 		
 		if ( this.hayUnidad(posicionDestino) ){			
@@ -123,13 +124,7 @@ public class Mapa {
 		mapa.put(posicion, celda);		
 	}
 
-	public void colocarObjeto(Object unObjeto, Posicion posicionDestino) {
-		if (this.hayTerreno(posicionDestino)){
-			Celda celda = new Celda();
-			celda.contenido(unObjeto);
-			mapa.put(posicionDestino, celda);
-		}
-	}
+	
 
 	public void colocarEdificioMineral(RecolectorMineral recMineral, Posicion posicionDestino) {
 		if (this.hayMineral(posicionDestino)){
@@ -140,11 +135,6 @@ public class Mapa {
 		
 	}
 
-	private boolean hayMineral(Posicion posicionDestino) {
-		if (mapa.get(posicionDestino).contenido() instanceof Mineral) return true;
-		else return false;
-	}
-
 	public void colocarEdificioVespeno(RecolectorGasVespeno recGas, Posicion posicionDestino) {
 		if (this.hayVaporVespeno(posicionDestino)){
 			Celda celda = new Celda();
@@ -153,8 +143,4 @@ public class Mapa {
 		}			
 	}
 
-	private boolean hayVaporVespeno(Posicion posicionDestino) {
-		if (mapa.get(posicionDestino).contenido() instanceof VaporVespeno) return true;
-		else return false;
-	}
 }
