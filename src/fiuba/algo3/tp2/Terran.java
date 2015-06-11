@@ -7,6 +7,7 @@ public abstract class Terran {
 	protected int tiempoConstruccion;
 	protected Posicion posicion;	
 	protected String nombre;
+	protected RecursoDelJugador costoRecurso;
 	
 	public void posicion(Posicion unaPosicion){
 		
@@ -34,9 +35,15 @@ public abstract class Terran {
 	}
 	
 	public void disminuirVida(int danio){
-		
-		this.vidaActual = this.vidaActual - danio;
-		
+		if(danio>vidaActual)vidaActual = 0 ;
+		else	vidaActual = vidaActual - danio;
+	}
+	
+	public RecursoDelJugador costo(){
+		return costoRecurso;
+	}
+	public boolean estaDestruido(){
+		if (vidaActual == 0)return true; else return false;
 	}
 	
 }

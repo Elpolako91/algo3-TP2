@@ -1,7 +1,5 @@
 package fiuba.algo3.tp2;
 
-import java.util.Random;
-
 public class Posicion {
 	
 	private int x;
@@ -53,8 +51,7 @@ public class Posicion {
 	
 	public int distancia(Posicion p2){
 		
-		int distancia= (int) Math.sqrt(Math.pow(this.x-p2.x, 2)+Math.pow(this.y-p2.y,2));
-		
+		int distancia= Math.abs(this.x-p2.x)+Math.abs(this.y-p2.y);
 		return distancia;
 	}
 

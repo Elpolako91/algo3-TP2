@@ -4,10 +4,11 @@ public class Barraca extends EdificioTerran{
 	
 	public Barraca(){
 		
-		this.nombre = "barraca";
-		this.tiempoConstruccion = 12;
-		this.vidaActual = 1000;
-		this.vidaMaxima = 1000;
+		nombre = "barraca";
+		tiempoConstruccion = 12;
+		vidaActual = 1000;
+		vidaMaxima = 1000;
+		costoRecurso = new RecursoDelJugador(150,0);
 	}
 
 	public UnidadMarine construirUnidad() {

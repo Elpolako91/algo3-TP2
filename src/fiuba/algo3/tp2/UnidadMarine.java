@@ -9,6 +9,8 @@ public class UnidadMarine extends UnidadTerran {
 		this.vidaActual = 40;
 		this.danioAire = 6;
 		this.danioTierra = 6;
+		this.rango = 4;
+		this.costoRecurso = new RecursoDelJugador(50,0);
 	}
 
 }

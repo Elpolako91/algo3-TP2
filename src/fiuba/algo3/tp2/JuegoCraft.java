@@ -7,33 +7,35 @@ public class JuegoCraft {
 	private Jugador jugador2;
 	private Turno turno;
 	
-	public void crearPartida(Jugador unJugador1, Jugador unJugador2, Mapa unMapa) {
-		
-		this.jugador1 = unJugador1;
-		this.jugador2 = unJugador2;
-		this.mapa = unMapa;
-		turno = new Turno(jugador1, jugador2);
-		
-		this.jugador1.juego(this);
-		this.jugador2.juego(this);
-	}	
-
-	public boolean mapaestavacio() {
-			
-		return mapa.estaVacio();
+	public Jugador cargarJugadorUno(String unNombre, String unColor, String unaRaza) {
+		jugador1 = new Jugador(unNombre,unColor,unaRaza);
+		return jugador1;
 	}
-	
+
+	public Jugador cargarJugadorDos(String unNombre, String unColor, String unaRaza) {
+		jugador2 = new Jugador(unNombre,unColor,unaRaza);
+		return jugador2;
+	}
+
+	public void iniciarPartida() {
+		turno = new Turno(jugador1, jugador2);		
+		jugador1.juego(this);
+		jugador2.juego(this);
+	}
+
 	public Mapa mapa(){
 		return this.mapa;
 	}
 
 	public void pasarTurno() {
-		turno.pasarTurno();
-		
+		turno.pasarTurno();		
 	}
 
 	public Jugador turno() {
 		return turno.jugador();
 	}
 
+	public void crearMapa(int tamanio) {
+		mapa = new Mapa(tamanio);		
+	}
 }
