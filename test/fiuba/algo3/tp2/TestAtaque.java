@@ -7,30 +7,114 @@ import org.junit.Test;
 public class TestAtaque {
 
 	@Test
-	public void testDosUnidadesSeAtacan() {
+	public void testUnidadesSeDanianUnaAlLadoDeLaOtra() {
 		
-		Jugador jugador1 = new Jugador("goku","azul","Terran");
-		Jugador jugador2 = new Jugador("gohan","verde","Terran");
-		Mapa mapa = new Mapa(100);
 		JuegoCraft juego = new JuegoCraft();
+		Jugador jugador1 = juego.cargarJugadorUno("facu","rojo","terran");
+		Jugador jugador2 = juego.cargarJugadorDos("tincho","verde","terran");
+		juego.crearMapa(100);
 		
-		juego.crearPartida(jugador1, jugador2, mapa);
-		Barraca barraca1 = new Barraca();
+		juego.iniciarPartida();
+		Barraca barraca = new Barraca();
 		
-		Posicion posicion1 = new Posicion(50,50);
-		Posicion posicion2 = new Posicion(60,50);
-		Posicion posicion3 = new Posicion(60,51);
+		Posicion posicionBarraca = new Posicion(50,50);
+		Posicion posicionDestinoUnidad1 = new Posicion(60,50);
+		Posicion PosicionDestinoUnidad2 = new Posicion(60,51);
 		
-		jugador1.colocarEdificio(posicion1, barraca1);
-		UnidadTerran unidad1 = jugador1.construirMarine();
-		UnidadTerran unidad2 = jugador1.construirMarine();
-		jugador1.moverUnidad(unidad2, posicion2);
-		jugador1.moverUnidad(unidad1, posicion3);
+		jugador1.colocarEdificio(posicionBarraca, barraca);
+		UnidadTerran unidad1 = jugador1.construirMarine(barraca);
+		UnidadTerran unidad2 = jugador1.construirMarine(barraca);
+		jugador1.moverUnidad(unidad2, PosicionDestinoUnidad2);
+		jugador1.moverUnidad(unidad1, posicionDestinoUnidad1);
 		
-		jugador1.atacar(posicion2, unidad1);
+		jugador1.atacar(unidad1, unidad2.posicion());
 		
-		assertEquals(34, unidad2.vidaActual());
+		assertEquals(34, unidad2.vidaActual());		
+	}
+	
+	@Test
+	public void testUnidadesSeDanianADistancia() {
 		
+		JuegoCraft juego = new JuegoCraft();
+		Jugador jugador1 = juego.cargarJugadorUno("facu","rojo","terran");
+		Jugador jugador2 = juego.cargarJugadorDos("tincho","verde","terran");
+		juego.crearMapa(100);
+		
+		juego.iniciarPartida();
+		Barraca barraca = new Barraca();
+		
+		Posicion posicionBarraca = new Posicion(50,50);
+		Posicion posicionDestinoUnidad1 = new Posicion(60,50);
+		Posicion PosicionDestinoUnidad2 = new Posicion(60,54);
+		
+		jugador1.colocarEdificio(posicionBarraca, barraca);
+		UnidadTerran unidad1 = jugador1.construirMarine(barraca);
+		UnidadTerran unidad2 = jugador1.construirMarine(barraca);
+		jugador1.moverUnidad(unidad2, PosicionDestinoUnidad2);
+		jugador1.moverUnidad(unidad1, posicionDestinoUnidad1);
+		
+		jugador1.atacar(unidad1, unidad2.posicion());
+		
+		assertEquals(34, unidad2.vidaActual());		
+	}
+	
+	@Test
+	public void testUnidadIntentaAtacarFueraDeSuRango() {
+		
+		JuegoCraft juego = new JuegoCraft();
+		Jugador jugador1 = juego.cargarJugadorUno("facu","rojo","terran");
+		Jugador jugador2 = juego.cargarJugadorDos("tincho","verde","terran");
+		juego.crearMapa(100);
+		
+		juego.iniciarPartida();
+		Barraca barraca = new Barraca();
+		
+		Posicion posicionBarraca = new Posicion(50,50);
+		Posicion posicionDestinoUnidad1 = new Posicion(60,50);
+		Posicion PosicionDestinoUnidad2 = new Posicion(60,55);
+		
+		jugador1.colocarEdificio(posicionBarraca, barraca);
+		UnidadTerran unidad1 = jugador1.construirMarine(barraca);
+		UnidadTerran unidad2 = jugador1.construirMarine(barraca);
+		jugador1.moverUnidad(unidad2, PosicionDestinoUnidad2);
+		jugador1.moverUnidad(unidad1, posicionDestinoUnidad1);
+		
+		jugador1.atacar(unidad1, unidad2.posicion());
+		
+		assertEquals(40, unidad2.vidaActual());		
+	}
+	
+	@Test
+	public void testUnidadMataAOtraUnidad() {
+		
+		JuegoCraft juego = new JuegoCraft();
+		Jugador jugador1 = juego.cargarJugadorUno("facu","rojo","terran");
+		Jugador jugador2 = juego.cargarJugadorDos("tincho","verde","terran");
+		juego.crearMapa(100);
+		
+		juego.iniciarPartida();
+		Barraca barraca = new Barraca();
+		
+		Posicion posicionBarraca = new Posicion(50,50);
+		Posicion posicionDestinoUnidad1 = new Posicion(60,50);
+		Posicion PosicionDestinoUnidad2 = new Posicion(60,54);
+		
+		jugador1.colocarEdificio(posicionBarraca, barraca);
+		UnidadTerran unidad1 = jugador1.construirMarine(barraca);
+		UnidadTerran unidad2 = jugador1.construirMarine(barraca);
+		jugador1.moverUnidad(unidad2, PosicionDestinoUnidad2);
+		jugador1.moverUnidad(unidad1, posicionDestinoUnidad1);
+		
+		jugador1.atacar(unidad1, unidad2.posicion());
+		jugador1.atacar(unidad1, unidad2.posicion());
+		jugador1.atacar(unidad1, unidad2.posicion());
+		jugador1.atacar(unidad1, unidad2.posicion());
+		jugador1.atacar(unidad1, unidad2.posicion());
+		jugador1.atacar(unidad1, unidad2.posicion());
+		jugador1.atacar(unidad1, unidad2.posicion());
+		
+		assertEquals(jugador1.unidades(),1);
+		assertTrue(juego.mapa().contenido(unidad2.posicion())instanceof Terreno);
 	}
 
 }
