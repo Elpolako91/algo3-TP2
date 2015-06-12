@@ -136,8 +136,8 @@ public class TestMapa {
 		juego.crearMapa(100);	
 		juego.iniciarPartida();
 		
-		Posicion posicionEdificio = new Posicion(1,1);
-		Posicion posicionInicial = new Posicion(3,3);
+		Posicion posicionEdificio = new Posicion(4,4);
+		Posicion posicionInicial = new Posicion(10,10);
 		Posicion posicionFinal = new Posicion (20,20);
 		
 		Barraca barraca = new Barraca();

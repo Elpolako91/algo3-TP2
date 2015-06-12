@@ -97,10 +97,10 @@ public class TestAtaque {
 		Barraca barraca2 = new Barraca();
 		
 		Posicion posicionBarraca1 = new Posicion(4,4);
-		Posicion posicionBarraca2 = new Posicion(70,70);
-		Posicion posicionDestinoUnidad1 = new Posicion(60,50);
-		Posicion posicionIntermedioUnidad2 = new Posicion(72,60);
-		Posicion posicionDestinoUnidad2 = new Posicion(60,51);
+		Posicion posicionBarraca2 = new Posicion(50,50);
+		Posicion posicionDestinoUnidad1 = new Posicion(20,20);
+		Posicion posicionIntermedioUnidad2 = new Posicion(30,30);
+		Posicion posicionDestinoUnidad2 = new Posicion(24,24);
 		
 		jugador1.construirEdificio(posicionBarraca1, barraca1);
 		UnidadTerran marine1 = jugador1.construirMarine(barraca1);
@@ -111,6 +111,7 @@ public class TestAtaque {
 		UnidadMarine marine2 = jugador2.construirMarine(barraca2);
 		jugador2.moverUnidad(marine2, posicionIntermedioUnidad2);
 		jugador2.moverUnidad(marine2, posicionDestinoUnidad2);
+		
 		jugador2.pasarTurno();
 		
 		jugador1.atacar(marine1, marine2.posicion());

@@ -23,7 +23,7 @@ public class TestJugador {
 		Jugador jugador2 = juego.cargarJugadorDos("tincho","verde","terran");
 		juego.crearMapa(100);
 		
-		juego.iniciarPartida();		
+		juego.iniciarPartida();	
 		assertTrue(juego.turno() == jugador1);
 		
 		jugador1.pasarTurno();		

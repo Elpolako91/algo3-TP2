@@ -71,11 +71,11 @@ public class Posicion {
 
 	public Posicion direccion(Posicion p2) {
 		int i=0,j=0;
-		if (this.x> p2.x())i=-1;
+		if (this.x> p2.x())i=-2;
 		else 
 			if(this.x < p2.x()) i =1;
 			
-		if (this.y> p2.y())j =-1;
+		if (this.y> p2.y())j =-2;
 		else
 		if(this.y < p2.y()) j = 1;
 						

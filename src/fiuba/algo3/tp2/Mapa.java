@@ -27,7 +27,7 @@ public class Mapa {
 		return celda.contenido(); 
 	}
 
-	/**************** METODOS PREGUNTAR TIPO DE CONTENIDO *****************************/
+	/*********** METODOS PREGUNTAR TIPO DE CONTENIDO *****************************/
 	
 	public boolean hayTerreno(Posicion posicion){
 		if (mapa.get(posicion) instanceof CeldaTerreno)	return true;
@@ -39,6 +39,7 @@ public class Mapa {
 		if (mapa.get(posicion).contenido() instanceof UnidadTerran)return true;
 		else return false;
 	}
+	
 	public boolean hayVaporVespeno(Posicion posicionDestino) {
 		if (mapa.get(posicionDestino).contenido() instanceof VaporVespeno) return true;
 		else return false;
@@ -54,8 +55,7 @@ public class Mapa {
 		boolean hayTerreno = true;		
 		
 		for ( int i = 0; i < 2; i++ ) {			
-			for ( int j = 0; j < 2; j++){			
-				
+			for ( int j = 0; j < 2; j++){				
 				Posicion posicionActual = new Posicion(posicion.x()+i, posicion.y()+j);
 				if (!(this.hayTerreno(posicionActual))) hayTerreno= false;									
 			}
@@ -80,7 +80,7 @@ public class Mapa {
 			}
 		}
 	}
-	
+
 	/********************************************************************/
 	
 	public void recolectarMineralDeLaPosicion(Posicion posicion, RecolectorMineral recMineral) {
@@ -97,10 +97,9 @@ public class Mapa {
 			posicionUnidad = posicionUnidad.obtenerPosicionAlrededor();
 		}
 		return posicionUnidad;
+		
 	}
 	
-
-
 	public boolean moverUnidad(UnidadTerran unidad, Posicion posicionDestino) {
 		Posicion direccionDestino = unidad.posicion().direccion(posicionDestino);
 		
@@ -132,10 +131,10 @@ public class Mapa {
 	}
 
 	public void colocarEdificioVespeno(RecolectorGasVespeno recGas, Posicion posicionDestino) {
-		if (this.hayVaporVespeno(posicionDestino)){
+		
 			Celda celda = new Celda();
 			celda.contenido(recGas);
-			mapa.put(posicionDestino,celda);
-		}			
+			mapa.put(posicionDestino,celda);			
 	}
+
 }

@@ -18,9 +18,13 @@ public class JuegoCraft {
 	}
 
 	public void iniciarPartida() {
-		turno = new Turno(jugador1, jugador2);		
+		turno = new Turno(jugador1, jugador2);
+		Posicion posicion1 = new Posicion(2,2);
+		Posicion posicion2 = new Posicion(96,96);
 		jugador1.juego(this);
+		this.colocarEdificio(jugador1.base(), posicion1);
 		jugador2.juego(this);
+		this.colocarEdificio(jugador2.base(), posicion2);
 	}
 
 	public Mapa mapa(){
@@ -56,6 +60,22 @@ public class JuegoCraft {
 		return true;
 	}
 
+	public void construirRecolectorVaporVespeno(Posicion posicion, RecolectorGasVespeno recGas) {
+		
+		if ( this.mapa().hayVaporVespeno(posicion) ){
+			
+			this.mapa().colocarObjetoConTamanio(recGas, posicion);
+		}
+	}
+	
+	public void construirRecolectorMineral(Posicion posicion, RecolectorMineral recMineral){
+		
+		if ( this.mapa().hayMineral(posicion) ){
+			
+			this.mapa().colocarObjetoConTamanio(recMineral, posicion);
+		}
+	}
+	
 	public void atacar(Jugador jugadorAtacante,UnidadTerran unidadAtacante, Posicion posicionDestino) {
 		if(unidadAtacante.posicion().distancia(posicionDestino)<= unidadAtacante.rango()&&(mapa.hayUnidad(posicionDestino))){
 			UnidadTerran unidadAtacada = (UnidadTerran) mapa.contenido(posicionDestino);
@@ -74,4 +94,5 @@ public class JuegoCraft {
 		else
 			return jugador1;
 	}
+
 }
