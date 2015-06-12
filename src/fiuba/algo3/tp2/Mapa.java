@@ -27,7 +27,7 @@ public class Mapa {
 		return celda.contenido(); 
 	}
 
-	/*********** METODOS PREGUNTAR TIPO DE CONTENIDO *****************************/
+	/**************** METODOS PREGUNTAR TIPO DE CONTENIDO *****************************/
 	
 	public boolean hayTerreno(Posicion posicion){
 		if (mapa.get(posicion) instanceof CeldaTerreno)	return true;
@@ -54,12 +54,31 @@ public class Mapa {
 		boolean hayTerreno = true;		
 		
 		for ( int i = 0; i < 2; i++ ) {			
-			for ( int j = 0; j < 2; j++){				
+			for ( int j = 0; j < 2; j++){			
+				
 				Posicion posicionActual = new Posicion(posicion.x()+i, posicion.y()+j);
 				if (!(this.hayTerreno(posicionActual))) hayTerreno= false;									
 			}
 		}
 		return hayTerreno;
+	}
+	
+	/************************	COLOCACION DE OBJETOS	********************************************/
+	
+	public void colocarObjeto(Object unObjeto, Posicion posicionDestino) {
+		
+		Celda c = new Celda();
+		c.contenido(unObjeto);
+		mapa.put(posicionDestino, c);
+		
+	}
+		
+	public void colocarObjetoConTamanio(Object unObjetoConTamanio, Posicion posicion){		
+		for ( int i = 0; i < 2; i++ ) {			
+			for ( int j = 0; j < 2; j++){		
+				this.colocarObjeto(unObjetoConTamanio, new Posicion(posicion.x()+i, posicion.y()+j));
+			}
+		}
 	}
 	
 	/********************************************************************/
@@ -78,24 +97,9 @@ public class Mapa {
 			posicionUnidad = posicionUnidad.obtenerPosicionAlrededor();
 		}
 		return posicionUnidad;
-		
 	}
 	
-	public void colocarObjeto(Object unObjeto, Posicion posicionDestino) {
-		
-		Celda c = new Celda();
-		c.contenido(unObjeto);
-		mapa.put(posicionDestino, c);
-		
-	}
-		
-	public void colocarObjetoConTamanio(Object unObjetoConTamanio, Posicion posicion){		
-		for ( int i = 0; i < 2; i++ ) {			
-			for ( int j = 0; j < 2; j++){		
-				this.colocarObjeto(unObjetoConTamanio, new Posicion(posicion.x()+i, posicion.y()+j));
-			}
-		}
-	}
+
 
 	public boolean moverUnidad(UnidadTerran unidad, Posicion posicionDestino) {
 		Posicion direccionDestino = unidad.posicion().direccion(posicionDestino);
@@ -109,14 +113,6 @@ public class Mapa {
 			return true;			
 		}
 		return false;
-	}
-
-	public void atacar(UnidadTerran unidad, Posicion posicionDestino){
-		
-		if ( this.hayUnidad(posicionDestino) ){			
-			UnidadTerran unidadAux = (UnidadTerran)mapa.get(posicionDestino).contenido();
-			unidadAux.disminuirVida(unidad.danioTierra());
-		}
 	}
 
 	public void colocarTerreno(Posicion posicion) {
@@ -136,10 +132,10 @@ public class Mapa {
 	}
 
 	public void colocarEdificioVespeno(RecolectorGasVespeno recGas, Posicion posicionDestino) {
-		
+		if (this.hayVaporVespeno(posicionDestino)){
 			Celda celda = new Celda();
 			celda.contenido(recGas);
-			mapa.put(posicionDestino,celda);			
+			mapa.put(posicionDestino,celda);
+		}			
 	}
-
 }

@@ -9,7 +9,6 @@ public class Jugador {
 	private String color;
 	private String raza;
 	private JuegoCraft juego;
-	private EdificioCentral base;
 	private List<EdificioTerran> edificios = new ArrayList<EdificioTerran> ();
 	private List<UnidadTerran> unidades = new ArrayList<UnidadTerran> ();
 	private RecursoDelJugador recursos;
@@ -22,14 +21,14 @@ public class Jugador {
 		raza = unaRaza;
 		suministros = new Suministro();
 		recursos = new RecursoDelJugador(1000,1000);
-		base = new EdificioCentral();
 	}
+	/*************************	ACCESOR		*****************************************/
 	
 	public String nombre() {		
 		return nombre;
 	}
 	
-	public String color() {		
+	public String color() {	
 		return color;
 	}
 	
@@ -57,16 +56,21 @@ public class Jugador {
 		return unidades.size();
 	}
 	
+	/******************************************************************************/
+	
 	public void pasarTurno() {
 		if(this.esMiTurno())juego.pasarTurno();		
 	}
 	
 	private boolean esMiTurno(){
-		if(juego.turno()==this)return true; else return false;
+		if(juego.turno()==this)
+			return true;		
+		else 
+			return false;
 	}
 	
 	public void construirEdificio(Posicion posicion, EdificioTerran unEdificio) {
-		if(recursos.cantidadSuficiente(unEdificio.costoRecursos())){
+		if((this.esMiTurno())&&recursos.cantidadSuficiente(unEdificio.costoRecursos())){
 			if(juego.colocarEdificio(unEdificio,posicion)){
 					edificios.add(unEdificio);
 					recursos.descontar(unEdificio.costoRecursos());
@@ -76,7 +80,7 @@ public class Jugador {
 	
 	public UnidadMarine construirMarine(Barraca unaBarraca){
 		UnidadMarine marine= unaBarraca.construirUnidad();
-			if (recursos.cantidadSuficiente(marine.costoRecursos())&&(suministros.cantidadSuficiente(marine.costoSuministro()))){
+			if ((this.esMiTurno())&&recursos.cantidadSuficiente(marine.costoRecursos())&&(suministros.cantidadSuficiente(marine.costoSuministro()))){
 				if(juego.colocarUnidad(marine,unaBarraca)){
 					unidades.add(marine);
 					recursos.descontar(marine.costoRecursos());
@@ -86,6 +90,13 @@ public class Jugador {
 			}
 		return null;
 	}
+	
+	public void atacar(UnidadTerran unidadAtacante,Posicion posicionDestino) {
+		if(this.esMiTurno()&&(unidades.contains(unidadAtacante))){
+			juego.atacar(this,unidadAtacante, posicionDestino);
+			}
+	}
+		
 		
 	public void moverUnidad(UnidadTerran unidad, Posicion posicionDestino) {
 		
@@ -93,42 +104,9 @@ public class Jugador {
 		juego.mapa().moverUnidad(unidad, posicionDestino);
 		
 	}
-	public void atacar(UnidadTerran unidad,Posicion posicionDestino) {
-			if(unidad.posicion().distancia(posicionDestino)<= unidad.rango()){
-				juego.mapa().hayUnidad(posicionDestino);
-				UnidadTerran unidadAtacada = (UnidadTerran) juego.mapa().contenido(posicionDestino);
-				juego.mapa().atacar(unidad, posicionDestino);
-				if (unidadAtacada.estaDestruido()){
-					juego.mapa().colocarTerreno(posicionDestino);
-					unidades.remove(unidadAtacada);					//ACA DEBE IR UNIDADES DEL ENEMIGO ! ! !
-				}
-			}
-		}
 
-	public Barraca construirBarraca(Posicion posicion) {
-		
-		Barraca barraca = base.construirBarraca();
-		this.construirEdificio(posicion, barraca);
-		return barraca;
-		
+	public void eliminarUnidad(UnidadTerran unidadAtacada) {
+		unidades.remove(unidadAtacada);		
 	}
-
-	public RecolectorGasVespeno construirRecolectorGasVespeno(Posicion posicion) {
-		
-		RecolectorGasVespeno recolectorVespeno = base.construirRecolectorGasVespeno();
-		juego.construirRecolectorVaporVespeno(posicion, recolectorVespeno);
-		return recolectorVespeno;
-	}
-
-	public RecolectorMineral construirRecolectorMineral(Posicion posicion) {
-		
-		RecolectorMineral recMineral = base.construirRecolectorMineral();
-		juego.construirRecolectorMineral(posicion, recMineral);
-		return recMineral;
-	}
-
-	public EdificioTerran base() {
-		
-		return base;
-	}	
+	
 }

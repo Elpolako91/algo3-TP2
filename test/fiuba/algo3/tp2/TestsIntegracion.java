@@ -43,13 +43,11 @@ public class TestsIntegracion {
 			jugador2.pasarTurno();
 		}
 		
-		//deberia eliminar unidad
-		while(jugador2.unidades()== 0){
+		while(jugador2.unidades()!=0){
 			jugador1.atacar(marine1, marine2.posicion());
 			jugador1.pasarTurno();
 			jugador2.pasarTurno();
 		}
-		assertTrue(marine1.posicion().distancia(marine2.posicion())==1);
 		assertTrue(juego.mapa().contenido(marine2.posicion()) instanceof Terreno);
 	}
 

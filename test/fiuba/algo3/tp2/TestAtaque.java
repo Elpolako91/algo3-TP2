@@ -93,28 +93,39 @@ public class TestAtaque {
 		juego.crearMapa(100);
 		
 		juego.iniciarPartida();
-		Barraca barraca = new Barraca();
+		Barraca barraca1 = new Barraca();
+		Barraca barraca2 = new Barraca();
 		
-		Posicion posicionBarraca = new Posicion(50,50);
+		Posicion posicionBarraca1 = new Posicion(4,4);
+		Posicion posicionBarraca2 = new Posicion(70,70);
 		Posicion posicionDestinoUnidad1 = new Posicion(60,50);
-		Posicion PosicionDestinoUnidad2 = new Posicion(60,54);
+		Posicion posicionIntermedioUnidad2 = new Posicion(72,60);
+		Posicion posicionDestinoUnidad2 = new Posicion(60,51);
 		
-		jugador1.construirEdificio(posicionBarraca, barraca);
-		UnidadTerran unidad1 = jugador1.construirMarine(barraca);
-		UnidadTerran unidad2 = jugador1.construirMarine(barraca);
-		jugador1.moverUnidad(unidad2, PosicionDestinoUnidad2);
-		jugador1.moverUnidad(unidad1, posicionDestinoUnidad1);
+		jugador1.construirEdificio(posicionBarraca1, barraca1);
+		UnidadTerran marine1 = jugador1.construirMarine(barraca1);
+		jugador1.moverUnidad(marine1, posicionDestinoUnidad1);
+		jugador1.pasarTurno();
 		
-		jugador1.atacar(unidad1, unidad2.posicion());
-		jugador1.atacar(unidad1, unidad2.posicion());
-		jugador1.atacar(unidad1, unidad2.posicion());
-		jugador1.atacar(unidad1, unidad2.posicion());
-		jugador1.atacar(unidad1, unidad2.posicion());
-		jugador1.atacar(unidad1, unidad2.posicion());
-		jugador1.atacar(unidad1, unidad2.posicion());
+		jugador2.construirEdificio(posicionBarraca2, barraca2);
+		UnidadMarine marine2 = jugador2.construirMarine(barraca2);
+		jugador2.moverUnidad(marine2, posicionIntermedioUnidad2);
+		jugador2.moverUnidad(marine2, posicionDestinoUnidad2);
+		jugador2.pasarTurno();
 		
+		jugador1.atacar(marine1, marine2.posicion());
+		jugador1.atacar(marine1, marine2.posicion());
+		jugador1.atacar(marine1, marine2.posicion());
+		jugador1.atacar(marine1, marine2.posicion());
+		jugador1.atacar(marine1, marine2.posicion());
+		jugador1.atacar(marine1, marine2.posicion());
+		jugador1.atacar(marine1, marine2.posicion());
+
 		assertEquals(jugador1.unidades(),1);
-		assertTrue(juego.mapa().contenido(unidad2.posicion())instanceof Terreno);
+		assertEquals(jugador2.unidades(),0);
+
+		assertEquals(marine2.vidaActual(),0);
+		assertTrue(juego.mapa().contenido(marine2.posicion())instanceof Terreno);
 	}
 
 }
