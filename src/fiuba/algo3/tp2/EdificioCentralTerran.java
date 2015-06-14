@@ -13,9 +13,9 @@ public class EdificioCentralTerran extends EdificioTerran {
 		
 	}
 	
-public Barraca construirBarraca() {
+public EdificioBarraca construirBarraca() {
 		
-		Barraca barraca = new Barraca();
+		EdificioBarraca barraca = new EdificioBarraca();
 		edificios.add(barraca);
 		return (barraca);
 	}
@@ -44,7 +44,7 @@ public Barraca construirBarraca() {
 	public EdificioFabrica construirFabrica() {
 		
 		for(int i = 0; i <= edificios.size(); i++){
-			if(edificios.get(i).getClass() == Barraca.class ){
+			if(edificios.get(i).getClass() == EdificioBarraca.class ){
 			
 			EdificioFabrica fabrica = new EdificioFabrica();
 			edificios.add(fabrica);

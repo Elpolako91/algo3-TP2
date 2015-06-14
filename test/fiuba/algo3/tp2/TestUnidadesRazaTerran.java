@@ -52,7 +52,7 @@ public class TestUnidadesRazaTerran {
 	@Test
 	public void testCrearNaveTransporte(){
 		
-		UnidadTerran unidad= new UnidadNaveTransporte();
+		UnidadTerran unidad= new UnidadNaveTransporteTerran();
 		
 		assertEquals(unidad.nombre(),"nave transporte");
 		assertEquals(unidad.vidaMaxima(),150);

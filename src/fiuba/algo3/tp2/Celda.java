@@ -12,6 +12,10 @@ public class Celda {
 		return contenido;
 	}
 	
+	public Celda(){
+		
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

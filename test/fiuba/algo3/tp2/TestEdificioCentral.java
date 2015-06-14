@@ -11,9 +11,9 @@ public class TestEdificioCentral {
 		
 		EdificioCentralTerran base = new EdificioCentralTerran();
 		
-		Barraca barraca = base.construirBarraca();		
+		EdificioBarraca barraca = base.construirBarraca();		
 		
-		assertTrue( barraca.getClass() == Barraca.class);
+		assertTrue( barraca.getClass() == EdificioBarraca.class);
 		
 	}
 	
@@ -55,7 +55,7 @@ public class TestEdificioCentral {
 		
 		EdificioCentralTerran base = new EdificioCentralTerran();
 		
-		Barraca barraca = base.construirBarraca();
+		EdificioBarraca barraca = base.construirBarraca();
 		EdificioFabrica fabrica = base.construirFabrica();		
 		
 		assertTrue( fabrica.getClass() == EdificioFabrica.class);
@@ -67,7 +67,7 @@ public class TestEdificioCentral {
 		
 		EdificioCentralTerran base = new EdificioCentralTerran();
 		
-		Barraca barraca = base.construirBarraca();
+		EdificioBarraca barraca = base.construirBarraca();
 		EdificioFabrica fabrica = base.construirFabrica();
 		EdificioPuertoEstelarTerran puerto = base.construirPuertoEstelar();		
 		
