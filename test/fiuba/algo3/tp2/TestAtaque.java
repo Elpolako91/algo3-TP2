@@ -12,8 +12,8 @@ public class TestAtaque {
 	public void testUnidadesSeDanianUnaAlLadoDeLaOtra() {
 		
 		JuegoCraft juego = new JuegoCraft();
-		Jugador jugador1 = juego.cargarJugadorUno("facu","rojo","terran");
-		Jugador jugador2 = juego.cargarJugadorDos("tincho","verde","terran");
+		Jugador jugador1 = juego.cargarJugador("facu","rojo","terran");
+		Jugador jugador2 = juego.cargarJugador("tincho","verde","terran");
 		juego.crearMapa(100);
 		
 		juego.iniciarPartida();
@@ -38,8 +38,8 @@ public class TestAtaque {
 	public void testUnidadesSeDanianADistancia() {
 		
 		JuegoCraft juego = new JuegoCraft();
-		Jugador jugador1 = juego.cargarJugadorUno("facu","rojo","terran");
-		Jugador jugador2 = juego.cargarJugadorDos("tincho","verde","terran");
+		Jugador jugador1 = juego.cargarJugador("facu","rojo","terran");
+		Jugador jugador2 = juego.cargarJugador("tincho","verde","terran");
 		juego.crearMapa(100);
 		
 		juego.iniciarPartida();
@@ -64,8 +64,8 @@ public class TestAtaque {
 	public void testUnidadIntentaAtacarFueraDeSuRango() {
 		
 		JuegoCraft juego = new JuegoCraft();
-		Jugador jugador1 = juego.cargarJugadorUno("facu","rojo","terran");
-		Jugador jugador2 = juego.cargarJugadorDos("tincho","verde","terran");
+		Jugador jugador1 = juego.cargarJugador("facu","rojo","terran");
+		Jugador jugador2 = juego.cargarJugador("tincho","verde","terran");
 		juego.crearMapa(100);
 		
 		juego.iniciarPartida();
@@ -90,8 +90,8 @@ public class TestAtaque {
 	public void testUnidadMataAOtraUnidad() {
 		
 		JuegoCraft juego = new JuegoCraft();
-		Jugador jugador1 = juego.cargarJugadorUno("facu","rojo","terran");
-		Jugador jugador2 = juego.cargarJugadorDos("tincho","verde","terran");
+		Jugador jugador1 = juego.cargarJugador("facu","rojo","terran");
+		Jugador jugador2 = juego.cargarJugador("tincho","verde","terran");
 		juego.crearMapa(100);
 		
 		juego.iniciarPartida();

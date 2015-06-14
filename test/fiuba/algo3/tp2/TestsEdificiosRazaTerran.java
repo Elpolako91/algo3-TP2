@@ -18,7 +18,7 @@ public class TestsEdificiosRazaTerran {
 	@Test
 	public void testCrearRecolectorMineral() {
 		
-		EdificioCentroDeMineral ceMineral = new EdificioCentroDeMineral();
+		EdificioCentroMineral ceMineral = new EdificioCentroMineral();
 		
 		assertEquals(500, ceMineral.vidaActual() );
 		

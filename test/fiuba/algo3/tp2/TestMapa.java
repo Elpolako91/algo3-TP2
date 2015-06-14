@@ -150,7 +150,7 @@ public class TestMapa {
 	}
 	
 	@Test
-	public void testIntercambiarObjetosSinTamañoDePosicion(){
+	public void testIntercambiarObjetosSinTamanioDePosicion(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		

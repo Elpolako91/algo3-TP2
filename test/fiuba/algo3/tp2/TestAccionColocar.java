@@ -137,7 +137,7 @@ public class TestAccionColocar {
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		AccionColocar accion = new AccionColocar(mapa);
 		Recurso mineral = new RecursoMineral();
-		EdificioTerran recolectorMineral = new EdificioCentroDeMineral();
+		EdificioTerran recolectorMineral = new EdificioCentroMineral();
 		Posicion posicion = new Posicion(4,4);
 		
 		accion.colocarRecurso(posicion, mineral);
@@ -151,7 +151,7 @@ public class TestAccionColocar {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		AccionColocar accion = new AccionColocar(mapa);
-		EdificioTerran recolectorMineral = new EdificioCentroDeMineral();
+		EdificioTerran recolectorMineral = new EdificioCentroMineral();
 		Posicion posicion = new Posicion(4,4);
 		
 		accion.colocarRecolectorDeMineral(posicion, recolectorMineral);
