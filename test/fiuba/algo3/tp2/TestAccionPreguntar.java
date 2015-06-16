@@ -138,7 +138,7 @@ public class TestAccionPreguntar {
 		Posicion pos = new Posicion (1,1);
 		PosicionMapa posMapa = new PosicionMapa(1,1,1);
 		
-		mapa.colocarObjeto(posMapa, new Barraca());
+		mapa.colocarObjeto(posMapa, new EdificioBarraca());
 				
 		assertTrue(accion.hayEdificio(pos));
 	}

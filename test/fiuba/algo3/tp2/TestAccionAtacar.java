@@ -97,6 +97,6 @@ public class TestAccionAtacar {
 		atacar.atacarTierra(posicionAtacado, marineAtacante);
 
 		assertEquals(0, marineAtacado.vidaActual());
-		assertFalse(preguntar.hayEnTierra(posicionAtacado, marineAtacado)); //devuelve Vacio, necesidad de capas
+		assertFalse(preguntar.hayEnTierra(posicionAtacado, marineAtacado));
 	}
 }
