@@ -42,5 +42,35 @@ public class TestsEdificiosRazaTerran {
 		assertEquals(edificio.nombre(), "barraca");
 		
 	}
+	
+	@Test
+	public void testCrearDepositosDeSuministros() {
+		
+		EdificioDeposito edificio = new EdificioDeposito();
+		
+		assertEquals(500, edificio.vidaActual() );
+		assertEquals(edificio.nombre(), "deposito");
+		
+	}
+	
+	@Test
+	public void testCrearFabrica() {
+		
+		EdificioFabrica edificio = new EdificioFabrica();
+		
+		assertEquals(1250, edificio.vidaActual() );
+		assertEquals(edificio.nombre(), "fabrica");
+		
+	}
+	
+	@Test
+	public void testCrearPuertoEstelarTerran() {
+		
+		EdificioPuertoEstelarTerran edificio = new EdificioPuertoEstelarTerran();
+		
+		assertEquals(1300, edificio.vidaActual() );
+		assertEquals(edificio.nombre(), "puerto estelar terran");
+		
+	}
 
 }

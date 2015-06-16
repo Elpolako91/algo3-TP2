@@ -1,6 +1,6 @@
 package fiuba.algo3.tp2;
 
-public class EdificioCentroMineral extends EdificioTerran {
+public class EdificioCentroMineral extends EdificioTerran implements RecolectorDeRecursos {
 	
 	private int cantRecursoDisponible;
 	private int almacenamiento;

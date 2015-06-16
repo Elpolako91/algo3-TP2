@@ -45,6 +45,28 @@ public class TestsEdificiosRazaProtos {
 		assertEquals(edificio.nombre(), "acceso");
 		
 	}
+	
+	@Test
+	public void testCrearPuertoEstelarProtos() {
+		
+		EdificioPuertoEstelarProtos edificio = new EdificioPuertoEstelarProtos();
+		
+		assertEquals(600, edificio.vidaActual() );
+		assertEquals(600, edificio.escudoActual() );
+		assertEquals(edificio.nombre(), "puerto estelar protos");
+		
+	}
+	
+	@Test
+	public void testCrearArchivosTemplarios() {
+		
+		EdificioArchivosTemplarios edificio = new EdificioArchivosTemplarios();
+		
+		assertEquals(500, edificio.vidaActual() );
+		assertEquals(500, edificio.escudoActual() );
+		assertEquals(edificio.nombre(), "archivos templarios");
+		
+	}
 
 
 }

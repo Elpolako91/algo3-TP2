@@ -9,6 +9,7 @@ public class Jugador {
 	private String color;
 	private String raza;
 	private JuegoCraft juego;
+	private Edificio base;
 	private List<EdificioTerran> edificios = new ArrayList<EdificioTerran> ();
 	private List<UnidadTerran> unidades = new ArrayList<UnidadTerran> ();
 	private RecursosDelJugador recursos;
@@ -19,6 +20,11 @@ public class Jugador {
 		nombre = unNombre;
 		color = unColor;
 		raza = unaRaza;
+		if ( unaRaza == "Terran"){
+			base = new EdificioCentralTerran();
+		}else{
+			base = new EdificioCentralProtos();
+		}
 		suministros = new Suministro();
 		recursos = new RecursosDelJugador(1000,1000);
 	}

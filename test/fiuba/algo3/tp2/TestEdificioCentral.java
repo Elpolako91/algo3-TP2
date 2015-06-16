@@ -44,7 +44,7 @@ public class TestEdificioCentral {
 		
 		EdificioCentralTerran base = new EdificioCentralTerran();
 		
-		EdificioDeposito deposito = base.construirDeposito();		
+		EdificioDeposito deposito = base.construirAsentamiento();		
 		
 		assertTrue( deposito.getClass() == EdificioDeposito.class);
 		
@@ -69,7 +69,7 @@ public class TestEdificioCentral {
 		
 		EdificioBarraca barraca = base.construirBarraca();
 		EdificioFabrica fabrica = base.construirFabrica();
-		EdificioPuertoEstelarTerran puerto = base.construirPuertoEstelar();		
+		EdificioPuertoEstelarTerran puerto = base.construirPuertoEstelarTerran();		
 		
 		assertTrue( puerto.getClass() == EdificioPuertoEstelarTerran.class);
 		
@@ -80,7 +80,7 @@ public class TestEdificioCentral {
 		
 		EdificioCentralProtos base = new EdificioCentralProtos();
 		
-		EdificioNexoMineral nexo = base.construirNexoMineral();
+		EdificioNexoMineral nexo = base.construirRecolectorMineral();
 		
 		assertTrue( nexo.getClass() == EdificioNexoMineral.class );
 		
@@ -91,7 +91,7 @@ public class TestEdificioCentral {
 		
 		EdificioCentralProtos base = new EdificioCentralProtos();
 		
-		EdificioAsimilador asimilador = base.construirAsimilador();
+		EdificioAsimilador asimilador = base.construirRecolectorGasVespeno();
 		
 		assertTrue( asimilador.getClass() == EdificioAsimilador.class );
 		
@@ -102,7 +102,7 @@ public class TestEdificioCentral {
 		
 		EdificioCentralProtos base = new EdificioCentralProtos();
 		
-		EdificioPilon pilon = base.construirPilon();
+		EdificioPilon pilon = base.construirAsentamiento();
 		
 		assertTrue( pilon.getClass() == EdificioPilon.class );
 		
@@ -125,7 +125,7 @@ public class TestEdificioCentral {
 		EdificioCentralProtos base = new EdificioCentralProtos();
 		
 		EdificioAcceso acceso = base.construirAcceso();
-		EdificioPuertoEstelarProtos puerto = base.construirPuertoEstelar();
+		EdificioPuertoEstelarProtos puerto = base.construirPuertoEstelarProtos();
 		
 		assertTrue( puerto.getClass() == EdificioPuertoEstelarProtos.class );
 		
@@ -137,7 +137,7 @@ public class TestEdificioCentral {
 		EdificioCentralProtos base = new EdificioCentralProtos();
 		
 		EdificioAcceso acceso = base.construirAcceso();
-		EdificioPuertoEstelarProtos puerto = base.construirPuertoEstelar();
+		EdificioPuertoEstelarProtos puerto = base.construirPuertoEstelarProtos();
 		EdificioArchivosTemplarios archivosTemplarios = base.crearArchivosTemplarios();
 		
 		assertTrue( archivosTemplarios.getClass() == EdificioArchivosTemplarios.class );

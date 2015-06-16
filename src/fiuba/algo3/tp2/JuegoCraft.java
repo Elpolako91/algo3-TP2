@@ -115,7 +115,7 @@ public class JuegoCraft {
 	}
 
 	private Jugador jugadorEnemigo(Jugador jugadorAtacante) {
-		if(jugadorAtacante== jugador1) 
+		if(jugadorAtacante == jugador1) 
 			return jugador2;
 		else
 			return jugador1;

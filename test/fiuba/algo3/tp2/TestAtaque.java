@@ -14,7 +14,7 @@ public class TestAtaque {
 		JuegoCraft juego = new JuegoCraft();
 		Jugador jugador1 = juego.cargarJugador("facu","rojo","terran");
 		Jugador jugador2 = juego.cargarJugador("tincho","verde","terran");
-		juego.crearMapa(100);
+		juego.cargarMapa(new Mapa(new Tamanio (100,100)));
 		
 		juego.iniciarPartida();
 		EdificioBarraca barraca = new EdificioBarraca();

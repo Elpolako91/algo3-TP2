@@ -3,33 +3,35 @@ package fiuba.algo3.tp2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EdificioCentralProtos extends EdificioProtos {
+public class EdificioCentralProtos extends EdificioProtos implements Edificio{
+	
 	
 	private List<EdificioProtos> edificios = new ArrayList<EdificioProtos> ();
 	
 	public EdificioCentralProtos() {
 		
+		tamanio = new Tamanio(3,3);
 		this.vidaActual = 1000;
 		this.vidaMaxima = 1000;
 		this.escudoActual = 1000;
 		this.escudoMaximo = 1000;
 	}
 
-	public EdificioNexoMineral construirNexoMineral() {
+	public EdificioNexoMineral construirRecolectorMineral() {
 		
 		EdificioNexoMineral nexo = new EdificioNexoMineral();
 		edificios.add(nexo);
 		return nexo;
 	}
 
-	public EdificioAsimilador construirAsimilador() {
+	public EdificioAsimilador construirRecolectorGasVespeno() {
 		
 		EdificioAsimilador asimilador = new EdificioAsimilador();
 		edificios.add(asimilador);
 		return asimilador;
 	}
 
-	public EdificioPilon construirPilon() {
+	public EdificioPilon construirAsentamiento() {
 		
 		EdificioPilon pilon = new EdificioPilon();
 		edificios.add(pilon);
@@ -43,7 +45,7 @@ public class EdificioCentralProtos extends EdificioProtos {
 		return acceso;
 	}
 
-	public EdificioPuertoEstelarProtos construirPuertoEstelar() {
+	public EdificioPuertoEstelarProtos construirPuertoEstelarProtos() {
 		
 		for( int i = 0; i <= edificios.size(); i++ ){
 			if(edificios.get(i).getClass() == EdificioAcceso.class){

@@ -1,6 +1,6 @@
 package fiuba.algo3.tp2;
 
-public abstract class EdificioTerran extends RazaTerran implements Edificio{
+public abstract class EdificioTerran extends RazaTerran {
 	
 	protected Tamanio tamanio;
 	
