@@ -83,7 +83,7 @@ public class TestAccionColocar {
 	}
 	
 	@Test
-	public void testColocarUnidadMarine(){
+	public void testColocarUnidadTerrestreMarine(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		AccionColocar colocar = new AccionColocar(mapa);
@@ -97,6 +97,23 @@ public class TestAccionColocar {
 				
 		assertTrue(preguntar.hayUnidadTerrestre(posicion));
 		assertEquals(marine.posicion(), posicion);
+	}
+	
+	@Test
+	public void testColocarUnidadTerrestreGolliat(){
+		
+		Mapa mapa = new Mapa(new Tamanio(10,10));
+		AccionColocar colocar = new AccionColocar(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
+		
+		UnidadGolliat golliat = new UnidadGolliat();
+		Posicion posicion = new Posicion(5,5);
+		
+		colocar.colocarTerrenoEn(posicion);
+		colocar.colocarUnidadTerrestre(posicion,golliat);
+				
+		assertTrue(preguntar.hayEnTierra(posicion, golliat));
+		assertEquals(golliat.posicion(), posicion);
 	}
 	
 	@Test
@@ -207,6 +224,116 @@ public class TestAccionColocar {
 		
 		colocar.colocarRecolectorDeGasVespeno(posicion, recolectorGasVespeno);
 				
-		assertFalse(preguntar.hayEnTierra(posicion, recolectorGasVespeno));		
+		assertFalse(preguntar.hayEnTierra(posicion, recolectorGasVespeno));
+	}
+	
+	@Test
+	public void testNoDebeColocarUnidadTerrestreMarineSobreOtraUnidadTerrestre(){
+		
+		Mapa mapa = new Mapa(new Tamanio(10,10));
+		AccionColocar colocar = new AccionColocar(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
+		
+		UnidadMarine marine1 = new UnidadMarine();
+		UnidadMarine marine2 = new UnidadMarine();
+		Posicion posicion = new Posicion(5,5);
+		
+		colocar.colocarTerrenoEn(posicion);
+		colocar.colocarUnidadTerrestre(posicion,marine1);
+		colocar.colocarUnidadTerrestre(posicion,marine2);
+				
+		assertTrue(preguntar.hayEnTierra(posicion, marine1));
+	}
+	
+	@Test
+	public void testNoDebeColocarUnidadTerrestreMarineSobreEdificio(){
+		
+		Mapa mapa = new Mapa(new Tamanio(10,10));
+		AccionColocar colocar = new AccionColocar(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
+		
+		UnidadMarine marine = new UnidadMarine();
+		EdificioTerran edificio = new EdificioBarraca();
+		Posicion posicion = new Posicion(5,5);
+		
+		colocar.colocarTerrenoEnTodoElMapa();;
+		colocar.colocarEdificio(posicion, edificio);
+		colocar.colocarUnidadTerrestre(posicion,marine);
+				
+		assertTrue(preguntar.hayEnTierra(posicion, edificio));
+	}
+	
+	@Test
+	public void testNoDebeColocarEdificioSobreUnidadTerrestre(){
+		
+		Mapa mapa = new Mapa(new Tamanio(10,10));
+		AccionColocar colocar = new AccionColocar(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
+		
+		UnidadMarine marine = new UnidadMarine();
+		EdificioTerran edificio = new EdificioBarraca();
+		
+		Posicion posicion1 = new Posicion(5,5);
+		Posicion posicion2 = new Posicion(6,6);
+		
+		colocar.colocarTerrenoEnTodoElMapa();;
+		colocar.colocarUnidadTerrestre(posicion2 ,marine);
+		colocar.colocarEdificio(posicion1 , edificio);
+				
+		assertTrue(preguntar.hayEnTierra(posicion2, marine));
+		assertFalse(preguntar.hayEnTierra(posicion1, edificio));
+	}
+	
+	@Test
+	public void testNoDebeColocarEdificioSobreOtroEdificio(){
+		
+		Mapa mapa = new Mapa(new Tamanio(10,10));
+		AccionColocar colocar = new AccionColocar(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
+		
+		EdificioTerran edificio1 = new EdificioBarraca();;
+		EdificioTerran edificio2 = new EdificioBarraca();
+		Posicion posicion1 = new Posicion(5,5);
+		Posicion posicion2 = new Posicion(6,6);
+		
+		colocar.colocarTerrenoEnTodoElMapa();;
+		colocar.colocarEdificio(posicion2, edificio2);
+		colocar.colocarEdificio(posicion1, edificio1 );
+				
+		assertFalse(preguntar.hayEnTierra(posicion1, edificio1));
+		assertTrue(preguntar.hayEnTierra(posicion2, edificio2));
+	}
+	
+	@Test
+	public void testColocarUnidadAereaEspectro(){
+		
+		Mapa mapa = new Mapa(new Tamanio(10,10));
+		AccionColocar colocar = new AccionColocar(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
+		
+		UnidadEspectro espectro = new UnidadEspectro();
+		Posicion posicion = new Posicion(5,5);
+		
+		colocar.colocarUnidadAerea(posicion, espectro);
+				
+		assertTrue(preguntar.hayEnAire(posicion, espectro));
+		assertEquals(espectro.posicion(), posicion);
+	}
+	
+	@Test
+	public void testNoDebeColocarUnidadAereaEspectroSobreOtraUnidadAerea(){
+		
+		Mapa mapa = new Mapa(new Tamanio(10,10));
+		AccionColocar colocar = new AccionColocar(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
+		
+		UnidadEspectro espectro1 = new UnidadEspectro();
+		UnidadEspectro espectro2 = new UnidadEspectro();
+		Posicion posicion = new Posicion(5,5);
+		
+		colocar.colocarUnidadAerea(posicion, espectro1);
+		colocar.colocarUnidadAerea(posicion, espectro2);
+				
+		assertTrue(preguntar.hayEnAire(posicion, espectro1));
 	}
 }

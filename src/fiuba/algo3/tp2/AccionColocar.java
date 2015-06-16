@@ -41,7 +41,8 @@ public class AccionColocar{
 
 	public boolean colocarUnidadTerrestre(Posicion posicion, UnidadTerran unidad) {
 		
-		if(preguntar.hayTerreno(posicion)){
+		if((preguntar.hayTerreno(posicion)) && ( (!preguntar.hayUnidadTerrestre(posicion)) && (!preguntar.hayEdificio(posicion)))){
+			
 			PosicionMapa posTerrestre = new PosicionMapa(posicion.x(),posicion.y(),1);
 			mapa.colocarObjeto(posTerrestre, unidad);
 			unidad.posicion(posicion);
@@ -53,7 +54,8 @@ public class AccionColocar{
 
 	public boolean colocarEdificio(Posicion posicion, EdificioTerran edificio) {
 		
-		if(preguntar.hayTerreno(posicion, edificio.tamanio())){
+		if((preguntar.hayTerreno(posicion, edificio.tamanio())) && (!preguntar.hayUnidadTerrestre(posicion, edificio.tamanio())) && (!preguntar.hayEdificio(posicion, edificio.tamanio()))){
+			
 			PosicionMapa posTerrestre = new PosicionMapa(posicion.x(),posicion.y(),1);
 			mapa.colocarObjeto(posTerrestre, edificio, edificio.tamanio());
 			edificio.posicion(posicion);
@@ -80,6 +82,19 @@ public class AccionColocar{
 			recolectorGasVespeno.posicion(posicion);
 		}
 		
+	}
+
+	public boolean colocarUnidadAerea(Posicion posicion, UnidadTerran unidad) {
+		
+		if(!preguntar.estaOcupadoAire(posicion)){
+			
+			PosicionMapa posAerea = new PosicionMapa(posicion.x(),posicion.y(), 2);
+			mapa.colocarObjeto(posAerea, unidad);
+			unidad.posicion(posicion);
+			return true;			
+		}
+		else
+			return false;
 	}
 
 }

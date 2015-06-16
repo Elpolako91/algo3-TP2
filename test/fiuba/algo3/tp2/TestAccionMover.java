@@ -68,4 +68,44 @@ public class TestAccionMover {
 
 		assertTrue(preguntar.hayEnTierra(posicionFinal, marineAmover));
 	}
+	
+	@Test
+	public void testMoverUnidadAereaEspectro(){
+		
+		Mapa mapa = new Mapa(new Tamanio(10,10));
+		AccionColocar colocar = new AccionColocar(mapa);
+		AccionMover mover = new AccionMover(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
+		
+		UnidadEspectro espectro = new UnidadEspectro();
+		Posicion posicionInicio = new Posicion(1,1);
+		Posicion posicionFinal = new Posicion(5,5);
+		
+		colocar.colocarUnidadAerea(posicionInicio, espectro);
+		mover.moverUnidadAerea(posicionFinal,espectro);
+
+		assertTrue(preguntar.hayEnAire(posicionFinal, espectro));
+	}
+	
+	@Test
+	public void testMoverUnidadAereaEspectroAPosicionOcupadaPorOtraUnidadAerea(){
+		
+		Mapa mapa = new Mapa(new Tamanio(10,10));
+		AccionColocar colocar = new AccionColocar(mapa);
+		AccionMover mover = new AccionMover(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
+		
+		UnidadEspectro espectroAmover = new UnidadEspectro();
+		UnidadEspectro espectroFijo = new UnidadEspectro();
+		
+		Posicion posicionUnidadAMover = new Posicion(1,1);
+		Posicion posicionUnidadFija = new Posicion(4,7);
+		Posicion posicionFinal = new Posicion(4,6);
+		
+		colocar.colocarUnidadAerea(posicionUnidadAMover, espectroAmover);
+		colocar.colocarUnidadAerea(posicionUnidadFija,espectroFijo);
+		mover.moverUnidadAerea(posicionUnidadFija, espectroAmover);
+
+		assertTrue(preguntar.hayEnAire(posicionFinal, espectroAmover));
+	}
 }

@@ -1,6 +1,6 @@
 package fiuba.algo3.tp2;
 
-public class UnidadEspectro extends UnidadTerran {
+public class UnidadEspectro extends UnidadTerran  implements UnidadAerea{
 
 	public UnidadEspectro() {
 		
