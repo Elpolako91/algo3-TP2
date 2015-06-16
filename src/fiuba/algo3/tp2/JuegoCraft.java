@@ -73,7 +73,7 @@ public class JuegoCraft {
 		Posicion posicionEncontrada = mapa.encontrarPosicionParaUnidad(edificio.posicion()); //este metodo esta en Mapa, falta refactorizar
 		UnidadTerran unidad = ((EdificioBarraca) edificio).construirUnidad();		// este metodo deberia recibir un edificio con interface para contruir unidades
 		
-		if((turno.turnoActual() == jugador) && (acciones.colocar().colocarUnidad(posicionEncontrada, unidad)))
+		if((turno.turnoActual() == jugador) && (acciones.colocar().colocarUnidadTerrestre(posicionEncontrada, unidad)))
 			jugador.agregarUnidad(unidad);		
 	}
 

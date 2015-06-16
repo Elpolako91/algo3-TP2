@@ -3,12 +3,14 @@ package fiuba.algo3.tp2;
 public class AccionMover{
 	
 	private Mapa mapa;
+	private AccionPreguntar preguntar;
 
 	public AccionMover(Mapa unMapa) {
 		mapa = unMapa;
+		preguntar = new AccionPreguntar(unMapa);
 	}
 
-	public void moverUnidad(Posicion posicionDestino, UnidadTerran unidad) {
+	public void moverUnidadTerrestre(Posicion posicionDestino, UnidadTerran unidad) {
 		
 		Posicion posicionDireccion;
 		int distancia;
@@ -18,9 +20,12 @@ public class AccionMover{
 			posicionDireccion = unidad.posicion().direccion(posicionDestino);
 			distancia = unidad.posicion().distancia(posicionDestino);
 			
-			if (mapa.hayTerreno(posicionDireccion)){
+			if ((preguntar.hayTerreno(posicionDireccion)) && (!preguntar.hayUnidadTerrestre(posicionDireccion))){
 				
-				mapa.intercambiarObjetos(unidad.posicion(), posicionDireccion);
+				PosicionMapa posMapaUnidad = new PosicionMapa(unidad.posicion().x(), unidad.posicion().y(),1);
+				PosicionMapa posMapaDireccion = new PosicionMapa(posicionDireccion.x(), posicionDireccion.y(),1);
+				
+				mapa.intercambiarObjetos(posMapaUnidad, posMapaDireccion);
 				unidad.posicion(posicionDireccion);
 			}
 			else

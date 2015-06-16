@@ -3,16 +3,19 @@ package fiuba.algo3.tp2;
 public class AccionColocar{
 
 	private Mapa mapa;
+	private AccionPreguntar preguntar;
 	
 	public AccionColocar(Mapa unMapa) {
 		mapa = unMapa;
+		preguntar = new AccionPreguntar(unMapa);
 	}
-	
+		
 	public void colocarTerrenoEn(Posicion posicion) {
 		
-		if(mapa.esPosicionValida(posicion))
-			mapa.colocarObjeto(posicion, new Terreno());
-		
+		if(mapa.esPosicionValida(posicion)){
+			PosicionMapa posSuelo = new PosicionMapa(posicion.x(),posicion.y(),0);
+			mapa.colocarObjeto(posSuelo, new Terreno());
+		}
 	}
 
 	public void colocarTerrenoEnTodoElMapa() {
@@ -29,26 +32,30 @@ public class AccionColocar{
 
 	public void colocarRecurso(Posicion posicion, Recurso recurso) {
 		
-		if(mapa.esPosicionValida(posicion))
-				mapa.colocarObjeto(posicion, recurso);
+		
+		if(mapa.esPosicionValida(posicion)){
+			PosicionMapa posSuelo = new PosicionMapa(posicion.x(),posicion.y(),0);
+			mapa.colocarObjeto(posSuelo, recurso);
+		}				
 	}
 
-	public boolean colocarUnidad(Posicion posicion, UnidadTerran unidad) {
+	public boolean colocarUnidadTerrestre(Posicion posicion, UnidadTerran unidad) {
 		
-		if(mapa.hayTerreno(posicion)){
-			mapa.colocarObjeto(posicion, unidad);
+		if(preguntar.hayTerreno(posicion)){
+			PosicionMapa posTerrestre = new PosicionMapa(posicion.x(),posicion.y(),1);
+			mapa.colocarObjeto(posTerrestre, unidad);
 			unidad.posicion(posicion);
 			return true;
 		}
 		else
 			return false;
-			
 	}
 
 	public boolean colocarEdificio(Posicion posicion, EdificioTerran edificio) {
 		
-		if(mapa.hayTerreno(posicion, edificio.tamanio())){
-			mapa.colocarObjeto(posicion, edificio, edificio.tamanio());
+		if(preguntar.hayTerreno(posicion, edificio.tamanio())){
+			PosicionMapa posTerrestre = new PosicionMapa(posicion.x(),posicion.y(),1);
+			mapa.colocarObjeto(posTerrestre, edificio, edificio.tamanio());
 			edificio.posicion(posicion);
 			return true;
 		}
@@ -58,16 +65,18 @@ public class AccionColocar{
 	}
 
 	public void colocarRecolectorDeMineral(Posicion posicion, EdificioTerran recolectorMineral) {
-		if(mapa.hayMineral(posicion)){
-			mapa.colocarObjeto(posicion, recolectorMineral);
+		if(preguntar.hayMineral(posicion)){
+			PosicionMapa posTerrestre = new PosicionMapa(posicion.x(),posicion.y(),1);
+			mapa.colocarObjeto(posTerrestre, recolectorMineral);
 			recolectorMineral.posicion(posicion);
 		}
 		
 	}
 
 	public void colocarRecolectorDeGasVespeno(Posicion posicion, EdificioTerran recolectorGasVespeno) {
-		if(mapa.hayGasVespeno(posicion)){
-			mapa.colocarObjeto(posicion, recolectorGasVespeno);
+		if(preguntar.hayGasVespeno(posicion)){
+			PosicionMapa posTerrestre = new PosicionMapa(posicion.x(),posicion.y(),1);
+			mapa.colocarObjeto(posTerrestre, recolectorGasVespeno);
 			recolectorGasVespeno.posicion(posicion);
 		}
 		

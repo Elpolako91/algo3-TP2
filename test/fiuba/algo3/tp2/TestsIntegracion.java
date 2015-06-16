@@ -28,11 +28,11 @@ public class TestsIntegracion {
 		jugador2.construirEdificio(posicionBarraca2, barraca2);
 		jugador2.pasarTurno();
 						
-		jugador1.construirUnidad(barraca1);
+		UnidadMarine marine = jugador1.construirUnidad(barraca1);
 		jugador1.pasarTurno();
 		
 		jugador2.construirUnidad(barraca2);
-		jugador2.moverUnidad(marine2,posicion3);
+		jugador2.moverUnidadTerrestre(marine2,posicion3);
 		jugador2.pasarTurno();
 
 		while(marine1.posicion().distancia(marine2.posicion())!=1){

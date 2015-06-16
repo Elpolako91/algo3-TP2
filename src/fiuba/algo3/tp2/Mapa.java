@@ -11,26 +11,27 @@ import java.util.Map;
 */
 public class Mapa {
 	
-	private Map<Posicion, Celda> mapa;
+	private Map<PosicionMapa, Celda> mapa = new HashMap<>();
+	
 	private Tamanio tamanio;
 	
 	public Mapa(Tamanio unTamanio){
 	
 		tamanio = unTamanio;
-		mapa = new HashMap<>();
-		for (int i = 1; i <= tamanio.enX(); i++){
-			for (int j = 1; j <= tamanio.enY(); j++){
+		for (int i = 1; i <= tamanio.enX(); i++)
+			for (int j = 1; j <= tamanio.enY(); j++)
+				for (int k = 0; k <= 2; k++)
+				this.inicializarPosicion(new PosicionMapa(i,j,k));
 				
-				this.inicializarPosicion(new Posicion(i,j));
-			}
-		}		
+			
+		
 	}	
 	
 	public Tamanio tamanio(){
 		return tamanio;
 	}
 	
-	public Object contenido(Posicion posicion) {	
+	public Object contenido(PosicionMapa posicion) {	
 		Celda celda = mapa.get(posicion);
 		if (celda != null)
 			return celda.contenido();
@@ -38,16 +39,18 @@ public class Mapa {
 			return new PosicionFueraDelMapa();
 	}
 	
-	/************************	Validacion De Posiciones	********************************************/
-	
-	private void inicializarPosicion(Posicion posicion) {
+	private void inicializarPosicion(PosicionMapa posicion) {
 		Celda celda= new Celda(new Vacio());
-		mapa.put(posicion, celda);		
+		mapa.put(posicion, celda);
 	}
 	
+	/************************	Validacion De Posiciones	********************************************/
+	
 	public boolean esPosicionValida(Posicion posicion){
-		if (!(this.contenido(posicion) instanceof PosicionFueraDelMapa))	return true;
-		else return false;
+		if (posicion.estaDentro(tamanio)) 
+			return true;
+		else 
+			return false;
 	}
 	
 	public boolean sonPosicionesValidas(Posicion posicion, Tamanio tamanio){
@@ -66,14 +69,15 @@ public class Mapa {
 	
 	/************************	Acciones Del Mapa	********************************************/
 	
-	public void colocarObjeto(Posicion posicionDestino, Object unObjeto) {
+	public void colocarObjeto(PosicionMapa posicionDestino, Object unObjeto) {
 		
 		Celda c = new Celda(unObjeto);
-		if (this.esPosicionValida(posicionDestino))mapa.put(posicionDestino, c);		
+		if (posicionDestino.estaDentro(tamanio))mapa.put(posicionDestino, c);		
 	}
 		
-	public void colocarObjeto(Posicion posicion,Object unObjetoConTamanio, Tamanio tamanio){
-		if(this.sonPosicionesValidas(posicion,tamanio)){
+	public void colocarObjeto(PosicionMapa posicion,Object unObjetoConTamanio, Tamanio tamanio){
+		Posicion p = new Posicion(posicion.x(),posicion.y());
+		if(this.sonPosicionesValidas(p,tamanio)){
 			for ( int i = 0; i < tamanio.enX(); i++ ) {			
 				for ( int j = 0; j < tamanio.enY(); j++){		
 					this.colocarObjeto(posicion.obtenerNuevaMovidaEn(i, j), unObjetoConTamanio);
@@ -83,7 +87,7 @@ public class Mapa {
 		}
 	}
 	
-	public void intercambiarObjetos(Posicion posicion1, Posicion posicion2) {
+	public void intercambiarObjetos(PosicionMapa posicion1, PosicionMapa posicion2) {
 		
 		if((this.esPosicionValida(posicion1)) && (this.esPosicionValida(posicion2))){
 			
@@ -95,7 +99,7 @@ public class Mapa {
 		}
 	}
 	
-	public void removerObjeto(Posicion posicion) {
+	public void removerObjeto(PosicionMapa posicion) {
 		
 		if(this.esPosicionValida(posicion))
 			this.inicializarPosicion(posicion);		
@@ -103,63 +107,7 @@ public class Mapa {
 	
 	/**************** METODOS PREGUNTAR TIPO DE CONTENIDO *****************************/
 	
-	public boolean hayTerreno(Posicion posicion) {
-		if (this.contenido(posicion) instanceof Terreno)
-			return true;
-		else 
-			return false;
-	}
-	
-	public boolean hayTerreno(Posicion posicion,Tamanio tamanio) {
-		
-		boolean hayTerreno = true;
-		for ( int i = 0; i < tamanio.enX(); i++ ) {			
-			for ( int j = 0; j < tamanio.enY(); j++){
-				
-				Posicion posicionActual = new Posicion(posicion.x()+i, posicion.y()+j);
-				if (!this.hayTerreno(posicionActual))
-					hayTerreno = false;
-			}
-		}
-		return hayTerreno;
-	}
-	
-	public boolean hayUnidad(Posicion posicion){
-		
-		if (this.contenido(posicion) instanceof UnidadTerran)
-			return true;
-		else 
-			return false;
-	}
-	
-	public boolean hayGasVespeno(Posicion posicion) {
-		if (this.contenido(posicion) instanceof RecursoGasVespeno) return true;
-		else return false;
-	}
-
-	public boolean hayMineral(Posicion posicion) {
-		if (this.contenido(posicion) instanceof RecursoMineral) 
-			return true;
-		else 
-			return false;
-	}
-	
-	public boolean hayEdificio(Posicion posicion) {
-		if (this.contenido(posicion) instanceof EdificioTerran)
-			return true;
-		else
-			return false;
-	}	
-	
-	public boolean estaFueraDelMapa(Posicion posicion){
-		
-		if (this.contenido(posicion) instanceof PosicionFueraDelMapa)
-			return true;
-		else
-			return false;			
-	}
-	
-	public boolean hayVacio(Posicion posicion){
+	public boolean hayVacio(PosicionMapa posicion){
 		
 		if (this.contenido(posicion) instanceof Vacio)
 			return true;

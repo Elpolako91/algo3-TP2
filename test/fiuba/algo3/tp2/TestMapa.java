@@ -14,7 +14,8 @@ public class TestMapa {
 		
 		for (int i=1; i<=10;i++)
 			for(int j=1; j<=10;j++)
-		assertTrue(mapa.hayVacio(new Posicion(i,j)));
+				for (int k = 0; k <= 2; k++)
+		assertTrue(mapa.hayVacio(new PosicionMapa(i,j,k)));
 	}
 	
 	@Test
@@ -32,7 +33,7 @@ public class TestMapa {
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		
 		for (int i=-2; i<=12;i++)
-		assertTrue(mapa.estaFueraDelMapa(new Posicion(0,i)));
+		assertFalse(mapa.esPosicionValida(new Posicion(0,i)));
 	}
 	
 	@Test
@@ -40,7 +41,7 @@ public class TestMapa {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		RecursoMineral mineral = new RecursoMineral();
-		Posicion posicion = new Posicion(1,1);
+		PosicionMapa posicion = new PosicionMapa(1,1,0);
 		
 		mapa.colocarObjeto(posicion, mineral);
 		
@@ -52,11 +53,11 @@ public class TestMapa {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		RecursoMineral mineral = new RecursoMineral();
-		Posicion posicion = new Posicion(0,0);
+		PosicionMapa posicion = new PosicionMapa(0,0,0);
 		
 		mapa.colocarObjeto(posicion, mineral);
 		
-		assertTrue( mapa.estaFueraDelMapa(posicion));
+		assertFalse( mapa.esPosicionValida(posicion));
 	}
 	
 	@Test
@@ -64,10 +65,10 @@ public class TestMapa {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		EdificioBarraca barraca = new EdificioBarraca();
-		Posicion posicion1 = new Posicion(1, 1);
-		Posicion posicion2 = new Posicion(1, 2);
-		Posicion posicion3 = new Posicion(2, 1);
-		Posicion posicion4 = new Posicion(2, 2);
+		PosicionMapa posicion1 = new PosicionMapa(1, 1 ,1);
+		PosicionMapa posicion2 = new PosicionMapa(1, 2, 1);
+		PosicionMapa posicion3 = new PosicionMapa(2, 1, 1);
+		PosicionMapa posicion4 = new PosicionMapa(2, 2, 1);
 		
 		mapa.colocarObjeto(posicion1, barraca,barraca.tamanio());
 		
@@ -82,10 +83,11 @@ public class TestMapa {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		EdificioBarraca barraca = new EdificioBarraca();
-		Posicion posicion1 = new Posicion(9, 9);
-		Posicion posicion2 = new Posicion(9, 10);
-		Posicion posicion3 = new Posicion(10, 9);
-		Posicion posicion4 = new Posicion(10, 10);
+		
+		PosicionMapa posicion1 = new PosicionMapa(9, 9 ,1);
+		PosicionMapa posicion2 = new PosicionMapa(9, 10, 1);
+		PosicionMapa posicion3 = new PosicionMapa(10, 9, 1);
+		PosicionMapa posicion4 = new PosicionMapa(10, 10, 1);
 		
 		mapa.colocarObjeto(posicion1, barraca, barraca.tamanio());
 		
@@ -100,17 +102,19 @@ public class TestMapa {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		EdificioBarraca barraca = new EdificioBarraca();
-		Posicion posicion1 = new Posicion(16, 3);
+		PosicionMapa posicionBarraca = new PosicionMapa(16,3,1);
+		
+		Posicion posicion1 = new Posicion(16, 3);		
 		Posicion posicion2 = new Posicion(16, 4);
 		Posicion posicion3 = new Posicion(17, 3);
 		Posicion posicion4 = new Posicion(17, 4);
 		
-		mapa.colocarObjeto(posicion1, barraca, barraca.tamanio());
+		mapa.colocarObjeto(posicionBarraca, barraca, barraca.tamanio());
 		
-		assertTrue( mapa.estaFueraDelMapa(posicion1));
-		assertTrue( mapa.estaFueraDelMapa(posicion2));
-		assertTrue( mapa.estaFueraDelMapa(posicion3));
-		assertTrue( mapa.estaFueraDelMapa(posicion4));
+		assertFalse( mapa.esPosicionValida(posicion1));
+		assertFalse( mapa.esPosicionValida(posicion2));
+		assertFalse( mapa.esPosicionValida(posicion3));
+		assertFalse( mapa.esPosicionValida(posicion4));
 	}
 	
 	@Test
@@ -118,16 +122,18 @@ public class TestMapa {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		EdificioBarraca barraca = new EdificioBarraca();
+		PosicionMapa posicionBarraca = new PosicionMapa(0,0,2);
+		
 		Posicion posicion1 = new Posicion(0, 0);
 		Posicion posicion2 = new Posicion(0, 1);
 		Posicion posicion3 = new Posicion(1, 0);
-		Posicion posicion4 = new Posicion(1, 1);
+		PosicionMapa posicion4 = new PosicionMapa(1, 1, 2);
 		
-		mapa.colocarObjeto(posicion1, barraca, barraca.tamanio());
+		mapa.colocarObjeto(posicionBarraca, barraca, barraca.tamanio());
 		
-		assertTrue( mapa.estaFueraDelMapa(posicion1));
-		assertTrue( mapa.estaFueraDelMapa(posicion2));
-		assertTrue( mapa.estaFueraDelMapa(posicion3));
+		assertFalse( mapa.esPosicionValida(posicion1));
+		assertFalse( mapa.esPosicionValida(posicion2));
+		assertFalse( mapa.esPosicionValida(posicion3));
 		assertTrue( mapa.hayVacio(posicion4));
 	}
 	
@@ -136,17 +142,17 @@ public class TestMapa {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		EdificioBarraca barraca = new EdificioBarraca();
-		Posicion posicion1 = new Posicion(10, 10);
-		Posicion posicion2 = new Posicion(10, 11);
-		Posicion posicion3 = new Posicion(11, 10);
-		Posicion posicion4 = new Posicion(11, 11);
+		PosicionMapa posicion1 = new PosicionMapa(10, 10, 1);
+		PosicionMapa posicion2 = new PosicionMapa(10, 11, 1);
+		PosicionMapa posicion3 = new PosicionMapa(11, 10, 1);
+		PosicionMapa posicion4 = new PosicionMapa(11, 11, 1);
 		
 		mapa.colocarObjeto(posicion1, barraca, barraca.tamanio());
 		
 		assertTrue( mapa.hayVacio(posicion1));
-		assertTrue( mapa.estaFueraDelMapa(posicion2));
-		assertTrue( mapa.estaFueraDelMapa(posicion3));
-		assertTrue( mapa.estaFueraDelMapa(posicion4));
+		assertFalse( mapa.esPosicionValida(posicion2));
+		assertFalse( mapa.esPosicionValida(posicion3));
+		assertFalse( mapa.esPosicionValida(posicion4));
 	}
 	
 	@Test
@@ -157,8 +163,8 @@ public class TestMapa {
 		UnidadMarine marine1 = new UnidadMarine();
 		UnidadMarine marine2 = new UnidadMarine();
 		
-		Posicion posicion1 = new Posicion(1,5);
-		Posicion posicion2 = new Posicion(8,7);
+		PosicionMapa posicion1 = new PosicionMapa(1,5,1);
+		PosicionMapa posicion2 = new PosicionMapa(8,7,2);
 		
 		mapa.colocarObjeto(posicion1, marine1);
 		mapa.colocarObjeto(posicion2, marine2);
@@ -176,15 +182,15 @@ public class TestMapa {
 		
 		UnidadMarine marine = new UnidadMarine();
 		
-		Posicion posicion1 = new Posicion(1,5);
-		Posicion posicion2 = new Posicion(-2,4);
+		PosicionMapa posicion1 = new PosicionMapa(1,5,2);
+		PosicionMapa posicion2 = new PosicionMapa(-2,4,2);
 		
 		mapa.colocarObjeto(posicion1, marine);
 		
 		mapa.intercambiarObjetos(posicion1, posicion2);
 		
 		assertEquals(mapa.contenido(posicion1), marine);
-		assertTrue(mapa.estaFueraDelMapa(posicion2));		
+		assertFalse(mapa.esPosicionValida(posicion2));		
 	}
 	
 	@Test
@@ -194,7 +200,7 @@ public class TestMapa {
 		
 		UnidadMarine marine = new UnidadMarine();
 		
-		Posicion posicion = new Posicion(1,5);
+		PosicionMapa posicion = new PosicionMapa(1,5,0);
 		
 		mapa.colocarObjeto(posicion, marine);
 		mapa.removerObjeto(posicion);
@@ -207,7 +213,7 @@ public class TestMapa {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 				
-		Posicion posicion = new Posicion(1,5);
+		PosicionMapa posicion = new PosicionMapa(1,5, 2);
 		mapa.removerObjeto(posicion);
 		
 		assertTrue(mapa.hayVacio(posicion));	
@@ -218,9 +224,9 @@ public class TestMapa {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 				
-		Posicion posicion = new Posicion(12,15);
+		PosicionMapa posicion = new PosicionMapa(12,15,0);
 		mapa.removerObjeto(posicion);
 		
-		assertTrue(mapa.estaFueraDelMapa(posicion));
+		assertFalse(mapa.esPosicionValida(posicion));
 	}
 }

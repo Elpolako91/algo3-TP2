@@ -48,4 +48,24 @@ public class TestPosicion {
 		assertEquals(posicion.x(), 9);
 		assertEquals(posicion.y(), -1);
 	}
+	
+	@Test
+	public void TestPosicionDentroDeTamanio(){
+		
+		Posicion posicion = new Posicion(2,4);
+		
+		Tamanio tamanio = new Tamanio(3,5);
+		
+		assertTrue(posicion.estaDentro(tamanio));
+	}
+	
+	@Test
+	public void TestPosicionFueraDeTamanio(){
+		
+		Posicion posicion = new Posicion(0,2);
+		
+		Tamanio tamanio = new Tamanio(3,5);
+		
+		assertTrue(!posicion.estaDentro(tamanio));
+	}
 }

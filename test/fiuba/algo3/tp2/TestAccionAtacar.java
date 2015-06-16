@@ -23,10 +23,10 @@ public class TestAccionAtacar {
 		Posicion posicionAtacado = new Posicion(6,6);	
 	
 		colocar.colocarTerrenoEnTodoElMapa();
-		colocar.colocarUnidad(posicionAtacante, marineAtacante);
-		colocar.colocarUnidad(posicionAtacado, marineAtacado);
+		colocar.colocarUnidadTerrestre(posicionAtacante, marineAtacante);
+		colocar.colocarUnidadTerrestre(posicionAtacado, marineAtacado);
 	
-		atacar.atacar(posicionAtacado, marineAtacante);
+		atacar.atacarTierra(posicionAtacado, marineAtacante);
 
 		assertEquals(34, marineAtacado.vidaActual());	
 	}
@@ -45,10 +45,10 @@ public class TestAccionAtacar {
 		Posicion posicionAtacado = new Posicion(8,3);	
 	
 		colocar.colocarTerrenoEnTodoElMapa();
-		colocar.colocarUnidad(posicionAtacante, marineAtacante);
-		colocar.colocarUnidad(posicionAtacado, marineAtacado);
+		colocar.colocarUnidadTerrestre(posicionAtacante, marineAtacante);
+		colocar.colocarUnidadTerrestre(posicionAtacado, marineAtacado);
 	
-		atacar.atacar(posicionAtacado, marineAtacante);
+		atacar.atacarTierra(posicionAtacado, marineAtacante);
 
 		assertEquals(40, marineAtacado.vidaActual());	
 	}
@@ -67,10 +67,10 @@ public class TestAccionAtacar {
 		Posicion posicionAtacado = new Posicion(7,3);	
 	
 		colocar.colocarTerrenoEnTodoElMapa();
-		colocar.colocarUnidad(posicionAtacante, marine);
+		colocar.colocarUnidadTerrestre(posicionAtacante, marine);
 		colocar.colocarEdificio(posicionAtacado, edificio);
 	
-		atacar.atacar(posicionAtacado, marine);
+		atacar.atacarTierra(posicionAtacado, marine);
 
 		assertEquals(994, edificio.vidaActual());	
 	}
@@ -80,6 +80,7 @@ public class TestAccionAtacar {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		AccionColocar colocar = new AccionColocar(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		AccionAtacar atacar  = new AccionAtacar(mapa);
 	
 		UnidadMarine marineAtacante = new UnidadMarine();
@@ -89,13 +90,13 @@ public class TestAccionAtacar {
 		Posicion posicionAtacado = new Posicion(6,6);	
 	
 		colocar.colocarTerrenoEnTodoElMapa();
-		colocar.colocarUnidad(posicionAtacante, marineAtacante);
-		colocar.colocarUnidad(posicionAtacado, marineAtacado);
+		colocar.colocarUnidadTerrestre(posicionAtacante, marineAtacante);
+		colocar.colocarUnidadTerrestre(posicionAtacado, marineAtacado);
 	
 		for(int i = 0; i<10; i++)
-		atacar.atacar(posicionAtacado, marineAtacante);
+		atacar.atacarTierra(posicionAtacado, marineAtacante);
 
 		assertEquals(0, marineAtacado.vidaActual());
-		assertTrue(mapa.hayTerreno(posicionAtacado)); //devuelve Vacio, necesidad de capas
+		assertFalse(preguntar.hayEnTierra(posicionAtacado, marineAtacado)); //devuelve Vacio, necesidad de capas
 	}
 }

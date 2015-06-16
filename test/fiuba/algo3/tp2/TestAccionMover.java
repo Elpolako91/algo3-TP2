@@ -11,17 +11,17 @@ public class TestAccionMover {
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		AccionColocar colocar = new AccionColocar(mapa);
 		AccionMover mover = new AccionMover(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		UnidadMarine marine = new UnidadMarine();
 		Posicion posicionInicio = new Posicion(1,1);
 		Posicion posicionFinal = new Posicion(5,5);
 		
 		colocar.colocarTerrenoEnTodoElMapa();
-		colocar.colocarUnidad(posicionInicio, marine);
-		mover.moverUnidad(posicionFinal,marine);
+		colocar.colocarUnidadTerrestre(posicionInicio, marine);
+		mover.moverUnidadTerrestre(posicionFinal,marine);
 
-		assertEquals(marine, mapa.contenido(posicionFinal));
-		assertTrue(mapa.hayTerreno(posicionInicio));
+		assertTrue(preguntar.hayEnTierra(posicionFinal, marine));
 	}
 	
 	@Test
@@ -30,6 +30,7 @@ public class TestAccionMover {
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		AccionColocar colocar = new AccionColocar(mapa);
 		AccionMover mover = new AccionMover(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		UnidadMarine marine = new UnidadMarine();
 		Posicion posicionInicio = new Posicion(1,1);
@@ -37,12 +38,11 @@ public class TestAccionMover {
 		Posicion posicionBorde = new Posicion(3,10);
 		
 		colocar.colocarTerrenoEnTodoElMapa();
-		colocar.colocarUnidad(posicionInicio, marine);
-		mover.moverUnidad(posicionFinal,marine);
+		colocar.colocarUnidadTerrestre(posicionInicio, marine);
+		mover.moverUnidadTerrestre(posicionFinal,marine);
 
 		
-		assertEquals(marine.posicion(), posicionBorde);
-		assertEquals(marine, mapa.contenido(posicionBorde));
+		assertTrue(preguntar.hayEnTierra(posicionBorde, marine));
 	}
 	
 	@Test
@@ -51,6 +51,7 @@ public class TestAccionMover {
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		AccionColocar colocar = new AccionColocar(mapa);
 		AccionMover mover = new AccionMover(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		UnidadMarine marineAmover = new UnidadMarine();
 		UnidadMarine marineFijo = new UnidadMarine();
@@ -60,12 +61,11 @@ public class TestAccionMover {
 		Posicion posicionMarineFijo = new Posicion(7,8);		
 		
 		colocar.colocarTerrenoEnTodoElMapa();
-		colocar.colocarUnidad(posicionInicio, marineAmover);
-		colocar.colocarUnidad(posicionMarineFijo, marineFijo);
+		colocar.colocarUnidadTerrestre(posicionInicio, marineAmover);
+		colocar.colocarUnidadTerrestre(posicionMarineFijo, marineFijo);
 		
-		mover.moverUnidad(posicionMarineFijo, marineAmover);
+		mover.moverUnidadTerrestre(posicionMarineFijo, marineAmover);;
 
-		assertEquals(marineAmover, mapa.contenido(posicionFinal));
-		assertEquals(marineAmover.posicion(), posicionFinal);
+		assertTrue(preguntar.hayEnTierra(posicionFinal, marineAmover));
 	}
 }

@@ -1,5 +1,5 @@
 package fiuba.algo3.tp2;
 
-public interface Edificio {
+public interface Edificio extends Terrestre{
 
 }

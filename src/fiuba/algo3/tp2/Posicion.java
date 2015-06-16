@@ -78,4 +78,11 @@ public class Posicion {
 			
 		return new Posicion(i,j);
 	}
+		
+	public boolean estaDentro(Tamanio t){
+		if((this.x() >= 1) && (this.x() <= t.enX()) && (this.y() >= 1) && (this.y() <= t.enY()))
+			return true;
+		else
+			return false;		
+	}
 }
