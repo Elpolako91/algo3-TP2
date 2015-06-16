@@ -1,5 +1,5 @@
 package fiuba.algo3.tp2;
 
-public class RecursoMineral extends Recurso implements Suelo{
+public class RecursoMineral extends Recurso {
 	
 }

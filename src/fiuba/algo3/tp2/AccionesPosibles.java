@@ -5,11 +5,13 @@ public class AccionesPosibles {
 	private AccionColocar colocar;
 	private AccionMover mover;
 	private AccionAtacar atacar;
+	private AccionPreguntar preguntar;
 	
 	public AccionesPosibles(Mapa unMapa){
 		colocar = new AccionColocar(unMapa);
 		mover = new AccionMover(unMapa);
 		atacar = new AccionAtacar(unMapa);
+		preguntar = new AccionPreguntar(unMapa);
 	}
 	
 	public AccionColocar colocar(){
@@ -22,5 +24,9 @@ public class AccionesPosibles {
 	
 	public AccionAtacar atacar(){
 		return atacar;
-	}	
+	}
+	
+	public AccionPreguntar preguntar(){
+		return preguntar;
+	}
 }

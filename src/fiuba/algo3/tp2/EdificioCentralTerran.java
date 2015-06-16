@@ -13,7 +13,7 @@ public class EdificioCentralTerran extends EdificioTerran {
 		
 	}
 	
-public EdificioBarraca construirBarraca() {
+	public EdificioBarraca construirBarraca() {
 		
 		EdificioBarraca barraca = new EdificioBarraca();
 		edificios.add(barraca);
@@ -65,8 +65,5 @@ public EdificioBarraca construirBarraca() {
 			}
 		}
 		return null;
-	}
-		
-				
+	}				
 }
-

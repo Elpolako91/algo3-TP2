@@ -7,8 +7,5 @@ public class EdificioCentral extends EdificioTerran {
 		vidaMaxima = 2000;
 		vidaActual = 2000;
 		
-	}
-
-		
+	}		
 }
-

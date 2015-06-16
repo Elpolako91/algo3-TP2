@@ -1,6 +1,6 @@
 package fiuba.algo3.tp2;
 
-public abstract class UnidadTerran extends RazaTerran implements Terrestre{
+public abstract class UnidadTerran extends RazaTerran implements Unidad{
 	
 	protected int danioAire;
 	protected int danioTierra;

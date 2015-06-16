@@ -1,5 +1,5 @@
 package fiuba.algo3.tp2;
 
-public class Terreno {
+public class Terreno implements Suelo{
 
 }
