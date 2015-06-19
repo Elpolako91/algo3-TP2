@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 
 public class VistaMenuPrincipal extends JFrame {
 	
-	final VistaMenuJugador vista2 = new VistaMenuJugador();
+	final VistaMenuPrimerJugador vista2 = new VistaMenuPrimerJugador();
 
 	/**
 	 * Create the frame.
@@ -51,8 +51,8 @@ public class VistaMenuPrincipal extends JFrame {
 		getContentPane().add(lblMenuPrincipal);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Familia\\Desktop\\wall2-1920x1200.jpg"));
-		lblNewLabel.setBounds(0, 0, 631, 606);
+		lblNewLabel.setIcon(new ImageIcon("imagenes\\wall2-1920x1200.jpg"));
+		lblNewLabel.setBounds(-10, -10, 650, 606);
 		getContentPane().add(lblNewLabel);
 		
 	}
