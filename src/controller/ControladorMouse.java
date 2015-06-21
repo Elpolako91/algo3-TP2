@@ -3,26 +3,28 @@ package controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import fiuba.algo3.tp2.ModeloObservable;
-import view.VistaMenuPrincipal;
+import javax.swing.JButton;
+
+import fiuba.algo3.tp2.JuegoCraft;
+import view.VistaMapa;
 
 public class ControladorMouse extends MouseAdapter {
 
-    ModeloObservable modelo;
+    JuegoCraft modelo;
+    
+    VistaMapa vista;
 
-    VistaMenuPrincipal vista;
-
-    public ControladorMouse(ModeloObservable modelo, VistaMenuPrincipal vista) {
+    public ControladorMouse(JuegoCraft modelo, VistaMapa vista) {
         this.modelo = modelo;
         this.vista = vista;
     }
 
-    public void mousePressed(MouseEvent mouseEvent) {
-
-        // Ojo al piojo.
-        // El manejo de las coordenadas del mouse debe ser encapsulado por la clase Posicion
-        // modelo.inicializarModeloDato(new Posicion(mouseEvent.getX(), mouseEvent.getY()));
-
-        modelo.inicializarModeloDato(vista.posicion);
+    
+    public void mouseClicked (MouseEvent e){
+    	
+    	int x = e.getX();
+    	int y = e.getY();
+    	//vista.notify();
+    	System.out.println(x+","+y);
     }
 }

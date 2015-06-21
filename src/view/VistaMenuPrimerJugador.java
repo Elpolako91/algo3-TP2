@@ -27,7 +27,7 @@ public class VistaMenuPrimerJugador extends JFrame {
 	private ButtonGroup botonesRaza = new ButtonGroup();
 	private ButtonGroup botonesColores = new ButtonGroup();
 	final VistaMapa vistaMapa = new VistaMapa();
-	final VistaMenuSegundoJugador vista3 = new VistaMenuSegundoJugador(vistaMapa);
+	final VistaMenuSegundoJugador vista3 = new VistaMenuSegundoJugador(vistaMapa, this);
 	public String color;
 	public String raza;
 	public String nombre;
@@ -35,7 +35,7 @@ public class VistaMenuPrimerJugador extends JFrame {
 
 	public VistaMenuPrimerJugador() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(300, 200, 650, 606);
+		setBounds(100, 100, 650, 606);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -82,7 +82,7 @@ public class VistaMenuPrimerJugador extends JFrame {
 		botonesColores.add(rdoBtnVerde);
 		botonesColores.add(rdoBtnRosa);
 		
-		//el color que elija se deberá guardar en la raza del jugador
+		//el color que elija se deberï¿½ guardar en la raza del jugador
 		
 		final JRadioButton rdoBtnProtos = new JRadioButton("Protos");
 		rdoBtnProtos.setBounds(72, 159, 109, 23);
@@ -109,7 +109,7 @@ public class VistaMenuPrimerJugador extends JFrame {
 		lblNewLabel_3.setBounds(291, 98, 242, 58);
 		contentPane.add(lblNewLabel_3);
 		
-		//la raza que elija se deberá guardar en la raza del jugador
+		//la raza que elija se deberï¿½ guardar en la raza del jugador
 		
 		JLabel lblNewLabel_2 = new JLabel("Elige tu Color");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 20));

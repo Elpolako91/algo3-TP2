@@ -27,9 +27,9 @@ public class VistaMenuSegundoJugador extends JFrame {
 	private ButtonGroup razas = new ButtonGroup();
 	private JTextField textField_1;
 
-	public VistaMenuSegundoJugador(VistaMapa vistaMapa) {
+	public VistaMenuSegundoJugador(final VistaMapa vistaMapa, final VistaMenuPrimerJugador vistaMenuPrimerJugador) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(300, 200, 650, 606);
+		setBounds(100, 100, 650, 606);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -123,7 +123,14 @@ public class VistaMenuSegundoJugador extends JFrame {
 		btnNewButton.setBounds(453, 499, 172, 58);
 		contentPane.add(btnNewButton);
 		
-		JButton btnSalir = new JButton("Salir");
+		JButton btnSalir = new JButton("Atrás");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				vistaMenuPrimerJugador.setVisible(true);
+				dispose();
+			}
+		});
 		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSalir.setBounds(35, 499, 172, 58);
 		contentPane.add(btnSalir);

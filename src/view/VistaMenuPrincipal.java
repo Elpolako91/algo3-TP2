@@ -14,9 +14,6 @@ public class VistaMenuPrincipal extends JFrame {
 	
 	final VistaMenuPrimerJugador vista2 = new VistaMenuPrimerJugador();
 
-	/**
-	 * Create the frame.
-	 */
 	public VistaMenuPrincipal() {
 		getContentPane().setLayout(null);
 		
@@ -51,7 +48,7 @@ public class VistaMenuPrincipal extends JFrame {
 		getContentPane().add(lblMenuPrincipal);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("imagenes\\wall2-1920x1200.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("imagenes/starcraft.jpg"));
 		lblNewLabel.setBounds(-10, -10, 650, 606);
 		getContentPane().add(lblNewLabel);
 		
