@@ -23,6 +23,7 @@ import controller.ControladorMouse;
 import fiuba.algo3.tp2.JuegoCraft;
 import fiuba.algo3.tp2.Mapa;
 import fiuba.algo3.tp2.Tamanio;
+import javax.swing.SwingConstants;
 
 public class VistaMapa extends JFrame {
 
@@ -32,12 +33,14 @@ public class VistaMapa extends JFrame {
 	private ArrayList<String> raza = new ArrayList<String>();
 	private ArrayList<String> nombre = new ArrayList<String>();
 	private Posicion posicion;
-	private int limiteMapa = 650;
+	private JButton[][] botones;
+	private int limiteMapaX = 1280;
+	private int limiteMapaY = 980;
 
 	public VistaMapa() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(300, 50, 650, 678);
+		setBounds(0, 0, limiteMapaX, limiteMapaY);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -49,12 +52,16 @@ public class VistaMapa extends JFrame {
 		for(int i = 1; i<=nombre.size();i++){
 			modelo.cargarJugador(nombre.get(i), color.get(i), raza.get(i));
 		}
-		JButton temp = new JButton();
+	/*	JButton temp = new JButton("",new ImageIcon("imagenes\\pasto.png"));
 		temp.setBounds(0,0,limiteMapa,limiteMapa);
-		temp.setBackground(Color.GREEN);
 		contentPane.add(temp);
-		temp.addMouseListener(new ControladorMouse(modelo, this));
-
+		temp.addMouseListener(new ControladorMouse(modelo, this));*/
+		for (int i = 0; i<limiteMapaX;i = i + 10){
+			for (int j = 0; j < limiteMapaY; j = j + 10){
+				Boton temp = new Boton(i,j);
+				contentPane.add(temp.boton());
+			}
+		}
 	}
 
 	public void color(String unColor) {

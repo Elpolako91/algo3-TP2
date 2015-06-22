@@ -136,7 +136,7 @@ public class VistaMenuSegundoJugador extends JFrame {
 		contentPane.add(btnSalir);
 		
 		JLabel label_3 = new JLabel("");
-		label_3.setIcon(new ImageIcon("imagenes\\starcraft_2_widescreen_wallpaper_18.jpg"));
+		label_3.setIcon(new ImageIcon("imagenes\\starcraftVista2.jpg"));
 		label_3.setBounds(0, 0, 635, 568);
 		contentPane.add(label_3);
 		

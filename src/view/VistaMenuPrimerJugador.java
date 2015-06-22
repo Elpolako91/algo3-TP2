@@ -151,7 +151,7 @@ public class VistaMenuPrimerJugador extends JFrame {
 		contentPane.add(btnComenzar);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("imagenes\\starcraft_2_widescreen_wallpaper_18.jpg"));
+		label.setIcon(new ImageIcon("imagenes\\starcraftVista2.jpg"));
 		label.setBounds(0, 0, 635, 568);
 		contentPane.add(label);
 	}
