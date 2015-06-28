@@ -15,6 +15,7 @@ public class Jugador {
 	private List<Unidad> unidades = new ArrayList<Unidad> ();
 	private RecursosDelJugador recursos;
 	private Suministro suministros;
+	private Edificio edificioAConstruir;
 	
 	public Jugador(String unNombre, String unColor, String unaRaza) {
 
@@ -196,6 +197,17 @@ public class Jugador {
 			
 		}
 		
+	}
+
+	public void edificioAConstruir(Edificio edificio) {
+		
+		edificioAConstruir = edificio;
+		
+	}
+
+	public Edificio edificioAConstruir() {
+		
+		return edificioAConstruir;
 	}
 
 	

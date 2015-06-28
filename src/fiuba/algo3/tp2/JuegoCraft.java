@@ -2,8 +2,9 @@ package fiuba.algo3.tp2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-public class JuegoCraft {
+public class JuegoCraft extends Observable {
 	
 	private Mapa mapa;
 	private Turno turno;
@@ -78,9 +79,15 @@ public class JuegoCraft {
 			
 			turno.pasarTurno();
 		}
+		this.actualizarObservadores();
 			
 	}
 	
+	private void actualizarObservadores() {
+		setChanged();
+		notifyObservers();		
+	}
+
 	public void colocarEdificio(Jugador jugador, Edificio edificio, Posicion posicion) {
 		
 		if((edificio instanceof EdificioRecolectorDeMineral) && (acciones.colocar().colocarRecolectorDeMineral(posicion, (EdificioRecolectorDeMineral) edificio)))	

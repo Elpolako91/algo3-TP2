@@ -7,20 +7,26 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
+import fiuba.algo3.tp2.JuegoCraft;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class VistaMenuPrincipal extends JFrame {
 	
-	final VistaMenuPrimerJugador vista2 = new VistaMenuPrimerJugador();
+	private static final long serialVersionUID = 1L;
 
-	public VistaMenuPrincipal() {
+	VistaMenuJugadores vista2;
+
+	public VistaMenuPrincipal(final JuegoCraft modelo) {
 		getContentPane().setLayout(null);
+
 		
 		JButton btnNewButton = new JButton("Iniciar Partida");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				vista2 = new VistaMenuJugadores(modelo);
 				vista2.setVisible(true);
 				dispose();
 			}
@@ -47,9 +53,10 @@ public class VistaMenuPrincipal extends JFrame {
 		lblMenuPrincipal.setBounds(41, 11, 556, 84);
 		getContentPane().add(lblMenuPrincipal);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("imagenes/starcraft.jpg"));
-		lblNewLabel.setBounds(-10, -10, 650, 606);
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(new ImageIcon(VistaMenuPrincipal.class.getResource("/imagenes/starcraft.jpg")));
+		lblNewLabel.setBounds(0, 0, 631, 468);
 		getContentPane().add(lblNewLabel);
 		
 	}
