@@ -11,7 +11,7 @@ public class TestAccionColocar {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
 		Posicion posicion = new Posicion(1,1);
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		colocar.colocarTerrenoEn(posicion);
@@ -23,7 +23,7 @@ public class TestAccionColocar {
 	public void testColocarTerrenoEnTodoElMapa(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		Posicion posicionAux;
 		
@@ -41,7 +41,7 @@ public class TestAccionColocar {
 	public void testColocarRecursoMineral(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		RecursoMineral mineral = new RecursoMineral(2000);
@@ -56,7 +56,7 @@ public class TestAccionColocar {
 	public void testColocarRecursoGasVespeno(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		RecursoGasVespeno gasVespeno = new RecursoGasVespeno(2000);
@@ -71,7 +71,7 @@ public class TestAccionColocar {
 	public void testNoDebeColocarUnidadMarineCuandoNoHayTerreno(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		UnidadMarine marine = new UnidadMarine();
@@ -86,7 +86,7 @@ public class TestAccionColocar {
 	public void testColocarUnidadTerrestreMarine(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		UnidadMarine marine = new UnidadMarine();
@@ -103,7 +103,7 @@ public class TestAccionColocar {
 	public void testColocarUnidadTerrestreGolliat(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		UnidadGolliat golliat = new UnidadGolliat();
@@ -120,7 +120,7 @@ public class TestAccionColocar {
 	public void testColocarEdificioBarraca(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		EdificioBarraca barraca = new EdificioBarraca(new RecursosDelJugador(1000,1000), new Suministro());
@@ -143,7 +143,7 @@ public class TestAccionColocar {
 	public void testNoDebeColocarEdificioBarracaCuandoNoHayTerreno(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		EdificioBarraca barraca = new EdificioBarraca(new RecursosDelJugador(1000,1000), new Suministro());		
@@ -165,7 +165,7 @@ public class TestAccionColocar {
 	public void testColocarEdificioRecolectorDeMinerialSobreRecursoMineral(){ 
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		Recurso mineral = new RecursoMineral(1000);
@@ -183,7 +183,7 @@ public class TestAccionColocar {
 	public void testNoDebeColocarEdificioRecolectorDeMinerialSinRecursoMineral(){ 
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		EdificioCentroMineral recolectorMineral = new EdificioCentroMineral(new RecursosDelJugador(1000,1000));
@@ -198,7 +198,7 @@ public class TestAccionColocar {
 	public void testColocarEdificioRecolectorDeGasVespenoSobreRecursoGasVespeno(){ 
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		Recurso gasVespeno = new RecursoGasVespeno(2000);
@@ -216,7 +216,7 @@ public class TestAccionColocar {
 	public void testNoDebeColocarEdificioRecolectorDeGasVespenoSinRecursoGasVespeno(){ 
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		EdificioRefineria recolectorGasVespeno = new EdificioRefineria(new RecursosDelJugador(1000,1000));
@@ -231,7 +231,7 @@ public class TestAccionColocar {
 	public void testNoDebeColocarUnidadTerrestreMarineSobreOtraUnidadTerrestre(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		UnidadMarine marine1 = new UnidadMarine();
@@ -249,7 +249,7 @@ public class TestAccionColocar {
 	public void testNoDebeColocarUnidadTerrestreMarineSobreEdificio(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		UnidadMarine marine = new UnidadMarine();
@@ -267,7 +267,7 @@ public class TestAccionColocar {
 	public void testNoDebeColocarEdificioSobreUnidadTerrestre(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		UnidadMarine marine = new UnidadMarine();
@@ -288,7 +288,7 @@ public class TestAccionColocar {
 	public void testNoDebeColocarEdificioSobreOtroEdificio(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		EdificioBarraca edificio1 = new EdificioBarraca(new RecursosDelJugador(1000,1000), new Suministro());;
@@ -308,7 +308,7 @@ public class TestAccionColocar {
 	public void testColocarUnidadAereaEspectro(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		UnidadEspectro espectro = new UnidadEspectro();
@@ -324,7 +324,7 @@ public class TestAccionColocar {
 	public void testNoDebeColocarUnidadAereaEspectroSobreOtraUnidadAerea(){
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		UnidadEspectro espectro1 = new UnidadEspectro();

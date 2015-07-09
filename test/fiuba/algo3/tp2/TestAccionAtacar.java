@@ -11,8 +11,8 @@ public class TestAccionAtacar {
 	public void testUnidadAtacaAOtraAdistancia() {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
-		AccionAtacar atacar  = new AccionAtacar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
+		AccionAtacarTierra atacar  = new AccionAtacarTierra(mapa);
 	
 		UnidadMarine marineAtacante = new UnidadMarine();
 		UnidadMarine marineAtacado = new UnidadMarine();
@@ -24,7 +24,7 @@ public class TestAccionAtacar {
 		colocar.colocarUnidadTerrestre(posicionAtacante, marineAtacante);
 		colocar.colocarUnidadTerrestre(posicionAtacado, marineAtacado);
 	
-		atacar.atacarTierra(posicionAtacado, marineAtacante);
+		atacar.realizar(posicionAtacado, marineAtacante);
 
 		assertEquals(34, marineAtacado.vidaActual());	
 	}
@@ -33,8 +33,8 @@ public class TestAccionAtacar {
 	public void testUnidadAtacaAOtraSinDistancia() {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
-		AccionAtacar atacar  = new AccionAtacar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
+		AccionAtacarTierra atacar  = new AccionAtacarTierra(mapa);
 	
 		UnidadZealot unidadMelee = new UnidadZealot();
 		UnidadMarine unidadAtacada = new UnidadMarine();
@@ -46,7 +46,7 @@ public class TestAccionAtacar {
 		colocar.colocarUnidadTerrestre(posicionAtacante, unidadMelee);
 		colocar.colocarUnidadTerrestre(posicionAtacado, unidadAtacada);
 	
-		atacar.atacarTierra(posicionAtacado, unidadMelee);
+		atacar.realizar(posicionAtacado, unidadMelee);
 
 		assertEquals(32, unidadAtacada.vidaActual());	
 	}
@@ -55,8 +55,8 @@ public class TestAccionAtacar {
 	public void testUnidadNoDebeAtacarEstaFueraDeRango() {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
-		AccionAtacar atacar  = new AccionAtacar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
+		AccionAtacarTierra atacar  = new AccionAtacarTierra(mapa);
 	
 		UnidadMarine marineAtacante = new UnidadMarine();
 		UnidadMarine marineAtacado = new UnidadMarine();
@@ -68,7 +68,7 @@ public class TestAccionAtacar {
 		colocar.colocarUnidadTerrestre(posicionAtacante, marineAtacante);
 		colocar.colocarUnidadTerrestre(posicionAtacado, marineAtacado);
 	
-		atacar.atacarTierra(posicionAtacado, marineAtacante);
+		atacar.realizar(posicionAtacado, marineAtacante);
 
 		assertEquals(40, marineAtacado.vidaActual());	
 	}
@@ -77,8 +77,8 @@ public class TestAccionAtacar {
 	public void testUnidadAtacaEdificio() {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
-		AccionAtacar atacar  = new AccionAtacar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
+		AccionAtacarTierra atacar  = new AccionAtacarTierra(mapa);
 	
 		UnidadMarine marine = new UnidadMarine();
 		EdificioBarraca edificio = new EdificioBarraca(new RecursosDelJugador(1000,1000), new Suministro());
@@ -90,7 +90,7 @@ public class TestAccionAtacar {
 		colocar.colocarUnidadTerrestre(posicionAtacante, marine);
 		colocar.colocarEdificio(posicionAtacado, edificio);
 	
-		atacar.atacarTierra(posicionAtacado, marine);
+		atacar.realizar(posicionAtacado, marine);
 
 		assertEquals(994, edificio.vidaActual());	
 	}
@@ -99,8 +99,8 @@ public class TestAccionAtacar {
 	public void testUnidadAtacaEdificioDesdeLaOtraEsquina() {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
-		AccionAtacar atacar  = new AccionAtacar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
+		AccionAtacarTierra atacar  = new AccionAtacarTierra(mapa);
 	
 		UnidadMarine marine = new UnidadMarine();
 		EdificioBarraca edificio = new EdificioBarraca(new RecursosDelJugador(1000,1000), new Suministro());
@@ -113,7 +113,7 @@ public class TestAccionAtacar {
 		colocar.colocarUnidadTerrestre(posicionAtacante, marine);
 		colocar.colocarEdificio(posicionEdificio, edificio);
 	
-		atacar.atacarTierra(posicionDeAtaque, marine);
+		atacar.realizar(posicionDeAtaque, marine);
 
 		assertEquals(994, edificio.vidaActual());	
 	}
@@ -122,9 +122,9 @@ public class TestAccionAtacar {
 	public void testUnidadMataAOtra() {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
 		AccionPreguntar preguntar = new AccionPreguntar(mapa);
-		AccionAtacar atacar  = new AccionAtacar(mapa);
+		AccionAtacarTierra atacar  = new AccionAtacarTierra(mapa);
 	
 		UnidadMarine marineAtacante = new UnidadMarine();
 		UnidadMarine marineAtacado = new UnidadMarine();
@@ -136,8 +136,11 @@ public class TestAccionAtacar {
 		colocar.colocarUnidadTerrestre(posicionAtacante, marineAtacante);
 		colocar.colocarUnidadTerrestre(posicionAtacado, marineAtacado);
 	
-		for(int i = 0; i<10; i++)
-		atacar.atacarTierra(posicionAtacado, marineAtacante);
+		for(int i = 0; i<10; i++){
+			atacar.realizar(posicionAtacado, marineAtacante);
+			marineAtacante.empezarTurno();
+		}
+		
 
 		assertEquals(0, marineAtacado.vidaActual());
 		assertFalse(preguntar.hayEnTierra(posicionAtacado, marineAtacado));
@@ -147,8 +150,8 @@ public class TestAccionAtacar {
 	public void testUnidadTerrestreAtacaAUnidadAerea() {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
-		AccionAtacar atacar  = new AccionAtacar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
+		AccionAtacarAire atacar  = new AccionAtacarAire(mapa);
 	
 		UnidadMarine marineAtacante = new UnidadMarine();
 		UnidadEspectro espectroAtacado = new UnidadEspectro();
@@ -160,7 +163,7 @@ public class TestAccionAtacar {
 		colocar.colocarUnidadTerrestre(posicionAtacante, marineAtacante);
 		colocar.colocarUnidadAerea(posicionDeAtaque, espectroAtacado);
 	
-		atacar.atacarAire(posicionDeAtaque, marineAtacante);
+		atacar.realizar(posicionDeAtaque, marineAtacante);
 
 		assertEquals(114, espectroAtacado.vidaActual());
 	}
@@ -169,8 +172,8 @@ public class TestAccionAtacar {
 	public void testUnidadAereaAtacaAOtraUnidadAerea() {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
-		AccionAtacar atacar  = new AccionAtacar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
+		AccionAtacarAire atacar  = new AccionAtacarAire(mapa);
 	
 		UnidadEspectro espectroAtacante = new UnidadEspectro();
 		UnidadEspectro espectroAtacado = new UnidadEspectro();
@@ -182,7 +185,7 @@ public class TestAccionAtacar {
 		colocar.colocarUnidadAerea(posicionAtacante, espectroAtacante);
 		colocar.colocarUnidadAerea(posicionDeAtaque, espectroAtacado);
 	
-		atacar.atacarAire(posicionDeAtaque, espectroAtacante);
+		atacar.realizar(posicionDeAtaque, espectroAtacante);
 
 		assertEquals(100, espectroAtacado.vidaActual());
 	}
@@ -191,8 +194,8 @@ public class TestAccionAtacar {
 	public void testUnidadAereaAtacaAUnidadTerrestre() {
 		
 		Mapa mapa = new Mapa(new Tamanio(10,10));
-		AccionColocar colocar = new AccionColocar(mapa);
-		AccionAtacar atacar  = new AccionAtacar(mapa);
+		AccionColocarEnTierra colocar = new AccionColocarEnTierra(mapa);
+		AccionAtacarTierra atacar  = new AccionAtacarTierra(mapa);
 	
 		UnidadEspectro espectroAtacante = new UnidadEspectro();
 		UnidadGolliat golliatAtacado = new UnidadGolliat();
@@ -204,7 +207,7 @@ public class TestAccionAtacar {
 		colocar.colocarUnidadAerea(posicionAtacante, espectroAtacante);
 		colocar.colocarUnidadTerrestre(posicionDeAtaque, golliatAtacado);
 	
-		atacar.atacarTierra(posicionDeAtaque, espectroAtacante);
+		atacar.realizar(posicionDeAtaque, espectroAtacante);
 
 		assertEquals(117, golliatAtacado.vidaActual());
 	}

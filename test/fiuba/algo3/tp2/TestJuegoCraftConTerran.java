@@ -679,88 +679,116 @@ public class TestJuegoCraftConTerran {
 	}
 	
 	@Test
-	public void TestDosJugadoresCreanUnaBarraca(){
+	public void TestJugadorTransportaMarine(){
 		
 		JuegoCraft juego = new JuegoCraft();
 		Jugador jugador1 = juego.cargarJugador("facu", "rojo", "terran");
-		Jugador jugador2 = juego.cargarJugador("tincho", "azul", "terran");
-		juego.cargarMapa(new Mapa(new Tamanio (10,10)));
-		
+		Mapa mapa = new Mapa(new Tamanio(10,10));
+		juego.cargarMapa(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		juego.iniciarPartida();
 		
-		EdificioCentralTerran edCentral1 = (EdificioCentralTerran) jugador1.edificioCentral();
-		EdificioCentralTerran edCentral2 = (EdificioCentralTerran) jugador2.edificioCentral();
+		EdificioCentralTerran edCentral = (EdificioCentralTerran) jugador1.edificioCentral();
 		
-		EdificioBarraca barraca1 = edCentral1.construirBarraca();
-		Posicion posicion1 = new Posicion(5,6);
-		jugador1.construirEdificio(posicion1, barraca1);
-		jugador1.pasarTurno();
-		
-		EdificioBarraca barraca2 = edCentral2.construirBarraca();		
-		Posicion posicion2 = new Posicion(4,1);
-		jugador2.construirEdificio(posicion2, barraca2);
-		jugador2.pasarTurno();
-		
-		for (int i= 0; i < 12; i++){
+		EdificioBarraca barraca = edCentral.construirBarraca();
+		Posicion posicionBarraca = new Posicion(5,6);
+		jugador1.construirEdificio(posicionBarraca, barraca);
+				
+		for (int i= 0; i < 12; i++)
 			jugador1.pasarTurno();
-			jugador2.pasarTurno();
-		}
 		
-		assertEquals(jugador1.edificios(), 1);
-		assertEquals(jugador2.edificios(), 1);
+		EdificioFabrica fabrica = edCentral.construirFabrica();
+		Posicion posicionFabrica = new Posicion(1,4);
+		jugador1.construirEdificio(posicionFabrica, fabrica);
+				
+		for (int i= 0; i < 12; i++)
+			jugador1.pasarTurno();
+		
+		EdificioPuertoEstelarTerran puerto = edCentral.construirPuertoEstelarTerran();
+		Posicion posicionPuerto = new Posicion(1,7);
+		jugador1.construirEdificio(posicionPuerto, puerto);
+				
+		for (int i= 0; i < 10; i++)
+			jugador1.pasarTurno();
+		
+		UnidadNaveTransporteTerran transporte = puerto.construirNaveTransporte();
+		UnidadMarine marine = barraca.construirMarine();
+		
+		for (int i= 0; i < 7; i++)
+			jugador1.pasarTurno();
+		
+		jugador1.moverUnidad(transporte, marine.posicion());
+		jugador1.cargarUnidad(transporte,marine);
+		jugador1.moverUnidad(transporte, new Posicion(4,4));
+		jugador1.descargarUnidad(transporte);
+		
+		assertTrue(preguntar.hayEnTierra(new Posicion(4,4), marine));	
 	}
 	
-	
-	
-	/************************* COMO GUIA FALTA REFACTORIZAR ******************************/
-	
-	/*
 	@Test
-	public void TestJugadoresConUnEdificioYunSoldado(){
+	public void TestJugadorLlenaUnidadDeTransporte(){
 		
 		JuegoCraft juego = new JuegoCraft();
-		Jugador jugador1 = juego.cargarJugador("facu","rojo","terran");
-		Jugador jugador2 = juego.cargarJugador("tincho","verde","terran");
-		juego.cargarMapa(new Mapa(new Tamanio (100,100)));
+		Jugador jugador1 = juego.cargarJugador("facu", "rojo", "terran");
+		Mapa mapa = new Mapa(new Tamanio(10,10));
+		juego.cargarMapa(mapa);
+		AccionPreguntar preguntar = new AccionPreguntar(mapa);
 		
 		juego.iniciarPartida();
-	
-		Posicion posicionBarraca1 = new Posicion(12,15);
-		Posicion posicionBarraca2 = new Posicion(95,95);
-		Posicion posicion3 = new Posicion(97,94);
 		
-		EdificioBarraca barraca1 = new EdificioBarraca();
-		jugador1.construirEdificio(posicionBarraca1,barraca1);
-		jugador1.pasarTurno();
+		EdificioCentralTerran edCentral = (EdificioCentralTerran) jugador1.edificioCentral();
+		
+		EdificioBarraca barraca = edCentral.construirBarraca();
+		Posicion posicionBarraca = new Posicion(1,4);
+		jugador1.construirEdificio(posicionBarraca, barraca);
+		
+		EdificioCentroMineral centroMineral = edCentral.construirRecolectorMineral();
+		EdificioRefineria refineria = edCentral.construirRecolectorGasVespeno();
+		EdificioDeposito suministro = edCentral.construirAsentamiento();
+		
+		jugador1.construirEdificio(new Posicion(1,10), centroMineral);
+		jugador1.construirEdificio(new Posicion(10,1), refineria);
+		jugador1.construirEdificio(new Posicion(3,4), suministro);
 				
-		EdificioBarraca barraca2 = new EdificioBarraca();
-		jugador2.construirEdificio(posicionBarraca2, barraca2);
-		jugador2.pasarTurno();
-						
-		UnidadMarine marine = jugador1.construirUnidad(barraca1);
-		jugador1.pasarTurno();
-		
-		jugador2.construirUnidad(barraca2);
-		jugador2.moverUnidadTerrestre(marine2,posicion3);
-		jugador2.pasarTurno();
-
-		while(marine1.posicion().distancia(marine2.posicion())!=1){
-			
-			jugador1.moverUnidad(marine1,marine2.posicion());
-			jugador1.pasarTurno();		
-		
-			jugador2.moverUnidad(marine2,marine1.posicion());
-			jugador2.pasarTurno();
-		}
-		
-		while(jugador2.unidades()!=0){
-			jugador1.atacar(marine1, marine2.posicion());
+		for (int i= 0; i < 12; i++)
 			jugador1.pasarTurno();
-			jugador2.pasarTurno();
-		}
-		assertTrue(juego.mapa().contenido(marine2.posicion()) instanceof Vacio);
+		
+		EdificioFabrica fabrica = edCentral.construirFabrica();
+		Posicion posicionFabrica = new Posicion(4,1);
+		jugador1.construirEdificio(posicionFabrica, fabrica);
+				
+		for (int i= 0; i < 12; i++)
+			jugador1.pasarTurno();
+		
+		EdificioPuertoEstelarTerran puerto = edCentral.construirPuertoEstelarTerran();
+		Posicion posicionPuerto = new Posicion(1,7);
+		jugador1.construirEdificio(posicionPuerto, puerto);
+					
+		for (int i= 0; i < 10; i++)
+			jugador1.pasarTurno();
+		
+		UnidadNaveTransporteTerran transporte = puerto.construirNaveTransporte();
+		UnidadGolliat golliat1 = fabrica.crearGolliat();
+		UnidadGolliat golliat2 = fabrica.crearGolliat();
+		UnidadGolliat golliat3 = fabrica.crearGolliat();
+		UnidadGolliat golliat4 = fabrica.crearGolliat();
+		
+		for (int i= 0; i < 7; i++)
+			jugador1.pasarTurno();
+		
+		jugador1.moverUnidad(transporte, golliat1.posicion());
+		jugador1.cargarUnidad(transporte,golliat1);
+		jugador1.moverUnidad(transporte, golliat2.posicion());
+		jugador1.cargarUnidad(transporte,golliat2);
+		jugador1.moverUnidad(transporte, golliat3.posicion());
+		jugador1.cargarUnidad(transporte,golliat3);
+		jugador1.moverUnidad(transporte, golliat4.posicion());
+		jugador1.cargarUnidad(transporte,golliat4);
+		
+		jugador1.pasarTurno();
+		jugador1.moverUnidad(transporte, new Posicion(1,9));
+		jugador1.descargarUnidad(transporte);
+				
+		assertTrue(preguntar.hayEnTierra(new Posicion(1,9), golliat1));	
 	}
-	
-	*/
-
 }
