@@ -3,6 +3,9 @@ package fiuba.algo3.tp2;
 
 public class UnidadNaveCiencia extends UnidadAerea {
 
+	private int energiaMaxima;
+	private int energiaActual;
+
 	public UnidadNaveCiencia() {
 		
 		nombre = "nave ciencia";
@@ -16,6 +19,18 @@ public class UnidadNaveCiencia extends UnidadAerea {
 		costoSuministro = 2;
 		tiempoConstruccion = 10;
 		vision = 10;
+		energiaMaxima = 200;
+		energiaActual = 50;
+	}
+	
+	public void empezarTurno(){
+		
+		super.empezarTurno();
+		
+		if (energiaActual < 190)
+			energiaActual = energiaActual + 10;
+		else
+			energiaActual = energiaMaxima;
 	}
 
 }

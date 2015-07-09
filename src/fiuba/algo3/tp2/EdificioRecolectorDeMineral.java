@@ -5,6 +5,10 @@ public abstract class EdificioRecolectorDeMineral extends Edificio {
 	protected RecursosDelJugador recursos;
 	private RecursoMineral mineral;
 	
+	protected EdificioRecolectorDeMineral(){
+		tamanio = new Tamanio(1,1);
+	}
+	
 	public void recolectaMineral() {
 		
 		if(mineral.cantidad() >= 10){

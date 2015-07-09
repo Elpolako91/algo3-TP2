@@ -11,7 +11,7 @@ public class Jugador {
 	private JuegoCraft juego;
 	private EdificioCentral base;
 	private List<Edificio> edificios = new ArrayList<Edificio> ();
-	private List<Edificio> edificiosEnConstruccion = new ArrayList<Edificio> ();
+	private List<EdificioEnConstruccion> edificiosEnConstruccion = new ArrayList<EdificioEnConstruccion> ();
 	private List<Unidad> unidades = new ArrayList<Unidad> ();
 	private RecursosDelJugador recursos;
 	private Suministro suministros;
@@ -72,7 +72,7 @@ public class Jugador {
 	}
 	
 	/******************************************************************************/
-	public void agregarEdificioEnConstruccion(Edificio edificio) {
+	public void agregarEdificioEnConstruccion(EdificioEnConstruccion edificio) {
 		edificiosEnConstruccion.add(edificio);		
 	}	
 	
@@ -107,7 +107,7 @@ public class Jugador {
 	}
 	
 	public void construirEdificio(Posicion posicion, Edificio edificio) {
-		juego.colocarEdificio(this, edificio, posicion);
+		juego.construirEdificio(this, edificio, posicion);
 	}
 	
 		
@@ -148,12 +148,12 @@ public class Jugador {
 			
 			if(edificiosEnConstruccion.get(i).tiempoConstruccion() == 0){
 				
-				Edificio edificio = edificiosEnConstruccion.remove(i);
+				EdificioEnConstruccion edificioEnContruccion = edificiosEnConstruccion.remove(i);
+				Edificio edificio = edificioEnContruccion.edificioTerminado();
+				juego.colocarEdificio(this, edificio, edificioEnContruccion.posicion());
 				
 				if (edificio instanceof EdificioDeSuministro)
 					suministros.agregar(5);
-				
-				edificios.add(edificio);
 			}
 			else
 				i++;
@@ -179,26 +179,30 @@ public class Jugador {
 					juego.colocarUnidad(this, edificioDeUnidades, unidad);
 				}
 			}
-			
-			if(edificio instanceof EdificioRecolectorDeMineral){
+			else
+				if(edificio instanceof EdificioRecolectorDeMineral){
 				
-				EdificioRecolectorDeMineral edificioMineral = (EdificioRecolectorDeMineral) edificio;
+					EdificioRecolectorDeMineral edificioMineral = (EdificioRecolectorDeMineral) edificio;
 				
-				edificioMineral.recolectaMineral();
-			}
-			
-			if(edificio instanceof EdificioRecolectorDeVespeno){
+					edificioMineral.recolectaMineral();
+				}
+			else
+				if(edificio instanceof EdificioRecolectorDeVespeno){
 				
-				EdificioRecolectorDeVespeno edificioVespeno = (EdificioRecolectorDeVespeno) edificio;
+					EdificioRecolectorDeVespeno edificioVespeno = (EdificioRecolectorDeVespeno) edificio;
 				
-				edificioVespeno.recolectarVespeno();
-			}
-				
-			
+					edificioVespeno.recolectarVespeno();
+			}						
 		}
 		
+		for(int i = 0; i < unidades.size(); i++){
+			
+			Unidad unidad = unidades.get(i);
+			
+			unidad.empezarTurno();
+		}		
 	}
-
+	
 	public void edificioAConstruir(Edificio edificio) {
 		
 		edificioAConstruir = edificio;
@@ -208,6 +212,18 @@ public class Jugador {
 	public Edificio edificioAConstruir() {
 		
 		return edificioAConstruir;
+	}
+
+	public void cargarUnidad(UnidadTransporte transporte,	UnidadTerrestre unidadACargar) {
+		
+		juego.cargarUnidad(this, transporte, unidadACargar);
+		
+	}
+
+	public void descargarUnidad(UnidadTransporte transporte) {
+		
+		juego.descargarUnidad(this, transporte);
+		
 	}
 
 	

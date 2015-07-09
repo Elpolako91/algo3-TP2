@@ -5,6 +5,7 @@ public class EdificioRefineria extends EdificioRecolectorDeVespeno {
 	
 	public EdificioRefineria(RecursosDelJugador unosRecursos) {
 	
+		super ();
 		nombre = "Refineria";
 		vidaMaxima = 750;
 		vidaActual = 750;

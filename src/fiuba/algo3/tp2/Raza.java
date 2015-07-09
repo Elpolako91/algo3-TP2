@@ -10,8 +10,8 @@ public abstract class Raza {
 	protected String nombre;
 	protected RecursosDelJugador costoRecurso;
 	protected int vision;
-	protected int escudoActual;
-	protected int escudoMaximo;
+	protected int escudoActual = 0;
+	protected int escudoMaximo = 0;
 	
 	public void posicion(Posicion unaPosicion){
 		
@@ -39,10 +39,23 @@ public abstract class Raza {
 	}
 	
 	public void disminuirVida(int danio){
-		if(danio>vidaActual)
-			vidaActual = 0 ;
-		else	
-			vidaActual = vidaActual - danio;
+		
+		int danioRestante = danio;
+		
+		if(escudoActual > 0){
+		
+			if(danio <= escudoActual)
+				escudoActual = escudoActual - danio;
+			else{
+				danioRestante = danioRestante - escudoActual;
+				escudoActual = 0;
+			}		
+		}
+		
+		if (danioRestante <= vidaActual)
+			vidaActual = vidaActual - danioRestante;
+		else
+			vidaActual = 0;
 	}
 	
 	public RecursosDelJugador costoRecursos(){

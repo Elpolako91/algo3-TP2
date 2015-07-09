@@ -6,6 +6,8 @@ import java.util.Observable;
 
 public class JuegoCraft extends Observable {
 	
+	final int MINERAL_INICIAL = 1000;
+	final int VESPENO_INICIAL = 1000;
 	private Mapa mapa;
 	private Turno turno;
 	private List<Jugador> jugadores = new ArrayList<Jugador> ();
@@ -40,18 +42,20 @@ public class JuegoCraft extends Observable {
 		else
 			return null;
 	}
-
+	
 	public void iniciarPartida() {
 		
-		RecursosDelJugador recursosIniciales = new RecursosDelJugador(1000,1000);
+		RecursosDelJugador recursosIniciales = new RecursosDelJugador(MINERAL_INICIAL, VESPENO_INICIAL);
 		
 		turno = new Turno(jugadores);
 		
-		for(int i = 0; i< jugadores.size(); i++){
-			
-			acciones.colocar().colocarEdificioEdificioCentral(jugadores.get(i).edificioCentral());
+		acciones.colocarEnTierra().realizar(new Posicion(1,1), jugadores.get(0).edificioCentral());
+		if (jugadores.size() == 2)
+			acciones.colocarEnTierra().realizar(new Posicion(mapa.tamanio().enX()-2 , mapa.tamanio().enY()-2), jugadores.get(1).edificioCentral());
+		
+		for(int i = 0; i< jugadores.size(); i++)
 			jugadores.get(i).recursos().agregar(recursosIniciales);
-		}
+		
 	}
 
 	public Mapa mapa(){
@@ -63,12 +67,16 @@ public class JuegoCraft extends Observable {
 	}
 
 	public void cargarMapa(Mapa unMapa) {
+		
 		mapa = unMapa;
 		acciones = new AccionesPosibles(unMapa);
 		
-		acciones.colocar().colocarTerrenoEnTodoElMapa();
-		acciones.colocar().colocarRecurso(new Posicion(1, mapa.tamanio().enY()), new RecursoMineral(1000));
-		acciones.colocar().colocarRecurso(new Posicion(mapa.tamanio().enX(), 1), new RecursoGasVespeno(1000));
+		acciones.colocarEnSuelo().colocarTerrenoEnTodoElMapa();
+		
+		
+		acciones.colocarEnSuelo().colocarTerrenoEnTodoElMapa();
+		acciones.colocarEnSuelo().colocarRecurso(new Posicion(1, mapa.tamanio().enY()), new RecursoMineral(1000));
+		acciones.colocarEnSuelo().colocarRecurso(new Posicion(mapa.tamanio().enX(), 1), new RecursoGasVespeno(1000));
 	}
 	
 	public void pasarTurno(Jugador jugador) {
@@ -87,23 +95,20 @@ public class JuegoCraft extends Observable {
 		setChanged();
 		notifyObservers();		
 	}
-
+	
+	public void construirEdificio(Jugador jugador, Edificio edificio, Posicion posicion) {
+		
+		EdificioEnConstruccion edificioEnConstruccion = edificio.enConstruccion();
+	
+		acciones.colocarEnTierra().realizar(posicion,edificioEnConstruccion);
+		jugador.agregarEdificioEnConstruccion(edificioEnConstruccion);		
+	}
+	
 	public void colocarEdificio(Jugador jugador, Edificio edificio, Posicion posicion) {
-		
-		if((edificio instanceof EdificioRecolectorDeMineral) && (acciones.colocar().colocarRecolectorDeMineral(posicion, (EdificioRecolectorDeMineral) edificio)))	
-			jugador.agregarEdificioEnConstruccion(edificio);
-		
-		if(edificio instanceof EdificioRecolectorDeMineral)
-			return;
-		
-		if((edificio instanceof EdificioRecolectorDeVespeno) && (acciones.colocar().colocarRecolectorDeGasVespeno(posicion, (EdificioRecolectorDeVespeno) edificio)))	
-			jugador.agregarEdificioEnConstruccion(edificio);
-		
-		if(edificio instanceof EdificioRecolectorDeVespeno)
-			return;
-			
-		if(acciones.colocar().colocarEdificio(posicion, edificio))
-			jugador.agregarEdificioEnConstruccion(edificio);		
+	
+		acciones.removerDeSuelo().edificio(posicion, edificio.tamanio());
+		acciones.colocarEnTierra().realizar(posicion, edificio);
+		jugador.agregarEdificio(edificio);		
 	}
 
 	public void colocarUnidad(Jugador jugador, EdificioDeUnidades edificio,	Unidad unidad) {
@@ -113,29 +118,42 @@ public class JuegoCraft extends Observable {
 		if(unidad instanceof UnidadTerrestre){
 			
 			posicionParaUnidad = acciones.preguntar().encontrarPosicionParaUnidadTerrestre(edificio.posicion());
-			acciones.colocar().colocarUnidadTerrestre(posicionParaUnidad, (UnidadTerrestre)unidad);
+			acciones.colocarEnTierra().realizar(posicionParaUnidad, (UnidadTerrestre)unidad);
 		}			
 		else{
 			posicionParaUnidad = acciones.preguntar().encontrarPosicionParaUnidadAerea(edificio.posicion());
-			acciones.colocar().colocarUnidadAerea(posicionParaUnidad,(UnidadAerea) unidad);
-		}
-			
-			
+			acciones.colocarEnAire().realizar(posicionParaUnidad,(UnidadAerea) unidad);
+		}			
 	}
 	
 	public void moverUnidad(Jugador jugador, Unidad unidad, Posicion posicionDestino) {
 		
 		if(unidad instanceof UnidadTerrestre)
-			acciones.mover().moverUnidadTerrestre(posicionDestino, (UnidadTerrestre) unidad);
+			acciones.moverTerrestre().realizar(posicionDestino, (UnidadTerrestre) unidad);
 		else
-			acciones.mover().moverUnidadAerea(posicionDestino, (UnidadAerea) unidad); 
+			acciones.moverAerea().realizar(posicionDestino, (UnidadAerea) unidad); 
 	}
 	
 	public void atacarTierra(Jugador jugador, Unidad unidadAtacante,Posicion posicionDestino) {
-		acciones.atacar().atacarTierra(posicionDestino, unidadAtacante);
+		acciones.atacarTierra().realizar(posicionDestino, unidadAtacante);
 	}
 
 	public void atacarAire(Jugador jugador, Unidad unidadAtacante, Posicion posicionDestino) {
-		acciones.atacar().atacarAire(posicionDestino, unidadAtacante);
+		acciones.atacarAire().realizar(posicionDestino, unidadAtacante);
+	}
+
+	public void cargarUnidad(Jugador jugador, UnidadTransporte transporte, UnidadTerrestre unidadACargar) {
+		
+		if(transporte.tieneLugar(unidadACargar.ocupacionTransporte()) && (transporte.posicion().equals(unidadACargar.posicion()))){
+			transporte.cargar(unidadACargar);
+			acciones.removerDeSuelo().edificio(unidadACargar.posicion());
+		}
+	}
+
+	public void descargarUnidad(Jugador jugador, UnidadTransporte transporte) {
+		
+		UnidadTerrestre unidad = transporte.descargarUnidad();
+		acciones.colocarEnTierra().realizar(transporte.posicion(), unidad);
+		
 	}	
 }

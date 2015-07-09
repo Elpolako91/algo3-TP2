@@ -8,4 +8,9 @@ public abstract class Edificio extends Raza implements Terrestre {
 	public Tamanio tamanio(){
 		return tamanio;
 	}
+	
+	public EdificioEnConstruccion enConstruccion(){
+		
+		return new EdificioEnConstruccion(this);
+	}
 }

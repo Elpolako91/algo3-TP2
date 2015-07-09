@@ -5,6 +5,7 @@ public class EdificioCentroMineral extends EdificioRecolectorDeMineral {
 		
 	public EdificioCentroMineral(RecursosDelJugador unosRecursos) {
 		
+		super ();
 		nombre = "Centro de mineral";
 		vidaMaxima = 500;
 		vidaActual = 500;

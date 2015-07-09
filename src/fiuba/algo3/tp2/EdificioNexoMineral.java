@@ -5,6 +5,7 @@ public class EdificioNexoMineral extends EdificioRecolectorDeMineral {
 	
 	public EdificioNexoMineral(RecursosDelJugador unosRecursos){
 		
+		super ();
 		nombre = "Centro de mineral";
 		vidaMaxima = 250;
 		vidaActual = 250;

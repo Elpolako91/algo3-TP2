@@ -1,9 +1,7 @@
 package fiuba.algo3.tp2;
 
-public class UnidadNaveTransporteProtos extends UnidadAerea {
-	
-	private int capacidad;
-	
+public class UnidadNaveTransporteProtos extends UnidadTransporte {
+
 	public UnidadNaveTransporteProtos() {
 		
 		nombre = "nave transporte";

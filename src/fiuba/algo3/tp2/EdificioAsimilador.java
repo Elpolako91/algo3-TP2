@@ -5,6 +5,7 @@ public class EdificioAsimilador extends EdificioRecolectorDeVespeno {
 	
 	public EdificioAsimilador(RecursosDelJugador unosRecursos){
 		
+		super ();
 		nombre = "Asimilador";
 		vidaMaxima = 450;
 		vidaActual = 450;

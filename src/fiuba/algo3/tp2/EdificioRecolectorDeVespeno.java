@@ -5,6 +5,9 @@ public abstract class EdificioRecolectorDeVespeno extends Edificio{
 	protected RecursosDelJugador recursos;
 	private RecursoGasVespeno vespeno;
 	
+	protected EdificioRecolectorDeVespeno(){
+		tamanio = new Tamanio(1,1);
+	}
 	public void recolectarVespeno() {
 		
 		if(vespeno.cantidad() >= 10){
