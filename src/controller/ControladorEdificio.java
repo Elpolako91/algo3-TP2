@@ -31,6 +31,7 @@ public class ControladorEdificio extends MouseAdapter {
 			Jugador jugadorActual = modelo.turno();
 			EdificioBarraca barraca = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirBarraca();
 			jugadorActual.edificioAConstruir(barraca);
+			jugadorActual.colocarEdificio(true);
 		}
 	}
 	
@@ -46,6 +47,7 @@ public class ControladorEdificio extends MouseAdapter {
 			Jugador jugadorActual = modelo.turno();
 			EdificioCentroMineral centroMineral = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirRecolectorMineral();
 			jugadorActual.edificioAConstruir(centroMineral);
+			jugadorActual.colocarEdificio(true);
 		}
 	}
 	
@@ -60,6 +62,7 @@ public class ControladorEdificio extends MouseAdapter {
 				Jugador jugadorActual = modelo.turno();
 				EdificioDeposito deposito = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirAsentamiento();
 				jugadorActual.edificioAConstruir(deposito);
+				jugadorActual.colocarEdificio(true);
 			}
 		}
 
@@ -75,6 +78,7 @@ public class ControladorEdificio extends MouseAdapter {
 				Jugador jugadorActual = modelo.turno();
 				EdificioFabrica fabrica = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirFabrica();
 				jugadorActual.edificioAConstruir(fabrica);
+				jugadorActual.colocarEdificio(true);
 			}
 		}
 
@@ -90,6 +94,7 @@ public class ControladorEdificio extends MouseAdapter {
 				Jugador jugadorActual = modelo.turno();
 				EdificioPuertoEstelarTerran puertoEstelar = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirPuertoEstelarTerran();
 				jugadorActual.edificioAConstruir(puertoEstelar);
+				jugadorActual.colocarEdificio(true);
 			}
 		}
 
@@ -105,6 +110,7 @@ public class ControladorEdificio extends MouseAdapter {
 				Jugador jugadorActual = modelo.turno();
 				EdificioRefineria refineria = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirRecolectorGasVespeno();
 				jugadorActual.edificioAConstruir(refineria);
+				jugadorActual.colocarEdificio(true);
 			}
 		}
 

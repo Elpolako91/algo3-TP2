@@ -15,7 +15,13 @@ public class Jugador {
 	private List<Unidad> unidades = new ArrayList<Unidad> ();
 	private RecursosDelJugador recursos;
 	private Suministro suministros;
-	private Edificio edificioAConstruir;
+	private Object objetoARealizar;
+	private Object objetoSeleccionado;
+	private boolean moverTerrestre = false;
+	private boolean atacarTierra = false;
+	private boolean atacarAire = false;
+	private boolean colocarEdificio = false;
+	private boolean moverAire = false;
 	
 	public Jugador(String unNombre, String unColor, String unaRaza) {
 
@@ -205,13 +211,13 @@ public class Jugador {
 	
 	public void edificioAConstruir(Edificio edificio) {
 		
-		edificioAConstruir = edificio;
+		objetoARealizar = edificio;
 		
 	}
 
-	public Edificio edificioAConstruir() {
+	public Object edificioAConstruir() {
 		
-		return edificioAConstruir;
+		return objetoARealizar;
 	}
 
 	public void cargarUnidad(UnidadTransporte transporte,	UnidadTerrestre unidadACargar) {
@@ -226,5 +232,63 @@ public class Jugador {
 		
 	}
 
+	public Object objetoSeleccionado() {
+		
+		return objetoSeleccionado;
+	}
+
+	public void objetoSeleccionado(Object objetoSeleccionado) {
+		
+		this.objetoSeleccionado = objetoSeleccionado;		
+	}
+
+	public void accionMoverAire(boolean boleano) {
+		
+		this.moverAire  = boleano;
+	}
 	
+	public boolean getAccionMoverAire(){
+		
+		return this.moverAire;
+	}
+	
+	public void accionMoverTerrestre(boolean boleano) {
+		
+		this.moverTerrestre= boleano;
+	}
+	
+	public boolean getAccionMoverTerrestre(){
+		
+		return this.moverTerrestre;
+	}
+
+	public void accionAtacarTierra(boolean boleano) {
+		
+		this.atacarTierra = boleano;
+	}
+	
+	public boolean getAccionAtacarTierra(){
+		
+		return this.atacarTierra;
+	}
+
+	public void accionAtacarAire(boolean boleano) {
+		
+		this.atacarAire = true;
+	}
+	
+	public boolean getAccionAtacarAire(){
+		
+		return this.atacarAire;
+	}
+
+	public void colocarEdificio(boolean boleano) {
+		
+		this.colocarEdificio = boleano;
+	}
+
+	public boolean getColocarEdificio(){
+		
+		return this.colocarEdificio;
+	}
 }

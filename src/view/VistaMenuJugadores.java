@@ -248,7 +248,7 @@ public class VistaMenuJugadores extends JFrame {
 		JLabel label = new JLabel("");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setIcon(new ImageIcon(VistaMenuJugadores.class.getResource("/imagenes/starcraftVista2.jpg")));
-		label.setBounds(0, 0, 645, 579);
+		label.setBounds(0, 0, 650, 606);
 		contentPane.add(label);
 	}
 }

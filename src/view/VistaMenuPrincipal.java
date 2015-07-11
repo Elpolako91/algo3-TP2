@@ -54,9 +54,9 @@ public class VistaMenuPrincipal extends JFrame {
 		getContentPane().add(lblMenuPrincipal);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setIcon(new ImageIcon(VistaMenuPrincipal.class.getResource("/imagenes/starcraft.jpg")));
-		lblNewLabel.setBounds(0, 0, 631, 468);
+		lblNewLabel.setBounds(0, 0, 800, 800);
 		getContentPane().add(lblNewLabel);
 		
 	}

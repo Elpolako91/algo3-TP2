@@ -13,8 +13,8 @@ public class JuegoCraft extends Observable {
 	private List<Jugador> jugadores = new ArrayList<Jugador> ();
 	private AccionesPosibles acciones;
 	
-	public int jugadores() {
-		return jugadores.size();
+	public List<Jugador> jugadores() {
+		return jugadores;
 	}
 	
 	private boolean sePuedeCargarJugador(String unNombre, String unColor){
