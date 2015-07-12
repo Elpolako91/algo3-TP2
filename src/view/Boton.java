@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 import controller.ControladorCreadorUnidades;
 import controller.ControladorEdificioCentral;
@@ -80,12 +81,6 @@ public class Boton {
 		if (preguntar.hayUnidadTerrestre(posicion)){
 			boton.setIcon(new ImageIcon(Boton.class.getResource("/imagenes/posiblefondo.jpg")));
 			boton.addActionListener(new ControladorMenuUnidad(modelo));
-		}
-		if (preguntar.hayMineral(posicion)){
-			boton.setIcon(mineral);
-		}
-		if(preguntar.hayGasVespeno(posicion)){
-			boton.setIcon(gas);
 		}
 		boton.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 	}

@@ -17,7 +17,7 @@ public class ControladorMouseTurno extends MouseAdapter {
 	}
 	
 	public void mouseClicked(MouseEvent e){
-		
+			
 		modelo.turno().pasarTurno();
 		
 	}
