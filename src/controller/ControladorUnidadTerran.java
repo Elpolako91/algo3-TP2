@@ -9,11 +9,11 @@ import fiuba.algo3.tp2.EdificioFabrica;
 import fiuba.algo3.tp2.EdificioPuertoEstelarTerran;
 import fiuba.algo3.tp2.JuegoCraft;
 
-public class ControladorUnidad extends MouseAdapter {
+public class ControladorUnidadTerran extends MouseAdapter {
 
 	private JuegoCraft modelo;
 
-	public ControladorUnidad(JuegoCraft modelo) {
+	public ControladorUnidadTerran(JuegoCraft modelo) {
 		
 		this.modelo = modelo;
 	}

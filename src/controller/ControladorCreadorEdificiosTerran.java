@@ -14,11 +14,11 @@ import fiuba.algo3.tp2.EdificioRefineria;
 import fiuba.algo3.tp2.JuegoCraft;
 import fiuba.algo3.tp2.Jugador;
 
-public class ControladorEdificio extends MouseAdapter {
+public class ControladorCreadorEdificiosTerran extends MouseAdapter {
 	
 	private JuegoCraft modelo;
 	
-	public ControladorEdificio(JuegoCraft unModelo) {
+	public ControladorCreadorEdificiosTerran(JuegoCraft unModelo) {
 		
 		modelo = unModelo;
 		
