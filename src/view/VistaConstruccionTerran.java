@@ -11,18 +11,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import controller.ControladorEdificio;
+import controller.ControladorCreadorEdificiosTerran;
 import fiuba.algo3.tp2.JuegoCraft;
 
-public class VistaConstruccion extends JFrame {
+public class VistaConstruccionTerran extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JuegoCraft modelo;
-	private ControladorEdificio controlador;
+	private ControladorCreadorEdificiosTerran controlador;
 
 	
-	public VistaConstruccion(JuegoCraft modelo){
+	public VistaConstruccionTerran(JuegoCraft modelo){
 		
 	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	setBounds(700, 0, 500, 500);
@@ -32,7 +32,7 @@ public class VistaConstruccion extends JFrame {
 	contentPane.setLayout(null);
 	
 	this.modelo = modelo;
-	controlador = new ControladorEdificio(modelo);
+	controlador = new ControladorCreadorEdificiosTerran(modelo);
 	
 	final JButton botonBarraca = new JButton("Barraca");
 	botonBarraca.setBounds(120, 120, 138, 32);
@@ -74,7 +74,7 @@ public class VistaConstruccion extends JFrame {
 	btnRefineria.setBounds(270, 320, 138, 32);
 	contentPane.add(btnRefineria);
 	btnRefineria.setVisible(false);
-	btnRefineria.addActionListener(controlador.getBotonFabrica());
+	btnRefineria.addActionListener(controlador.getBotonRefineria());
 		
 	
 	final JButton btnNewButton = new JButton("Construir");
@@ -94,7 +94,7 @@ public class VistaConstruccion extends JFrame {
 	
 	JLabel lblNewLabel = new JLabel("");
 	lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-	lblNewLabel.setIcon(new ImageIcon(VistaConstruccion.class.getResource("/imagenes/posiblefondo.jpg")));
+	lblNewLabel.setIcon(new ImageIcon(VistaConstruccionTerran.class.getResource("/imagenes/posiblefondo.jpg")));
 	lblNewLabel.setBounds(0, 0, 500, 500);
 	contentPane.add(lblNewLabel);
 	

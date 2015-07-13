@@ -7,18 +7,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import controller.ControladorUnidad;
+import controller.ControladorUnidadTerran;
 import fiuba.algo3.tp2.JuegoCraft;
 
-public class VistaCreacionUnidad extends JFrame {
+public class VistaCreacionUnidadTerran extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JuegoCraft modelo;
-	private ControladorUnidad controladorUnidad;
+	private ControladorUnidadTerran controladorUnidad;
 
 	
-	public VistaCreacionUnidad(JuegoCraft modelo){
+	public VistaCreacionUnidadTerran(JuegoCraft modelo){
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(200, 0, 500, 500);
@@ -28,7 +28,7 @@ public class VistaCreacionUnidad extends JFrame {
 		contentPane.setLayout(null);
 	
 		this.modelo = modelo;
-		controladorUnidad = new ControladorUnidad(modelo);
+		controladorUnidad = new ControladorUnidadTerran(modelo);
 		
 		JButton btnMarine = new JButton("Marine");
 		btnMarine.setBounds(0, 0, 100, 100);
@@ -57,7 +57,7 @@ public class VistaCreacionUnidad extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon(VistaConstruccion.class.getResource("/imagenes/posiblefondo.jpg")));
+		lblNewLabel.setIcon(new ImageIcon(VistaConstruccionTerran.class.getResource("/imagenes/posiblefondo.jpg")));
 		lblNewLabel.setBounds(0, 0, 500, 500);
 		contentPane.add(lblNewLabel);
 	}
