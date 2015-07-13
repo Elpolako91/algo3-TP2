@@ -88,7 +88,7 @@ public class VistaMenuUnidad extends JFrame {
 	
 	JLabel lblNewLabel = new JLabel("");
 	lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-	lblNewLabel.setIcon(new ImageIcon(VistaConstruccion.class.getResource("/imagenes/posiblefondo.jpg")));
+	lblNewLabel.setIcon(new ImageIcon(VistaConstruccionTerran.class.getResource("/imagenes/posiblefondo.jpg")));
 	lblNewLabel.setBounds(0, 0, 500, 500);
 	contentPane.add(lblNewLabel);
 	

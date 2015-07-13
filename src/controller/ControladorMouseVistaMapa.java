@@ -1,16 +1,11 @@
 package controller;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
 
 import fiuba.algo3.tp2.Edificio;
 import fiuba.algo3.tp2.JuegoCraft;

@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 
-import view.VistaCreacionUnidad;
+import view.VistaCreacionUnidadTerran;
 
 import fiuba.algo3.tp2.JuegoCraft;
 import fiuba.algo3.tp2.Posicion;
@@ -16,7 +16,7 @@ public class ControladorCreadorUnidades extends MouseAdapter implements ActionLi
 	private Posicion posicion;
 	private Object edificio;
 
-	public ControladorCreadorUnidades(JuegoCraft modelo, Posicion posicion, VistaCreacionUnidad vista){
+	public ControladorCreadorUnidades(JuegoCraft modelo, Posicion posicion, VistaCreacionUnidadTerran vista){
 		
 		this.modelo = modelo;
 		this.posicion = posicion;

@@ -30,7 +30,7 @@ public class VistaMapa extends JFrame implements Observer {
 	private JPanel contentPane;
 	private JuegoCraft modelo;
 	private int limiteMapaY = 630;
-	private int limiteMapaX = 1200;
+	private int limiteMapaX = 1360;
 	private int cteTamanioBoton = 30;
 	private Boton[][] botones;
 	private JLabel lblNombreJugador;
@@ -48,7 +48,7 @@ public class VistaMapa extends JFrame implements Observer {
 	public VistaMapa(final JuegoCraft modelo) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1284, 1000);
+		setBounds(0, 0, 1360, 1000);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -56,7 +56,7 @@ public class VistaMapa extends JFrame implements Observer {
 		
 		menuJugador = new JPanel();
 		menuJugador.setBorder(new EmptyBorder(5,5,5,5));
-		menuJugador.setBounds(0, 631, 1284, 400);
+		menuJugador.setBounds(0, 631, 2000, 400);
 		menuJugador.setLayout(null);
 		contentPane.add(menuJugador);
 		
@@ -71,8 +71,8 @@ public class VistaMapa extends JFrame implements Observer {
 		int gas2 = modelo.jugadores().get(1).recursos().vespeno();
 		
 		JButton turno = new JButton("Pasar Turno");
-		turno.setBounds(500, 0, 230, 70);
-		turno.setFont(new Font("Tahoma", Font.BOLD, 30));
+		turno.setBounds(500, 50, 230, 70);
+		turno.setFont(new Font("Tahoma", Font.BOLD, 25));
 		menuJugador.add(turno);
 		
 		lblNombreJugador = new JLabel(modelo.jugadores().get(0).nombre());
@@ -157,9 +157,9 @@ public class VistaMapa extends JFrame implements Observer {
 		menuJugador.add(gasDelJugador2);
 					
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setIcon(new ImageIcon(VistaMapa.class.getResource("/imagenes/posiblefondo.jpg")));
-		lblNewLabel.setBounds(0, 0, 1268, 189);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(new ImageIcon(VistaMapa.class.getResource("/imagenes/marmol.jpg")));
+		lblNewLabel.setBounds(0, 0, 1360, 189);
 		menuJugador.add(lblNewLabel);
 		
 		turno.addMouseListener(new ControladorMouseTurno(modelo));
