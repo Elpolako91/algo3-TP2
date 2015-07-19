@@ -4,27 +4,32 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 
-import fiuba.algo3.tp2.EdificioBarraca;
-import fiuba.algo3.tp2.EdificioFabrica;
-import fiuba.algo3.tp2.EdificioPuertoEstelarTerran;
-import fiuba.algo3.tp2.JuegoCraft;
+import fiuba.algo3.tp2.excepciones.RecursosInsuficientes;
+import fiuba.algo3.tp2.juego.Usuario;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioBarraca;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioFabrica;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioPuertoEstelarTerran;
 
 public class ControladorUnidadTerran extends MouseAdapter {
 
-	private JuegoCraft modelo;
+	private Usuario user;
 
-	public ControladorUnidadTerran(JuegoCraft modelo) {
+	public ControladorUnidadTerran(Usuario user) {
 		
-		this.modelo = modelo;
+		this.user = user;
 	}
 	
 	private class EscuchaBotonMarine implements ActionListener{
 		
 		public void actionPerformed(ActionEvent e) {
 		
-			if ( modelo.turno().objetoSeleccionado() instanceof EdificioBarraca ){
+			if ( user.objetoSeleccionado() instanceof EdificioBarraca ){
 				
-				((EdificioBarraca) modelo.turno().objetoSeleccionado()).construirMarine();
+				try {
+					((EdificioBarraca) user.objetoSeleccionado()).construirMarine();
+				} catch (RecursosInsuficientes e1) {
+					e1.printStackTrace();
+				}
 			}
 		}
 	}
@@ -37,9 +42,13 @@ public class ControladorUnidadTerran extends MouseAdapter {
 
 		public void actionPerformed(ActionEvent e) {
 			
-			if( modelo.turno().objetoSeleccionado() instanceof EdificioFabrica ){
+			if( user.objetoSeleccionado() instanceof EdificioFabrica ){
 				
-				((EdificioFabrica) modelo.turno().objetoSeleccionado()).crearGolliat();
+				try {
+					((EdificioFabrica) user.objetoSeleccionado()).crearGolliat();
+				} catch (RecursosInsuficientes e1) {
+					e1.printStackTrace();
+				}
 			}
 		}
 		
@@ -53,9 +62,13 @@ public class ControladorUnidadTerran extends MouseAdapter {
 
 			public void actionPerformed(ActionEvent e) {
 				
-				if( modelo.turno().objetoSeleccionado() instanceof EdificioPuertoEstelarTerran ){
+				if( user.objetoSeleccionado() instanceof EdificioPuertoEstelarTerran ){
 					
-					((EdificioPuertoEstelarTerran) modelo.turno().objetoSeleccionado()).construirEspectro();
+					try {
+						((EdificioPuertoEstelarTerran) user.objetoSeleccionado()).construirEspectro();
+					} catch (RecursosInsuficientes e1) {
+						e1.printStackTrace();
+					}
 				}
 			}
 			
@@ -69,9 +82,13 @@ public class ControladorUnidadTerran extends MouseAdapter {
 
 				public void actionPerformed(ActionEvent e) {
 					
-					if( modelo.turno().objetoSeleccionado() instanceof EdificioPuertoEstelarTerran ){
+					if( user.objetoSeleccionado() instanceof EdificioPuertoEstelarTerran ){
 						
-						((EdificioPuertoEstelarTerran) modelo.turno().objetoSeleccionado()).construirNaveTransporte();
+						try {
+							((EdificioPuertoEstelarTerran) user.objetoSeleccionado()).construirNaveTransporte();
+						} catch (RecursosInsuficientes e1) {
+							e1.printStackTrace();
+						}
 					}
 				}
 				
@@ -85,9 +102,13 @@ public class ControladorUnidadTerran extends MouseAdapter {
 
 					public void actionPerformed(ActionEvent e) {
 						
-						if( modelo.turno().objetoSeleccionado() instanceof EdificioPuertoEstelarTerran ){
+						if( user.objetoSeleccionado() instanceof EdificioPuertoEstelarTerran ){
 							
-							((EdificioPuertoEstelarTerran) modelo.turno().objetoSeleccionado()).construirNaveCiencia();
+							try {
+								((EdificioPuertoEstelarTerran) user.objetoSeleccionado()).construirNaveCiencia();
+							} catch (RecursosInsuficientes e1) {
+								e1.printStackTrace();
+							}
 						}
 					}
 					

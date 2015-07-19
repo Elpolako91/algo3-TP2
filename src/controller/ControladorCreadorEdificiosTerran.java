@@ -4,23 +4,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 
-import fiuba.algo3.tp2.EdificioBarraca;
-import fiuba.algo3.tp2.EdificioCentralTerran;
-import fiuba.algo3.tp2.EdificioCentroMineral;
-import fiuba.algo3.tp2.EdificioDeposito;
-import fiuba.algo3.tp2.EdificioFabrica;
-import fiuba.algo3.tp2.EdificioPuertoEstelarTerran;
-import fiuba.algo3.tp2.EdificioRefineria;
-import fiuba.algo3.tp2.JuegoCraft;
-import fiuba.algo3.tp2.Jugador;
+import fiuba.algo3.tp2.excepciones.RecursosInsuficientes;
+import fiuba.algo3.tp2.excepciones.RequerimientosInsuficientes;
+import fiuba.algo3.tp2.juego.Jugador;
+import fiuba.algo3.tp2.juego.Usuario;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioBarraca;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentralTerran;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentroMineral;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioDeposito;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioFabrica;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioPuertoEstelarTerran;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioRefineria;
 
 public class ControladorCreadorEdificiosTerran extends MouseAdapter {
 	
-	private JuegoCraft modelo;
+	private Usuario user;
 	
-	public ControladorCreadorEdificiosTerran(JuegoCraft unModelo) {
+	public ControladorCreadorEdificiosTerran(Usuario user) {
 		
-		modelo = unModelo;
+		this.user = user;
 		
 	}
 	
@@ -28,10 +30,15 @@ public class ControladorCreadorEdificiosTerran extends MouseAdapter {
 		
 		public void actionPerformed(ActionEvent e) {
 		
-			Jugador jugadorActual = modelo.turno();
-			EdificioBarraca barraca = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirBarraca();
-			jugadorActual.edificioAConstruir(barraca);
-			jugadorActual.colocarEdificio(true);
+			Jugador jugadorActual = user.jugadorActual();
+			EdificioBarraca barraca;
+			try {
+				barraca = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirBarraca();
+				user.edificioAConstruir(barraca);
+				user.colocarEdificio(true);
+			} catch (RecursosInsuficientes e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -44,10 +51,15 @@ public class ControladorCreadorEdificiosTerran extends MouseAdapter {
 		
 		public void actionPerformed(ActionEvent e) {
 		
-			Jugador jugadorActual = modelo.turno();
-			EdificioCentroMineral centroMineral = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirRecolectorMineral();
-			jugadorActual.edificioAConstruir(centroMineral);
-			jugadorActual.colocarEdificio(true);
+			Jugador jugadorActual = user.jugadorActual();
+			EdificioCentroMineral centroMineral;
+			try {
+				centroMineral = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirRecolectorMineral();
+				user.edificioAConstruir(centroMineral);
+				user.colocarEdificio(true);
+			} catch (RecursosInsuficientes e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -59,10 +71,16 @@ public class ControladorCreadorEdificiosTerran extends MouseAdapter {
 			
 			public void actionPerformed(ActionEvent e) {
 			
-				Jugador jugadorActual = modelo.turno();
-				EdificioDeposito deposito = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirAsentamiento();
-				jugadorActual.edificioAConstruir(deposito);
-				jugadorActual.colocarEdificio(true);
+				Jugador jugadorActual = user.jugadorActual();
+				EdificioDeposito deposito;
+				try {
+					deposito = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirAsentamiento();
+					user.edificioAConstruir(deposito);
+					user.colocarEdificio(true);
+				} catch (RecursosInsuficientes e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 
@@ -75,10 +93,16 @@ public class ControladorCreadorEdificiosTerran extends MouseAdapter {
 			
 			public void actionPerformed(ActionEvent e) {
 			
-				Jugador jugadorActual = modelo.turno();
-				EdificioFabrica fabrica = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirFabrica();
-				jugadorActual.edificioAConstruir(fabrica);
-				jugadorActual.colocarEdificio(true);
+				Jugador jugadorActual = user.jugadorActual();
+				EdificioFabrica fabrica;
+				try {
+					fabrica = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirFabrica();
+					user.edificioAConstruir(fabrica);
+					user.colocarEdificio(true);
+				} catch (RecursosInsuficientes | RequerimientosInsuficientes e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 
@@ -91,10 +115,16 @@ public class ControladorCreadorEdificiosTerran extends MouseAdapter {
 			
 			public void actionPerformed(ActionEvent e) {
 			
-				Jugador jugadorActual = modelo.turno();
-				EdificioPuertoEstelarTerran puertoEstelar = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirPuertoEstelarTerran();
-				jugadorActual.edificioAConstruir(puertoEstelar);
-				jugadorActual.colocarEdificio(true);
+				Jugador jugadorActual = user.jugadorActual();
+				EdificioPuertoEstelarTerran puertoEstelar;
+				try {
+					puertoEstelar = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirPuertoEstelarTerran();
+					user.edificioAConstruir(puertoEstelar);
+					user.colocarEdificio(true);
+				} catch (RecursosInsuficientes | RequerimientosInsuficientes e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 
@@ -107,10 +137,16 @@ public class ControladorCreadorEdificiosTerran extends MouseAdapter {
 			
 			public void actionPerformed(ActionEvent e) {
 			
-				Jugador jugadorActual = modelo.turno();
-				EdificioRefineria refineria = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirRecolectorGasVespeno();
-				jugadorActual.edificioAConstruir(refineria);
-				jugadorActual.colocarEdificio(true);
+				Jugador jugadorActual = user.jugadorActual();
+				EdificioRefineria refineria;
+				try {
+					refineria = ((EdificioCentralTerran) jugadorActual.edificioCentral()).construirRecolectorGasVespeno();
+					user.edificioAConstruir(refineria);
+					user.colocarEdificio(true);
+				} catch (RecursosInsuficientes e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 

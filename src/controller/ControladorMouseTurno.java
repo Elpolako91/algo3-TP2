@@ -1,24 +1,31 @@
 package controller;
 
+import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import fiuba.algo3.tp2.JuegoCraft;
+
+import fiuba.algo3.tp2.juego.Usuario;
+
 
 public class ControladorMouseTurno extends MouseAdapter {
 	
-	private JuegoCraft modelo;
+	private Usuario user;
 
 
-	public ControladorMouseTurno( JuegoCraft unModelo ){
+	public ControladorMouseTurno( Usuario user ){
 		
-		modelo = unModelo;
-
+		this.user = user;
 		
 	}
 	
 	public void mouseClicked(MouseEvent e){
 			
-		modelo.turno().pasarTurno();
+		user.pasarTurno();
+/*		Window[] win = Window.getWindows();
+		for(int i = 2; i <= win.length; i++){
+			
+			win[i].dispose();
+		}*/
 		
 	}
 }

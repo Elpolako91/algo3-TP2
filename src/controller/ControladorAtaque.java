@@ -3,27 +3,27 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import fiuba.algo3.tp2.JuegoCraft;
-import fiuba.algo3.tp2.Unidad;
+import fiuba.algo3.tp2.juego.Usuario;
+import fiuba.algo3.tp2.objetosDelMapa.unidades.Unidad;
 
 public class ControladorAtaque {
 	
-	private JuegoCraft modelo;
+	private Usuario user;
 
-	public ControladorAtaque(JuegoCraft modelo){
+	public ControladorAtaque(Usuario user){
 		
-		this.modelo = modelo;
+		this.user = user;
 	}
 
 	private class EscuchaBotonAtaqueAire implements ActionListener{
 		
 		public void actionPerformed(ActionEvent e) {
 			
-			Object objeto = modelo.turno().objetoSeleccionado();
+			Object objeto = user.objetoSeleccionado();
 						
 			if ( objeto instanceof Unidad ){
 				
-				modelo.turno().accionAtacarAire(true);
+				user.accionAtacarAire(true);
 			}
 			
 		}
@@ -37,11 +37,11 @@ public class ControladorAtaque {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				Object objeto = modelo.turno().objetoSeleccionado();
+				Object objeto = user.objetoSeleccionado();
 								
 				if ( objeto instanceof Unidad ){
 					 
-					modelo.turno().accionAtacarTierra(true);
+					user.accionAtacarTierra(true);
 				}
 			}
 		}
@@ -54,11 +54,11 @@ public class ControladorAtaque {
 				
 				public void actionPerformed(ActionEvent e) {
 					
-					Object objeto = modelo.turno().objetoSeleccionado();
+					Object objeto = user.objetoSeleccionado();
 									
 					if ( objeto instanceof Unidad ){
 						 
-						modelo.turno().accionMoverTerrestre(true);
+						user.accionMover(true);
 					}
 				}
 			}
@@ -71,11 +71,11 @@ public class ControladorAtaque {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				Object objeto = modelo.turno().objetoSeleccionado();
+				Object objeto = user.objetoSeleccionado();
 								
 				if ( objeto instanceof Unidad ){
 					 
-					modelo.turno().accionMoverAire(true);
+					user.accionMover(true);
 				}
 			}
 		}

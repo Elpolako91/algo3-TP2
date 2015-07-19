@@ -21,7 +21,10 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JTextField;
 
-import fiuba.algo3.tp2.JuegoCraft;
+import fiuba.algo3.tp2.excepciones.CargaJugadorInvalida;
+import fiuba.algo3.tp2.juego.JuegoCraft;
+import fiuba.algo3.tp2.juego.Usuario;
+
 
 public class VistaMenuJugadores extends JFrame {
 
@@ -41,8 +44,9 @@ public class VistaMenuJugadores extends JFrame {
 	private JTextField textNombre;
 	JuegoCraft modelo;
 	private JTextField textNombre2;
+	private Usuario user;
 
-	public VistaMenuJugadores(JuegoCraft unModelo) {
+	public VistaMenuJugadores(JuegoCraft unModelo, Usuario user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(300, 100, 650, 606);
 		contentPane = new JPanel();
@@ -51,6 +55,7 @@ public class VistaMenuJugadores extends JFrame {
 		contentPane.setLayout(null);
 		
 		this.modelo = unModelo;
+		this.user = user;
 		
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
@@ -62,9 +67,7 @@ public class VistaMenuJugadores extends JFrame {
 		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSalir.setBounds(21, 488, 152, 53);
 		contentPane.add(btnSalir);
-		
-		//la raza que elija se deber� guardar en la raza del jugador
-		
+				
 		JLabel lblNewLabel_2 = new JLabel("Color");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -224,19 +227,22 @@ public class VistaMenuJugadores extends JFrame {
 		JButton btnComenzar = new JButton("Comenzar");
 		btnComenzar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//deberia cargar la partida
 				raza1 = botonesRaza1.getSelection().getActionCommand();
 				color1 = botonesColores1.getSelection().getActionCommand();
 				nombre1 = textNombre.getText();
-				modelo.cargarJugador(nombre1, color1, raza1);
 				raza2 = botonesRaza2.getSelection().getActionCommand();
 				color2 = botonesColores2.getSelection().getActionCommand();
 				nombre2 = textNombre2.getText();
-				if (( nombre1 != nombre2) && ( color1 != color2 )){
+				try {
+					modelo.cargarJugador(nombre1, color1, raza1);
 					modelo.cargarJugador(nombre2, color2, raza2);
-					vista3 = new VistaMapa(modelo);
+					vista3 = new VistaMapa(modelo, user);
 					vista3.setVisible(true);
 					dispose();
+				} catch (CargaJugadorInvalida e2) {
+					e2.printStackTrace();
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				}
 			}
 		});

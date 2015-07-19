@@ -13,17 +13,17 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controller.ControladorCreadorEdificiosProtos;
-import fiuba.algo3.tp2.JuegoCraft;
+import fiuba.algo3.tp2.juego.Usuario;
 
 public class VistaConstruccionProtos extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JuegoCraft modelo;
 	private ControladorCreadorEdificiosProtos controlador;
+	private Usuario user;
 
 	
-	public VistaConstruccionProtos(JuegoCraft modelo){
+	public VistaConstruccionProtos(Usuario user){
 		
 	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	setBounds(700, 0, 500, 500);
@@ -32,8 +32,8 @@ public class VistaConstruccionProtos extends JFrame {
 	setContentPane(contentPane);
 	contentPane.setLayout(null);
 	
-	this.modelo = modelo;
-	controlador = new ControladorCreadorEdificiosProtos(modelo);
+	this.user = user;
+	controlador = new ControladorCreadorEdificiosProtos(user);
 	
 	final JButton botonAcceso = new JButton("Acceso");
 	botonAcceso.setBounds(120, 120, 138, 32);

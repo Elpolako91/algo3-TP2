@@ -13,27 +13,27 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controller.ControladorAtaque;
-import fiuba.algo3.tp2.JuegoCraft;
+import fiuba.algo3.tp2.juego.Usuario;
 
 public class VistaMenuUnidad extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JuegoCraft modelo;
 	private ControladorAtaque controlador;
+	private Usuario user;
 
 	
-	public VistaMenuUnidad(JuegoCraft modelo){
+	public VistaMenuUnidad(Usuario user){
 		
 	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	setBounds(700, 600, 500, 500);
+	setBounds(200, 0, 500, 500);
 	contentPane = new JPanel();
 	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	setContentPane(contentPane);
 	contentPane.setLayout(null);
 	
-	this.modelo = modelo;
-	controlador = new ControladorAtaque(modelo);
+	this.user = user;
+	controlador = new ControladorAtaque(user);
 	
 	final JButton btnAire = new JButton("Aire");
 	btnAire.setFont(new Font("ComicSans",Font.PLAIN,15));

@@ -9,17 +9,17 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controller.ControladorUnidadProtos;
-import fiuba.algo3.tp2.JuegoCraft;
+import fiuba.algo3.tp2.juego.Usuario;
 
 public class VistaCreacionUnidadProtos extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JuegoCraft modelo;
+	private Usuario user;
 	private ControladorUnidadProtos controladorUnidad;
 
 	
-	public VistaCreacionUnidadProtos(JuegoCraft modelo){
+	public VistaCreacionUnidadProtos(Usuario user){
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(200, 0, 500, 500);
@@ -28,8 +28,8 @@ public class VistaCreacionUnidadProtos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	
-		this.modelo = modelo;
-		controladorUnidad = new ControladorUnidadProtos(modelo);
+		this.user = user;
+		controladorUnidad = new ControladorUnidadProtos(user);
 		
 		JButton btnZealot = new JButton("Zealot");
 		btnZealot.setBounds(200, 0, 100, 100);

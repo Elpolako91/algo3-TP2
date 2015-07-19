@@ -1,34 +1,35 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import fiuba.algo3.tp2.juego.Usuario;
+import view.VistaCreacionUnidadProtos;
 import view.VistaCreacionUnidadTerran;
 
-import fiuba.algo3.tp2.JuegoCraft;
-import fiuba.algo3.tp2.Posicion;
-import fiuba.algo3.tp2.PosicionMapa;
+public class ControladorCreadorUnidades extends MouseAdapter {
 
-public class ControladorCreadorUnidades extends MouseAdapter implements ActionListener{
-	
-	private JuegoCraft modelo;
-	private Posicion posicion;
-	private Object edificio;
+		private VistaCreacionUnidadTerran vistaCreacionUnidadTerran;
+		private Usuario user;
+		private VistaCreacionUnidadProtos vistaCreacionUnidadProtos;
 
-	public ControladorCreadorUnidades(JuegoCraft modelo, Posicion posicion, VistaCreacionUnidadTerran vista){
+		public ControladorCreadorUnidades(Usuario user, VistaCreacionUnidadTerran vistaCreacionUnidadTerran, VistaCreacionUnidadProtos vistaCreacionUnidadProtos){
+			
+			this.user = user;
+			this.vistaCreacionUnidadTerran = vistaCreacionUnidadTerran;
+			this.vistaCreacionUnidadProtos = vistaCreacionUnidadProtos;
+		}
 		
-		this.modelo = modelo;
-		this.posicion = posicion;
-		PosicionMapa posicionMapa = new PosicionMapa(posicion.x(), posicion.y(), 0);
-		this.edificio = modelo.mapa().contenido(posicionMapa);
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		System.out.println("supp nigga");
-	}
-	
+		public void mousePressed(MouseEvent e){
+			
+			if(user.jugadorActual().raza() == "terran"){
+				
+				vistaCreacionUnidadTerran.setVisible(true);
+				
+			}else{
+				
+				vistaCreacionUnidadProtos.setVisible(true);
+			}
+			
+		}
 }

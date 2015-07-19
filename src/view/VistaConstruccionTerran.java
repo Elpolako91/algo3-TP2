@@ -11,18 +11,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
 import controller.ControladorCreadorEdificiosTerran;
-import fiuba.algo3.tp2.JuegoCraft;
+import fiuba.algo3.tp2.juego.JuegoCraft;
+import fiuba.algo3.tp2.juego.Usuario;
 
 public class VistaConstruccionTerran extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JuegoCraft modelo;
 	private ControladorCreadorEdificiosTerran controlador;
+	private Usuario user;
 
 	
-	public VistaConstruccionTerran(JuegoCraft modelo){
+	public VistaConstruccionTerran(Usuario user){
 		
 	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	setBounds(700, 0, 500, 500);
@@ -31,8 +33,8 @@ public class VistaConstruccionTerran extends JFrame {
 	setContentPane(contentPane);
 	contentPane.setLayout(null);
 	
-	this.modelo = modelo;
-	controlador = new ControladorCreadorEdificiosTerran(modelo);
+	this.user = user;
+	controlador = new ControladorCreadorEdificiosTerran(user);
 	
 	final JButton botonBarraca = new JButton("Barraca");
 	botonBarraca.setBounds(120, 120, 138, 32);

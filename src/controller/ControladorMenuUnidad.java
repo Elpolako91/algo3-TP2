@@ -5,17 +5,14 @@ import java.awt.event.ActionListener;
 
 import view.VistaMenuUnidad;
 
-import fiuba.algo3.tp2.JuegoCraft;
-
 public class ControladorMenuUnidad implements ActionListener {
 
-	private JuegoCraft modelo;
 	private VistaMenuUnidad vista;
 
-	public ControladorMenuUnidad(JuegoCraft modelo) {
+	public ControladorMenuUnidad(VistaMenuUnidad vista) {
 
-		this.modelo = modelo;
-		this.vista = new VistaMenuUnidad(modelo);
+
+		this.vista = vista;
 	}
 
 	@Override

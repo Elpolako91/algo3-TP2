@@ -7,18 +7,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
 import controller.ControladorUnidadTerran;
-import fiuba.algo3.tp2.JuegoCraft;
+import fiuba.algo3.tp2.juego.Usuario;
 
 public class VistaCreacionUnidadTerran extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JuegoCraft modelo;
+	private Usuario user;
 	private ControladorUnidadTerran controladorUnidad;
 
 	
-	public VistaCreacionUnidadTerran(JuegoCraft modelo){
+	public VistaCreacionUnidadTerran(Usuario user){
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(200, 0, 500, 500);
@@ -27,8 +28,8 @@ public class VistaCreacionUnidadTerran extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	
-		this.modelo = modelo;
-		controladorUnidad = new ControladorUnidadTerran(modelo);
+		this.user = user;
+		controladorUnidad = new ControladorUnidadTerran(user);
 		
 		JButton btnMarine = new JButton("Marine");
 		btnMarine.setBounds(0, 0, 100, 100);

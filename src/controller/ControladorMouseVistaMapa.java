@@ -7,67 +7,93 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
-import fiuba.algo3.tp2.Edificio;
-import fiuba.algo3.tp2.JuegoCraft;
-import fiuba.algo3.tp2.Jugador;
-import fiuba.algo3.tp2.Posicion;
-import fiuba.algo3.tp2.PosicionMapa;
-import fiuba.algo3.tp2.Unidad;
+import fiuba.algo3.tp2.excepciones.PosicionInvalida;
+import fiuba.algo3.tp2.excepciones.UnidadEnemigaSeleccionada;
+import fiuba.algo3.tp2.excepciones.UnidadMovimientoTerminado;
+import fiuba.algo3.tp2.juego.Usuario;
+import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.mapa.Vacio;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.Edificio;
+import fiuba.algo3.tp2.objetosDelMapa.unidades.Unidad;
 
 public class ControladorMouseVistaMapa extends MouseAdapter {
 	
-	private JuegoCraft modelo;
 	private Posicion posicion;
 	private Object contenido;
 	private JButton boton;
-
-	public ControladorMouseVistaMapa(Posicion unaPosicion, JuegoCraft unModelo, JButton boton) {
+	private Usuario user;
+	
+	public ControladorMouseVistaMapa(Posicion unaPosicion, Usuario user, JButton boton) {
 		
 		this.posicion = unaPosicion;
-		this.modelo = unModelo;
+		this.user = user;
 		this.boton = boton;
 	}
 	
 	public void mousePressed (MouseEvent e){
-		
-		Jugador jugadorActual = modelo.turno();
+				
 		boton.setBorder(BorderFactory.createLineBorder(Color.BLUE, 3));
 		
-		if( jugadorActual.getColocarEdificio() ){
+		if( user.getColocarEdificio() ){
 			
-			jugadorActual.construirEdificio( posicion,(Edificio) jugadorActual.edificioAConstruir() );
-			jugadorActual.edificioAConstruir(null);
-			jugadorActual.colocarEdificio(false);
-			
+			try {
+				user.colocarEdificio((Edificio) user.edificioAConstruir(), posicion);
+				user.edificioAConstruir(null);
+				user.colocarEdificio(false);
+			} catch (PosicionInvalida e1) {			}
 		}else{
-			if ( jugadorActual.getAccionAtacarAire()){
+			if ( user.getAccionAtacarAire()){
 		
-				jugadorActual.atacarAire((Unidad)jugadorActual.objetoSeleccionado(), posicion);
-				jugadorActual.accionAtacarAire(false);
-			
+				try {
+					user.atacarAire((Unidad)user.objetoSeleccionado(), posicion);		
+				} catch (PosicionInvalida | UnidadEnemigaSeleccionada | UnidadMovimientoTerminado e1) {
+					e1.printStackTrace();
+				}
+				user.accionAtacarAire(false);	
 			}else{
-				if( jugadorActual.getAccionAtacarTierra()){
+				if( user.getAccionAtacarTierra()){
 		
-					jugadorActual.atacarTierra((Unidad)jugadorActual.objetoSeleccionado(), posicion);
-					jugadorActual.accionAtacarTierra(false);
+					try {
+						user.atacarTierra((Unidad) user.objetoSeleccionado(), posicion);
+					} catch (PosicionInvalida | UnidadEnemigaSeleccionada | UnidadMovimientoTerminado e1) {}
+					user.accionAtacarTierra(false);
 					
 				}else{
-					if( jugadorActual.getAccionMoverTerrestre()){
+					if( user.getAccionMover()){
 						
-						jugadorActual.moverUnidad((Unidad) jugadorActual.objetoSeleccionado(), posicion);
-						jugadorActual.accionMoverTerrestre(false);
+						try {
+							user.moverUnidad((Unidad) user.objetoSeleccionado(), posicion);
+						} catch (PosicionInvalida | UnidadEnemigaSeleccionada | UnidadMovimientoTerminado e1) {	}
+						user.accionMover(false);
 						
 					}else{
-						if (jugadorActual.getAccionMoverAire()){
+						if (user.getAccionMover()){
 						
-							jugadorActual.moverUnidad((Unidad) jugadorActual.objetoSeleccionado(), posicion);
-							jugadorActual.accionMoverAire(false);
+							try {
+								user.moverUnidad((Unidad) user.objetoSeleccionado(), posicion);
+							} catch (PosicionInvalida | UnidadEnemigaSeleccionada | UnidadMovimientoTerminado e1) {	}
+							user.accionMover(false);
 							
 						}else{
-			
-							PosicionMapa posicionMapa = new PosicionMapa(posicion.x(), posicion.y(), 1);
-							contenido = modelo.mapa().contenido(posicionMapa);
-							modelo.turno().objetoSeleccionado(contenido);
+							
+							Posicion posicion2 = new Posicion(posicion.x(), posicion.y());
+							try {
+								contenido = user.juego.mapa().contenido(posicion2,user.juego.mapa().aire);
+							} catch (PosicionInvalida e1) {}
+							
+							if( contenido instanceof Vacio){
+								
+								posicion2 = new Posicion(posicion.x(), posicion.y());
+								try {
+									contenido = user.juego.mapa().contenido(posicion2, user.juego.mapa().tierra);
+								} catch (PosicionInvalida e1) {}
+								user.objetoSeleccionado(contenido);
+								
+							}else{
+								
+								user.objetoSeleccionado(contenido);
+
+							}
 						}
 					}
 				}

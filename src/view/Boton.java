@@ -10,15 +10,19 @@ import controller.ControladorCreadorUnidades;
 import controller.ControladorEdificioCentral;
 import controller.ControladorMenuUnidad;
 import controller.ControladorMouseVistaMapa;
-import fiuba.algo3.tp2.AccionPreguntar;
-import fiuba.algo3.tp2.JuegoCraft;
-import fiuba.algo3.tp2.Posicion;
+import fiuba.algo3.tp2.acciones.AccionPreguntar;
+import fiuba.algo3.tp2.excepciones.PosicionInvalida;
+import fiuba.algo3.tp2.juego.Usuario;
+import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.Edificio;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentral;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioDeUnidades;
 
 public class Boton {
 	
 	private Posicion posicion;
 	private JButton boton;
-	JuegoCraft modelo;
+	private Usuario user;
 	private ImageIcon pasto = new ImageIcon(Boton.class.getResource("/imagenes/pasto.png"));
 	private ImageIcon edificio = new ImageIcon(Boton.class.getResource("/imagenes/edificio.jpg"));
 	private ImageIcon mineral = new ImageIcon(Boton.class.getResource("/imagenes/mineral.jpg"));
@@ -27,36 +31,28 @@ public class Boton {
 	private VistaConstruccionTerran vistaConstruccionTerran;
 	private VistaCreacionUnidadTerran vistaUnidadesTerran;
 	private VistaConstruccionProtos vistaConstruccionProtos;
-	private VistaCreacionUnidadProtos vistaCreacionProtos;
+	private VistaCreacionUnidadProtos vistaUnidadProtos;
 	private VistaMenuUnidad vista2;
+	private int cteTamanioBoton = 20;
 	
-	public Boton(int x, int y,int k, JuegoCraft modelo, VistaMapa vista){
+	public Boton(int x, int y, Usuario user) throws PosicionInvalida{
 		
-		posicion = new Posicion(x/30+1,y/30+1);
-		this.modelo = modelo;
-		AccionPreguntar preguntar = new AccionPreguntar(modelo.mapa());
-		this.vistaConstruccionTerran = new VistaConstruccionTerran(modelo);
-		this.vistaUnidadesTerran = new VistaCreacionUnidadTerran(modelo);
-		this.vistaConstruccionProtos = new VistaConstruccionProtos(modelo);
-		this.vistaCreacionProtos = new VistaCreacionUnidadProtos(modelo);
-		this.vista2 = new VistaMenuUnidad(modelo);
+		posicion = new Posicion(x/cteTamanioBoton+1,y/cteTamanioBoton+1);
+		
+		this.user = user;
+		this.vistaConstruccionTerran = new VistaConstruccionTerran(user);
+		this.vistaUnidadesTerran = new VistaCreacionUnidadTerran(user);
+		this.vistaConstruccionProtos = new VistaConstruccionProtos(user);
+		this.vistaUnidadProtos = new VistaCreacionUnidadProtos(user);
+		this.vista2 = new VistaMenuUnidad(user);
+		
 		boton = new JButton();
-		boton.setBounds(x, y, 30, 30);
-		ml = new ControladorMouseVistaMapa(posicion, modelo, boton);
-		if (preguntar.hayTerreno(posicion)){
-			boton.setIcon(pasto);
-		}
-		if (preguntar.hayEdificio(posicion)){
-				boton.setIcon(edificio);
-				boton.addMouseListener(new ControladorEdificioCentral(vistaConstruccionTerran, vistaUnidadesTerran, vista2, vistaConstruccionProtos, vistaCreacionProtos, modelo));
-		}
-		if (preguntar.hayMineral(posicion)){
-			boton.setIcon(mineral);
-		}
-		if(preguntar.hayGasVespeno(posicion)){
-			boton.setIcon(gas);
-		}
+		boton.setBounds(x, y, cteTamanioBoton, cteTamanioBoton);
+		this.pintarBoton(x, y);
+		
+		ml = new ControladorMouseVistaMapa(posicion, user, boton);
 		boton.addMouseListener(ml);
+		
 	}
 
 	public JButton boton() {
@@ -69,22 +65,39 @@ public class Boton {
 		return posicion;
 	}
 
-	public void repintarBoton() {
-		AccionPreguntar preguntar = new AccionPreguntar(modelo.mapa());
+	public void pintarBoton(int x, int y) throws PosicionInvalida {
 		
-		if (preguntar.hayTerreno(posicion)){
+		AccionPreguntar preguntar = new AccionPreguntar(user.juego.mapa());
+		
+		if(preguntar.hayTerreno(posicion)){
 			boton.setIcon(pasto);
 		}
 		if(preguntar.hayEdificio(posicion)){
-			boton.setIcon(new ImageIcon(Boton.class.getResource("/imagenes/edificio.jpg")));
-			boton.addMouseListener(new ControladorCreadorUnidades(modelo,posicion, vistaUnidadesTerran));
-// Si es una edificio ya construido, debo agregarle el comportamiento para la construccion de sus unidades
-// ejemplo, si es una Barraca, debe construir Marines.
+			Edificio objeto = (Edificio) user.juego.mapa().contenido(posicion, user.juego.mapa().tierra); 
+			boton.setIcon(edificio);
+			if(objeto instanceof EdificioCentral){
+			boton.addMouseListener(new ControladorEdificioCentral(vistaConstruccionTerran, vistaConstruccionProtos, user));		
+			}else{
+				if(objeto instanceof EdificioDeUnidades){
+				boton.addMouseListener(new ControladorCreadorUnidades(user, vistaUnidadesTerran, vistaUnidadProtos));
+				}
+			}
 		}
 		if (preguntar.hayUnidadTerrestre(posicion)){
 			boton.setIcon(new ImageIcon(Boton.class.getResource("/imagenes/posiblefondo.jpg")));
-			boton.addActionListener(new ControladorMenuUnidad(modelo));
+			boton.addActionListener(new ControladorMenuUnidad(vista2));
+		}
+		if (preguntar.hayUnidadAire(posicion)){
+			boton.setIcon(new ImageIcon(Boton.class.getResource("/imagenes/posiblefondo.jpg")));
+			boton.addActionListener(new ControladorMenuUnidad(vista2));
+		}
+		if(preguntar.hayMineral(posicion)){
+			boton.setIcon(mineral);
+		}
+		if(preguntar.hayGasVespeno(posicion)){
+			boton.setIcon(gas);
 		}
 		boton.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
-	}
+		boton.repaint();
+	}	
 }
