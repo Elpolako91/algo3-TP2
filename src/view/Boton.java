@@ -10,6 +10,7 @@ import controller.ControladorCreadorUnidades;
 import controller.ControladorEdificioCentral;
 import controller.ControladorMenuUnidad;
 import controller.ControladorMouseVistaMapa;
+import controller.ControladorTransporte;
 import fiuba.algo3.tp2.acciones.AccionPreguntar;
 import fiuba.algo3.tp2.excepciones.PosicionInvalida;
 import fiuba.algo3.tp2.juego.Usuario;
@@ -17,6 +18,8 @@ import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.Edificio;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentral;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioDeUnidades;
+import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadAerea;
+import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadTransporte;
 
 public class Boton {
 	
@@ -28,6 +31,7 @@ public class Boton {
 	private ImageIcon mineral = new ImageIcon(Boton.class.getResource("/imagenes/mineral.jpg"));
 	private ImageIcon gas = new ImageIcon(Boton.class.getResource("/imagenes/Gas_vespeno.png"));
 	private ControladorMouseVistaMapa ml;
+	private ControladorTransporte controladorTransporte;
 	private VistaConstruccionTerran vistaConstruccionTerran;
 	private VistaCreacionUnidadTerran vistaUnidadesTerran;
 	private VistaConstruccionProtos vistaConstruccionProtos;
@@ -45,6 +49,8 @@ public class Boton {
 		this.vistaConstruccionProtos = new VistaConstruccionProtos(user);
 		this.vistaUnidadProtos = new VistaCreacionUnidadProtos(user);
 		this.vista2 = new VistaMenuUnidad(user);
+		
+		this.controladorTransporte = new ControladorTransporte(user);
 		
 		boton = new JButton();
 		boton.setBounds(x, y, cteTamanioBoton, cteTamanioBoton);
@@ -88,8 +94,13 @@ public class Boton {
 			boton.addActionListener(new ControladorMenuUnidad(vista2));
 		}
 		if (preguntar.hayUnidadAire(posicion)){
+			UnidadAerea objeto = (UnidadAerea) user.juego.mapa().contenido(posicion, user.juego.mapa().aire);
 			boton.setIcon(new ImageIcon(Boton.class.getResource("/imagenes/posiblefondo.jpg")));
-			boton.addActionListener(new ControladorMenuUnidad(vista2));
+			if ( objeto instanceof UnidadTransporte){
+				boton.addActionListener(controladorTransporte.getVistaMenuTransporte() );
+			}else{
+				boton.addActionListener(new ControladorMenuUnidad(vista2));
+			}
 		}
 		if(preguntar.hayMineral(posicion)){
 			boton.setIcon(mineral);

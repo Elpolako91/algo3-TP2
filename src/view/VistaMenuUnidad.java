@@ -58,32 +58,12 @@ public class VistaMenuUnidad extends JFrame {
 			btnAire.setVisible(true);
 			btnTierra.setVisible(true);
 		}
-	});
-	
-	final JButton btnMoverTierra = new JButton("Tierra");
-	btnMoverTierra.setFont(new Font("ComicSans", Font.PLAIN,15));
-	btnMoverTierra.setBounds(0, 320, 100, 50);
-	btnMoverTierra.addActionListener(controlador.getBotonMoverTerrestre());
-	btnMoverTierra.setVisible(false);
-	contentPane.add(btnMoverTierra);
-	
-	final JButton btnMoverAire = new JButton("Aire");
-	btnMoverAire.setFont(new Font("ComicSans", Font.PLAIN,15));
-	btnMoverAire.setBounds(300, 320, 100, 50);
-	btnMoverAire.addActionListener(controlador.getBotonMoverAire());
-	btnMoverAire.setVisible(false);
-	contentPane.add(btnMoverAire);
-	
+	});	
 	
 	JButton btnMover = new JButton("Mover");
 	btnMover.setFont(new Font("ComicSans", Font.PLAIN,20));
 	btnMover.setBounds(150, 220, 120, 80);
-	btnMover.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent e){
-			btnMoverAire.setVisible(true);
-			btnMoverTierra.setVisible(true);
-		}
-	});
+	btnMover.addActionListener(controlador.getBotonMover());
 	contentPane.add(btnMover);
 	
 	JLabel lblNewLabel = new JLabel("");

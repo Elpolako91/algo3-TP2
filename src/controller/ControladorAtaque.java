@@ -50,7 +50,7 @@ public class ControladorAtaque {
 				return new EscuchaBotonAtaqueTierra();
 			}
 			
-	private class EscuchaBotonMoverTerrestre implements ActionListener{
+	private class EscuchaBotonMover implements ActionListener{
 				
 				public void actionPerformed(ActionEvent e) {
 					
@@ -63,25 +63,8 @@ public class ControladorAtaque {
 				}
 			}
 			
-		public ActionListener getBotonMoverTerrestre() {
-			return new EscuchaBotonMoverTerrestre();
+		public ActionListener getBotonMover() {
+			return new EscuchaBotonMover();
 		}
-		
-	private class EscuchaBotonMoverAire implements ActionListener{
 			
-			public void actionPerformed(ActionEvent e) {
-				
-				Object objeto = user.objetoSeleccionado();
-								
-				if ( objeto instanceof Unidad ){
-					 
-					user.accionMover(true);
-				}
-			}
-		}
-		
-		public ActionListener getBotonMoverAire() {
-			return new EscuchaBotonMoverAire();
-	}
-	
 }

@@ -75,24 +75,36 @@ public class ControladorMouseVistaMapa extends MouseAdapter {
 							user.accionMover(false);
 							
 						}else{
-							
-							Posicion posicion2 = new Posicion(posicion.x(), posicion.y());
-							try {
-								contenido = user.juego.mapa().contenido(posicion2,user.juego.mapa().aire);
-							} catch (PosicionInvalida e1) {}
-							
-							if( contenido instanceof Vacio){
+							if (user.getAccionDescargar()){
 								
-								posicion2 = new Posicion(posicion.x(), posicion.y());
 								try {
-									contenido = user.juego.mapa().contenido(posicion2, user.juego.mapa().tierra);
-								} catch (PosicionInvalida e1) {}
-								user.objetoSeleccionado(contenido);
-								
+									user.descargarUnidades(user.getUnidadTransporte(), posicion);
+								} catch (PosicionInvalida | UnidadEnemigaSeleccionada e1) {	}
 							}else{
+								if (user.getAccionCargar()){
+									
+									try {
+										user.cargarUnidad(user.getUnidadTransporte(), posicion);
+									} catch (PosicionInvalida | UnidadEnemigaSeleccionada e1) {	}
+								}
+								Posicion posicion2 = new Posicion(posicion.x(), posicion.y());
+									try {
+										contenido = user.juego.mapa().contenido(posicion2,user.juego.mapa().aire);
+									} catch (PosicionInvalida e1) {}
+							
+									if( contenido instanceof Vacio){
 								
-								user.objetoSeleccionado(contenido);
+										posicion2 = new Posicion(posicion.x(), posicion.y());
+										try {
+											contenido = user.juego.mapa().contenido(posicion2, user.juego.mapa().tierra);
+										} catch (PosicionInvalida e1) {}
+										user.objetoSeleccionado(contenido);
+								
+									}else{
+								
+										user.objetoSeleccionado(contenido);
 
+								}
 							}
 						}
 					}

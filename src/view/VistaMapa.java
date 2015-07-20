@@ -3,8 +3,6 @@ package view;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -56,7 +54,6 @@ public class VistaMapa extends JFrame implements Observer {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
 		
 		Tamanio tamanio = new Tamanio(limiteMapaX/cteTamanioBoton,limiteMapaY/cteTamanioBoton);
 		Mapa map = new Mapa(tamanio);

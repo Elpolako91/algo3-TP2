@@ -20,6 +20,7 @@ public class Usuario {
 	private boolean atacarAire = false;
 	private boolean cargarUnidad = false;
 	private boolean descargarUnidad = false;
+	private UnidadTransporte unidadTransporte;
 	
 	
 	public Usuario(JuegoCraft unJuego){
@@ -120,5 +121,36 @@ public class Usuario {
 	public boolean getColocarEdificio(){
 		
 		return this.colocarEdificio;
-	}	
+	}
+
+	public void accionCargar(boolean boleano) {
+		
+		this.cargarUnidad = boleano;
+		
+	}
+	
+	public void accionDescargar(boolean boleano) {
+		
+		this.descargarUnidad = boleano;
+		
+	}
+
+	public boolean getAccionDescargar() {
+		
+		return this.descargarUnidad;
+	}
+	
+	public boolean getAccionCargar() {
+		
+		return this.cargarUnidad;
+	}
+
+	public void unidadDeTransporte(UnidadTransporte transporte) {
+	
+		this.unidadTransporte = transporte;
+	}
+
+	public UnidadTransporte getUnidadTransporte() {
+		return unidadTransporte;
+	}
 }

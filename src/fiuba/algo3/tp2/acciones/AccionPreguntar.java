@@ -149,7 +149,7 @@ public class AccionPreguntar {
 
 	public boolean hayUnidadAire(Posicion posicion) throws PosicionInvalida {
 		
-		if (mapa.contenido(posicion, mapa.tierra) instanceof UnidadAerea)
+		if (mapa.contenido(posicion, mapa.aire) instanceof UnidadAerea)
 			return true;
 		else 
 			return false;
