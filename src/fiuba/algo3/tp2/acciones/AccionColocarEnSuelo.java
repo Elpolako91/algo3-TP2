@@ -12,27 +12,28 @@ public class AccionColocarEnSuelo extends AccionDelMapa{
 		super(unMapa);
 	}
 
-	public void colocarTerrenoEn(Posicion posicion) throws PosicionInvalida {
+	public void colocarTerrenoEn(Posicion posicion) {
 				
-		mapa.removerObjeto(posicion, mapa.suelo);
-		mapa.colocarObjeto(posicion, mapa.suelo, new Terreno());		
+		try {
+			mapa.removerObjeto(posicion, mapa.suelo);
+			mapa.colocarObjeto(posicion, mapa.suelo, new Terreno());
+		} catch (PosicionInvalida e) {}				
 	}
 
 	public void colocarTerrenoEnTodoElMapa() {
 		
 		for (int i = 1; i <= mapa.tamanio().enX(); i++)
 			for (int j = 1; j <= mapa.tamanio().enY(); j++){
-
-				try {
-					this.colocarTerrenoEn(new Posicion(i,j));
-				} catch (PosicionInvalida e) {}
+				
+				this.colocarTerrenoEn(new Posicion(i,j));				
 		}			
 	}
 
-	public void colocarRecurso(Posicion posicion, Recurso recurso) throws PosicionInvalida {
+	public void colocarRecurso(Posicion posicion, Recurso recurso) {
 		
-		mapa.removerObjeto(posicion, mapa.suelo);
-		mapa.colocarObjeto(posicion, mapa.suelo, recurso);
+		try {
+			mapa.removerObjeto(posicion, mapa.suelo);
+			mapa.colocarObjeto(posicion, mapa.suelo, recurso);
+		} catch (PosicionInvalida e) {}		
 	}
-
 }

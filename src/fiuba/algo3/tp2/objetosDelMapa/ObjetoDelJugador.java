@@ -71,7 +71,7 @@ public abstract class ObjetoDelJugador extends ObjetoDelMapa {
 		return vision;
 	}
 	
-	/************************   ******************************************/
+	/*********************************************************************************************************/
 	
 	public void disminuirVida(int danio){
 		
@@ -86,11 +86,14 @@ public abstract class ObjetoDelJugador extends ObjetoDelMapa {
 				escudoActual = 0;
 			}		
 		}
-		
-		if (danioRestante <= vidaActual)
-			vidaActual = vidaActual - danioRestante;
-		else
-			vidaActual = 0;
+		else{
+			
+			if (danioRestante <= vidaActual)
+				vidaActual = vidaActual - danioRestante;
+			else
+				vidaActual = 0;
+			
+		}	
 	}
 	
 	

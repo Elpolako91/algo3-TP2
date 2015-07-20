@@ -23,5 +23,6 @@ public class AccionDescargarUnidad extends AccionDelJugador{
 		UnidadTerrestre unidad = transporte.descargarUnidad();
 				
 		colocarUnidad.realizar(transporte.posicion(), unidad);						
+		transporte.cargar(unidad);		
 	}
 }

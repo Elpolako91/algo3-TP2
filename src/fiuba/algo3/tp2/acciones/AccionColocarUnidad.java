@@ -14,8 +14,7 @@ public class AccionColocarUnidad extends AccionDelJugador {
 	}
 
 	@Override
-	public void realizar(Posicion posicion, ObjetoDelMapa unidad)
-			throws PosicionInvalida {
+	public void realizar(Posicion posicion, ObjetoDelMapa unidad) throws PosicionInvalida {
 		
 		if (unidad instanceof UnidadTerrestre)
 			this.colocarUnidadTerrestre(posicion, (UnidadTerrestre) unidad);
@@ -36,6 +35,7 @@ public class AccionColocarUnidad extends AccionDelJugador {
 			mapa.colocarObjeto(posicion, mapa.tierra, unidad);
 			unidad.posicion(posicion);
 		}
+		else
+			throw new PosicionInvalida();
 	}
-
 }

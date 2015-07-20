@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fiuba.algo3.tp2.excepciones.PosicionInvalida;
+import fiuba.algo3.tp2.objetosDelMapa.ObjetoDelMapa;
 
 public class CapaDeMapa {
 
@@ -22,7 +23,7 @@ public class CapaDeMapa {
 		return tamanio;
 	}
 	
-	public void colocarObjeto(Posicion posicionDestino, Object unObjeto) throws PosicionInvalida {
+	public void colocarObjeto(Posicion posicionDestino, ObjetoDelMapa unObjeto) throws PosicionInvalida {
 		
 		if (this.esPosicionValida(posicionDestino) && this.hayVacio(posicionDestino)){
 			Celda c = new Celda(unObjeto);
@@ -32,7 +33,7 @@ public class CapaDeMapa {
 			throw new PosicionInvalida();
 	}
 		
-	public void colocarObjeto(Posicion posicion, Object unObjetoConTamanio, Tamanio tamanio) throws PosicionInvalida{
+	public void colocarObjeto(Posicion posicion, ObjetoDelMapa unObjetoConTamanio, Tamanio tamanio) throws PosicionInvalida{
 		
 		if(this.sonPosicionesValidas(posicion, tamanio) && this.hayVacio(posicion, tamanio))
 			for ( int i = 0; i < tamanio.enX(); i++ ) 	
@@ -42,7 +43,7 @@ public class CapaDeMapa {
 			throw new PosicionInvalida();
 	}
 	
-	public Object contenido(Posicion posicion) throws PosicionInvalida {
+	public ObjetoDelMapa contenido(Posicion posicion) throws PosicionInvalida {
 		
 		if (this.esPosicionValida(posicion)){
 			Celda celda = mapa.get(posicion);
@@ -76,8 +77,8 @@ public class CapaDeMapa {
 		
 		if((this.esPosicionValida(posicion1)) && (this.esPosicionValida(posicion2))){
 			
-			Object objeto1 = this.contenido(posicion1);
-			Object objeto2 = this.contenido(posicion2);
+			ObjetoDelMapa objeto1 = this.contenido(posicion1);
+			ObjetoDelMapa objeto2 = this.contenido(posicion2);
 			
 			this.removerObjeto(posicion1);
 			this.removerObjeto(posicion2);
@@ -99,7 +100,7 @@ public class CapaDeMapa {
 	private boolean hayVacio(Posicion posicion){
 		
 		Celda c = mapa.get(posicion);
-		if(c.contenido instanceof Vacio)
+		if(c.contenido() instanceof Vacio)
 			return true;
 		else
 			return false;

@@ -138,7 +138,7 @@ public class AccionPreguntar {
 		
 		return posicionActual;
 	}
-
+	/***** necesidad facu *////
 	public boolean hayEdificio(Posicion posicion) throws PosicionInvalida {
 		
 		if (mapa.contenido(posicion, mapa.tierra) instanceof Edificio)

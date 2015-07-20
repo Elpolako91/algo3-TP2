@@ -34,40 +34,55 @@ public class Mapa {
 		return tamanio;
 	}
 
-	public Object contenido(Posicion posicion, TipoDeCapa tipoDeCapa) throws PosicionInvalida {
+	public ObjetoDelMapa contenido(Posicion posicion, TipoDeCapa tipoDeCapa) throws PosicionInvalida {
 		
-		CapaDeMapa capa = capas.get(tipoDeCapa.numero());
+		CapaDeMapa capa = capas.get(tipoDeCapa.ordinal());
 		return capa.contenido(posicion);
 	}
 	
 	public void colocarObjeto(Posicion posicion, TipoDeCapa tipoDeCapa, ObjetoDelMapa objeto) throws PosicionInvalida {
 		
-		CapaDeMapa capa = capas.get(tipoDeCapa.numero());
+		CapaDeMapa capa = capas.get(tipoDeCapa.ordinal());
 		capa.colocarObjeto(posicion, objeto);		
 	}
 
 	public void colocarObjeto(Posicion posicion, TipoDeCapa tipoDeCapa, ObjetoDelMapa objetoConTamanio, Tamanio unTamanio) 
 			throws PosicionInvalida {
 		
-		CapaDeMapa capa = capas.get(tipoDeCapa.numero());
+		CapaDeMapa capa = capas.get(tipoDeCapa.ordinal());
 		capa.colocarObjeto(posicion, objetoConTamanio, unTamanio);
 	}
 
 	public void intercambiarObjetos(Posicion posicion1, Posicion posicion2, TipoDeCapa tipoDeCapa) throws PosicionInvalida {
 		
-		CapaDeMapa capa = capas.get(tipoDeCapa.numero());
+		CapaDeMapa capa = capas.get(tipoDeCapa.ordinal());
 		capa.intercambiarObjetos(posicion1, posicion2);		
 	}
 
 	public void removerObjeto(Posicion posicion, TipoDeCapa tipoDeCapa) throws PosicionInvalida {
 		
-		CapaDeMapa capa = capas.get(tipoDeCapa.numero());
+		CapaDeMapa capa = capas.get(tipoDeCapa.ordinal());
 		capa.removerObjeto(posicion);
 	}
 
 	public void removerObjeto(Posicion posicion, TipoDeCapa tipoDeCapa,  Tamanio unTamanio) throws PosicionInvalida {
 		
-		CapaDeMapa capa = capas.get(tipoDeCapa.numero());
+		CapaDeMapa capa = capas.get(tipoDeCapa.ordinal());
 		capa.removerObjeto(posicion, unTamanio);	
+	}
+	
+	public ObjetoDelMapa contenidoCapaSuperior(Posicion posicion) throws PosicionInvalida {
+		
+		ObjetoDelMapa objeto = new Vacio();
+		
+		for(int i = capas.size()-1; i>= 0; i--){
+			
+			if(! (capas.get(i).contenido(posicion) instanceof Vacio)){
+				objeto = capas.get(i).contenido(posicion);
+				return objeto;
+			}
+		}
+		
+		return objeto;
 	}
 }

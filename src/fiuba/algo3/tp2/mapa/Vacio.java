@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.mapa;
 
-public class Vacio {
+import fiuba.algo3.tp2.objetosDelMapa.ObjetoDelMapa;
+
+public class Vacio extends ObjetoDelMapa{
 
 }

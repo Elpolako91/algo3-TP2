@@ -16,20 +16,18 @@ public abstract class EdificioRecolectorRecurso extends Edificio{
 		recursosAJuntar = recursosDelJugador;
 	}
 	
-	public void recolectar() {
-		
-		if(recurso.cantidad() >= 10){
-			recurso.extraer(10);
-			recursosAJuntar.agregar(new RecursosDelJugador(10,0));
-		}
-		else{
-			recursosAJuntar.agregar(new RecursosDelJugador(recurso.cantidad(),0));
-			recurso.extraer(recurso.cantidad());
-		}
-	}
+	public abstract void recolectar();
 	
 	public void extraeDe(Recurso unRecurso) {		
 		recurso = unRecurso;		
+	}
+	
+	protected Recurso recurso(){
+		return recurso;
+	}
+	
+	protected RecursosDelJugador recursosJuntados(){
+		return recursosAJuntar;
 	}
 
 }

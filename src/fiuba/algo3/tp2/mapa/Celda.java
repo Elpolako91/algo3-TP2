@@ -1,14 +1,16 @@
 package fiuba.algo3.tp2.mapa;
 
+import fiuba.algo3.tp2.objetosDelMapa.ObjetoDelMapa;
+
 public class Celda {
 	
-	protected Object contenido;
+	private ObjetoDelMapa contenido;
 	
-	public Celda(Object unContenido){
+	public Celda(ObjetoDelMapa unContenido){
 		contenido = unContenido;
 	}
 
-	public Object contenido() {	
+	public ObjetoDelMapa contenido() {	
 		return contenido;
 	}
 		

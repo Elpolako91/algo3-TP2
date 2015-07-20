@@ -2,16 +2,6 @@ package fiuba.algo3.tp2.mapa;
 
 public enum TipoDeCapa {
 
-	SUELO(0),AEREO(1),TERRESTRE(2);
-	
-	private int n;
-	
-	private TipoDeCapa(int i){
+	SUELO,TERRESTRE, AEREO;
 		
-		n = i;
-	}
-	
-	public int numero(){
-		return n;
-	}
 }

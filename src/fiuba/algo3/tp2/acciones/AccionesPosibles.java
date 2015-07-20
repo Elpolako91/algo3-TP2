@@ -41,11 +41,7 @@ public class AccionesPosibles {
 	public AccionColocarUnidad colocarUnidad(){
 		return colocarUnidad;
 	}
-	
-	public AccionColocarEdificio colocarEdificio(){
-		return colocarEdificio;
-	}
-	
+		
 	public AccionMoverUnidad mover(){
 		return mover;
 	}
@@ -68,5 +64,9 @@ public class AccionesPosibles {
 	
 	public AccionDescargarUnidad descargar(){
 		return descargarUnidad;
+	}
+	
+	public AccionColocarEdificio colocarEdificio(){
+		return colocarEdificio;
 	}
 }

@@ -6,7 +6,7 @@ import fiuba.algo3.tp2.objetosDelMapa.ObjetoDelJugador;
 import fiuba.algo3.tp2.objetosDelMapa.Terrestre;
 
 
-public abstract class Edificio extends ObjetoDelJugador implements Terrestre {
+public abstract class Edificio extends ObjetoDelJugador implements Terrestre , Edificable{
 	
 	private Tamanio tamanio;
 		
@@ -21,7 +21,7 @@ public abstract class Edificio extends ObjetoDelJugador implements Terrestre {
 		return tamanio;
 	}
 	
-	public EdificioEnConstruccion enConstruccion(){		
+	public EnConstruccion enConstruccion(){		
 		return new EdificioEnConstruccion(this);
 	}
 }

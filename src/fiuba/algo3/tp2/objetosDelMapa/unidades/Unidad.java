@@ -28,6 +28,8 @@ public abstract class Unidad extends ObjetoDelJugador{
 		costoSuministro = unCostoSuministro;		
 	}
 	
+	/*************************************** getters ******************************************/
+	
 	public int costoSuministro(){
 		return costoSuministro;
 	}
@@ -47,6 +49,8 @@ public abstract class Unidad extends ObjetoDelJugador{
 	public int rangoAire(){		
 		return rangoAire;
 	}
+	
+	/*************************************************************************************************/
 	
 	public boolean movimientoPosible(int i){
 		

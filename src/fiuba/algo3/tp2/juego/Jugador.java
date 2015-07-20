@@ -1,34 +1,25 @@
 package fiuba.algo3.tp2.juego;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-import fiuba.algo3.tp2.excepciones.PosicionInvalida;
-import fiuba.algo3.tp2.excepciones.RecursosInsuficientes;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.Edificio;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentral;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentralProtos;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentralTerran;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioDeSuministro;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioDeUnidades;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioEnConstruccion;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioRecolectorDeMineral;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioRecolectorDeVespeno;
-import fiuba.algo3.tp2.objetosDelMapa.unidades.Unidad;
+import fiuba.algo3.tp2.excepciones.NoHayEdificiosTerminados;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.*;
+import fiuba.algo3.tp2.objetosDelMapa.unidades.*;
 
 public class Jugador {
 	
 	private String nombre;
 	private String color;
 	private String raza;
-	private EdificioCentral base;
-	private List<Edificio> edificios = new ArrayList<Edificio> ();
-	private List<EdificioEnConstruccion> edificiosEnConstruccion = new ArrayList<EdificioEnConstruccion> ();
-	private List<Unidad> unidades = new ArrayList<Unidad> ();
+	
 	private RecursosDelJugador recursos;
 	private Suministro suministros;
 	
-	private JuegoCraft juego;	
+	private EdificioCentral base;
+	private List<Edificio> edificios = new ArrayList<Edificio> ();
+	private List<EnConstruccion> edificiosEnConstruccion = new ArrayList<EnConstruccion> ();
+	private List<Unidad> unidades = new ArrayList<Unidad> ();
 	
 	public Jugador(String unNombre, String unColor, String unaRaza) {
 
@@ -45,61 +36,148 @@ public class Jugador {
 			base = new EdificioCentralProtos(recursos, suministros, edificios);		
 	}
 	
-	/*************************	Accesosrs	*****************************************/
-	
-	public String nombre() {		
+	public String nombre() {
 		return nombre;
 	}
 	
-	public String color() {	
+	public String color() {
 		return color;
 	}
 	
-	public String raza() {		
-		return raza;
+	public int edificios() {
+		return edificios.size();
 	}
-	
+
+	public EdificioCentral edificioCentral() {
+		return base;
+	}
+
 	public RecursosDelJugador recursos() {
 		return recursos;
 	}
+
+	public void agregarEdificioEnConstruccion(EnConstruccion edificioEnConstruccion) {
+		edificiosEnConstruccion.add(edificioEnConstruccion);				
+	}
+
+	public void progresoPorTurno() {
 		
-	public Suministro suministros(){
+		for(int i = 0; i < edificiosEnConstruccion.size(); i++){
+			
+			EnConstruccion edificioActual = edificiosEnConstruccion.get(i);
+			
+			if(edificioActual.estaDestruido()){
+				edificiosEnConstruccion.remove(i);
+				i--;
+			}
+			else
+				edificiosEnConstruccion.get(i).progresa();
+		}			
+		
+		for(int i = 0; i < edificios.size(); i++){
+			
+			Edificio edificio = edificios.get(i);
+			
+			if(edificio.estaDestruido()){
+				
+				edificios.remove(i);
+				i--;
+			}
+			else{
+				
+				if(edificio instanceof EdificioDeUnidades){
+					
+					EdificioDeUnidades edificioDeUnidades = (EdificioDeUnidades) edificio;
+					
+					edificioDeUnidades.unidadesProgresoConstruccion();
+				}
+				else
+					if(edificio instanceof EdificioRecolectorRecurso)
+						((EdificioRecolectorRecurso) edificio).recolectar();
+			}			
+		}		
+		
+		for(int i = 0; i < unidades.size(); i++){			
+			Unidad unidad = unidades.get(i);
+			if (unidad.estaDestruido()){
+				
+				suministros.reponer(unidad.costoSuministro());
+				unidades.remove(i);
+				i--;
+			}				
+			else
+				unidad.empezarTurno();
+		}		
+	}
+
+	private boolean hayEdificiosTerminados() {
+		
+		for(int i = 0; i < edificiosEnConstruccion.size(); i++)
+			if(edificiosEnConstruccion.get(i).tiempoConstruccion() == 0)
+				return true;
+		
+		return false;
+	}
+
+	public EnConstruccion obtenerEdificioTerminado() throws NoHayEdificiosTerminados {			
+		
+		if(this.hayEdificiosTerminados()){
+			
+			for(int i = 0; i < edificiosEnConstruccion.size(); i++)
+				if(edificiosEnConstruccion.get(i).tiempoConstruccion() == 0){
+												
+					EnConstruccion edificio = edificiosEnConstruccion.get(i);
+					edificiosEnConstruccion.remove(i);
+					return edificio;
+			}
+			throw new NoHayEdificiosTerminados();
+				
+		}
+		else
+			throw new NoHayEdificiosTerminados();
+	}
+
+	public void agregarEdificio(Edificio edificio) {
+		edificios.add(edificio);		
+	}
+
+	public Suministro suministros() {
 		return suministros;
 	}
-	
-	public void juego(JuegoCraft unJuego) {			// a eliminar
-		juego = unJuego;
-	}
-	
-	public JuegoCraft juego(){			// a eliminar
-		return juego;
-	}
-	
-	public int edificios() {		
-		return edificios.size();
-	}
-	
-	public int unidades() {		
+
+	public int unidades() {
 		return unidades.size();
 	}
-	
-	/******************************************************************************/
-	public void agregarEdificioEnConstruccion(EdificioEnConstruccion edificio) {
-		edificiosEnConstruccion.add(edificio);		
+
+	public void agregarUnidad(Unidad unidad) {
+		unidades.add(unidad);		
+	}
+
+	private boolean hayUnidadTerminada() {
+		
+		for(int i = 0; i < edificios.size(); i++)
+			if((edificios.get(i) instanceof EdificioDeUnidades) && 
+					(((EdificioDeUnidades) edificios.get(i)).hayUnidadesTerminadas()))
+				return true;
+		
+		return false;
 	}
 	
-	public void eliminarEdificioEnConstruccion(EdificioEnConstruccion edificio) {
-		edificiosEnConstruccion.remove(edificio);		
+	public Unidad obtenerUnidadTerminada() throws NoHayEdificiosTerminados {
+		
+		if(this.hayUnidadTerminada()){
+			
+			for(int i = 0; i < edificios.size(); i++)
+				if((edificios.get(i) instanceof EdificioDeUnidades) && (((EdificioDeUnidades) edificios.get(i)).hayUnidadesTerminadas())){
+															
+					Unidad unidad = ((EdificioDeUnidades) edificios.get(i)).unidadTerminada();
+					unidad.posicion(edificios.get(i).posicion());
+					return unidad;
+				}			
+		}		
+		throw new NoHayEdificiosTerminados();			
 	}
-	
-	public void agregarEdificio(Edificio edificio){
-		edificios.add(edificio);
-	}
-	
-	public void eliminarEdificio(Edificio edificio){
-		edificios.remove(edificio);
-	}
-	
+
 	public boolean contieneUnidad(Unidad unidad) {
 		
 		if(unidades.contains(unidad))
@@ -107,99 +185,8 @@ public class Jugador {
 		else
 			return false;
 	}
-	
-	public void agregarUnidad(Unidad unidad) throws RecursosInsuficientes{
-		
-		try{
-			suministros.gastar(unidad.costoSuministro());
-		}
-		catch(RecursosInsuficientes e){}
-		
-		try{
-			recursos.descontar(unidad.costoRecursos());
-			unidades.add(unidad);
-		}
-		catch(RecursosInsuficientes e){
-			suministros.reponer(unidad.costoSuministro());
-		}	
-	}
-	
-	public boolean eliminarUnidad(Unidad unidad) {
-		if(unidades.remove(unidad)){
-			suministros.reponer(unidad.costoSuministro());
-			return true;
-		}
-		else
-			return false;
-	}
-			
-	public EdificioCentral edificioCentral() {
-		return base;
-	}
 
-	public void edificiosProgresoConstruccion() throws PosicionInvalida {
-		
-		int i = 0;
-		while( i < edificiosEnConstruccion.size()){
-			
-			edificiosEnConstruccion.get(i).progresa();
-			
-			if(edificiosEnConstruccion.get(i).tiempoConstruccion() == 0){
-				
-				EdificioEnConstruccion edificioEnContruccion = edificiosEnConstruccion.remove(i);
-				Edificio edificio = edificioEnContruccion.edificioTerminado();
-				juego.colocarEdificio(this, edificio, edificioEnContruccion.posicion());
-				
-				if (edificio instanceof EdificioDeSuministro)
-					suministros.agregar(5);
-			}
-			else
-				i++;
-		}		
+	public String raza() {
+		return raza;
 	}
-
-	public void progresoPorTurno() throws PosicionInvalida {
-		
-		for(int i = 0; i < edificios.size(); i++){
-			
-			Edificio edificio = edificios.get(i);
-			
-			if(edificio instanceof EdificioDeUnidades){
-				
-				EdificioDeUnidades edificioDeUnidades = (EdificioDeUnidades) edificio;
-				
-				edificioDeUnidades.unidadesProgresoConstruccion();
-				
-				while (edificioDeUnidades.hayUnidadesTerminadas()){
-					
-					Unidad unidad = edificioDeUnidades.unidadTerminada();
-					unidades.add(unidad);
-					juego.colocarUnidad(this, edificioDeUnidades, unidad);
-				}
-			}
-			else
-				if(edificio instanceof EdificioRecolectorDeMineral){
-				
-					EdificioRecolectorDeMineral edificioMineral = (EdificioRecolectorDeMineral) edificio;
-				
-					edificioMineral.recolectar();
-				}
-			else
-				if(edificio instanceof EdificioRecolectorDeVespeno){
-				
-					EdificioRecolectorDeVespeno edificioVespeno = (EdificioRecolectorDeVespeno) edificio;
-				
-					edificioVespeno.recolectar();
-			}						
-		}
-		
-		for(int i = 0; i < unidades.size(); i++){
-			
-			Unidad unidad = unidades.get(i);
-			
-			unidad.empezarTurno();
-		}		
-	}
-	
-	
 }

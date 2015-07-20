@@ -9,6 +9,7 @@ import fiuba.algo3.tp2.excepciones.PosicionInvalida;
 import fiuba.algo3.tp2.mapa.*;
 import fiuba.algo3.tp2.objetosDelMapa.*;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioDeposito;
+import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadEspectro;
 import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadMarine;
 
 public class TestMapa {
@@ -68,6 +69,58 @@ public class TestMapa {
 			assertEquals(terreno, mapa.contenido(posicion, mapa.suelo));
 			
 		} catch (PosicionInvalida e) {}				
+	}
+	
+	@Test
+	public void testObtenerTerrenoDeCapaSuperior(){
+		
+		Terreno terreno = new Terreno();
+		Posicion posicion = new Posicion(1,1);
+		
+		try {
+			mapa.colocarObjeto(posicion, mapa.suelo, terreno);
+			
+			assertEquals(terreno, mapa.contenidoCapaSuperior(posicion));
+			
+		} catch (PosicionInvalida e) {}				
+	}
+	
+	@Test
+	public void testObtenerUnidadDeCapaSuperior(){
+		
+		Terreno terreno = new Terreno();
+		UnidadMarine unidad = new UnidadMarine();
+		Posicion posicion = new Posicion(1,1);
+		
+		try {
+			mapa.colocarObjeto(posicion, mapa.suelo, terreno);
+			mapa.colocarObjeto(posicion, mapa.tierra, unidad);
+			
+			assertEquals(unidad, mapa.contenidoCapaSuperior(posicion));
+			
+		} catch (PosicionInvalida e) {
+			assertTrue(false);
+		}				
+	}
+	
+	@Test
+	public void testObtenerUnidadAereaDeCapaSuperior(){
+		
+		Terreno terreno = new Terreno();
+		UnidadMarine unidadTerrestre = new UnidadMarine();
+		UnidadEspectro unidadAerea = new UnidadEspectro();
+		Posicion posicion = new Posicion(1,1);
+		
+		try {
+			mapa.colocarObjeto(posicion, mapa.suelo, terreno);
+			mapa.colocarObjeto(posicion, mapa.tierra, unidadTerrestre);
+			mapa.colocarObjeto(posicion, mapa.aire, unidadAerea);
+			
+			assertEquals(unidadAerea, mapa.contenidoCapaSuperior(posicion));
+			
+		} catch (PosicionInvalida e) {
+			assertTrue(false);
+		}				
 	}
 	
 	@Test

@@ -1,6 +1,6 @@
 package fiuba.algo3.tp2.objetosDelMapa.edificios;
 
-public class EdificioEnConstruccion extends Edificio {
+public class EdificioEnConstruccion extends Edificio implements EnConstruccion {
 	
 	private Edificio edificioAconstruir;
 	
@@ -14,15 +14,5 @@ public class EdificioEnConstruccion extends Edificio {
 	
 	public Edificio edificioTerminado(){
 		return edificioAconstruir;
-	}
-		
-	public int tiempoConstruccion(){
-		
-		return edificioAconstruir.tiempoConstruccion();
-	}
-	
-	public void progresa(){
-		
-		edificioAconstruir.progresa();
 	}
 }
