@@ -28,7 +28,6 @@ import fiuba.algo3.tp2.mapa.Tamanio;
 
 public class VistaMapa extends JFrame implements Observer {
 
-	public String ruta = "/sonidos/";
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JuegoCraft modelo;
@@ -67,7 +66,7 @@ public class VistaMapa extends JFrame implements Observer {
 		
 		menuJugador = new JPanel();
 		menuJugador.setBorder(new EmptyBorder(5,5,5,5));
-		menuJugador.setBounds(0, 630, 2000, 400);
+		menuJugador.setBounds(0, 504, 1208, 458);
 		menuJugador.setLayout(null);
 		contentPane.add(menuJugador);
 
@@ -83,24 +82,24 @@ public class VistaMapa extends JFrame implements Observer {
 		turno.setFont(new Font("Tahoma", Font.BOLD, 25));
 		menuJugador.add(turno);
 		
+		panelObjetoSeleccionado = new VistaObjetoSeleccionado(user);
+		panelObjetoSeleccionado.setBounds(0, 40, 320, 183);
+		menuJugador.add(panelObjetoSeleccionado);
+		
 		panelAtributosJugador = new VistaAtributosJugador(user);
 		panelAtributosJugador.setBounds(0, 0, 2000, 60);
 		menuJugador.add(panelAtributosJugador);
-		
-		panelObjetoSeleccionado = new VistaObjetoSeleccionado(user);
-		panelObjetoSeleccionado.setBounds(0, 50, 161, 139);
-		menuJugador.add(panelObjetoSeleccionado);
 					
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon(VistaMapa.class.getResource("/imagenes/marmol.jpg")));
-		lblNewLabel.setBounds(0, 0, 1360, 189);
+		lblNewLabel.setBounds(0, 0, 1360, 253);
 		menuJugador.add(lblNewLabel);
 		
 		turno.addMouseListener(new ControladorMouseTurno(user));
 		
 		panel = new JScrollPane();
-		panel.setBounds(0, 0, 1224, 630);
+		panel.setBounds(0, 0, 1224, 500);
 		panel.setViewportView(mapa);
 		panel.getViewport().setView(mapa);
 		mapa.setPreferredSize(new Dimension(limiteMapaX, limiteMapaY));

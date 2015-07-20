@@ -111,5 +111,6 @@ public class ControladorMouseVistaMapa extends MouseAdapter {
 				}
 			}
 		}
+		user.juego.actualizarObservadores();
 	}
 }

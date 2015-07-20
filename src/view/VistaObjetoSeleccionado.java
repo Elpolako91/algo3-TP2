@@ -21,9 +21,11 @@ public class VistaObjetoSeleccionado extends JPanel {
 	private int vidaActual = 0;
 	private Object contenido;
 	private Usuario user;
-	private JTextField txtEscudoActual;
-	private JTextField textField_1;
 	private int escudoActual;
+	private int vidaMaxima;
+	private int escudoMaximo;
+	private int suministroGastados;
+	private int suministrosTotales;
 
 	
 	public VistaObjetoSeleccionado(Usuario user) {
@@ -41,12 +43,18 @@ public class VistaObjetoSeleccionado extends JPanel {
 			nombre = ((Unidad) contenido).nombre();
 			vidaActual = ((Unidad) contenido).vidaActual();
 			escudoActual = ((Unidad) contenido).escudoActual();
+			vidaMaxima = ((Unidad) contenido).vidaMaxima();
+			escudoMaximo = ((Unidad) contenido).escudoMaximo();
 			
 		}else{
 				if(contenido instanceof Edificio){
 					nombre = ((Edificio)contenido).nombre();
 					vidaActual = ((Edificio)contenido).vidaActual();
 					escudoActual = ((Edificio) contenido).escudoActual();
+					vidaMaxima = ((Edificio) contenido).vidaMaxima();
+					escudoMaximo = ((Edificio) contenido).escudoMaximo();
+					suministroGastados = user.jugadorActual().suministros().suministroGastados();
+					suministrosTotales = user.jugadorActual().suministros().suministroTotal();
 			}
 		}
 		
@@ -61,33 +69,33 @@ public class VistaObjetoSeleccionado extends JPanel {
 		text1.setHorizontalAlignment(SwingConstants.CENTER);
 		text1.setBounds(10, 35, 68, 20);
 		text1.setEditable(false);
-		text1.setText("Vida Actual:");
+		text1.setText("Vida Total:");
 		this.add(text1);
 
 		JTextField textVida = new JTextField();
 		textVida.setHorizontalAlignment(SwingConstants.CENTER);
-		textVida.setBounds(80, 35, 47, 20);
+		textVida.setBounds(80, 35, 65, 20);
 		textVida.setEditable(false);
-		textVida.setText(String.valueOf(vidaActual));
+		textVida.setText(String.valueOf(vidaActual + "/" + vidaMaxima));
 		this.add(textVida);
 		
 		JTextField text2 = new JTextField();
 		text2.setHorizontalAlignment(SwingConstants.CENTER);
-		text2.setBounds(10, 85, 75, 20);
+		text2.setBounds(10, 135, 75, 20);
 		text2.setEditable(false);
 		text2.setText("Danio Tierra:");
 		this.add(text2);
 		
 		JTextField textDanioTierra = new JTextField();
 		textDanioTierra.setHorizontalAlignment(SwingConstants.CENTER);
-		textDanioTierra.setBounds(88, 85, 20, 20);
+		textDanioTierra.setBounds(89, 135, 20, 20);
 		textDanioTierra.setEditable(false);
 		textDanioTierra.setText(String.valueOf(danioTierra));
 		this.add(textDanioTierra);
 		
 		JTextField text3 = new JTextField();
 		text3.setHorizontalAlignment(SwingConstants.CENTER);
-		text3.setBounds(10, 109, 65, 20);
+		text3.setBounds(10, 110, 65, 20);
 		text3.setEditable(false);
 		text3.setText("Danio Aire:");
 		this.add(text3);
@@ -99,20 +107,35 @@ public class VistaObjetoSeleccionado extends JPanel {
 		textDanioAire.setText(String.valueOf(danioAire));
 		this.add(textDanioAire);
 		
-		txtEscudoActual = new JTextField();
+		JTextField txtEscudoActual = new JTextField();
 		txtEscudoActual.setHorizontalAlignment(SwingConstants.CENTER);
-		txtEscudoActual.setText("Escudo Actual:");
+		txtEscudoActual.setText("Escudo Total:");
 		txtEscudoActual.setEditable(false);
 		txtEscudoActual.setBounds(10, 60, 83, 20);
 		add(txtEscudoActual);
 		
-		textField_1 = new JTextField();
-		textField_1.setText("0");
-		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setEditable(false);
-		textField_1.setBounds(95, 60, 47, 20);
-		textField_1.setText(String.valueOf(escudoActual));
-		add(textField_1);
+		JTextField textEscudo = new JTextField();
+		textEscudo.setText("0");
+		textEscudo.setHorizontalAlignment(SwingConstants.CENTER);
+		textEscudo.setEditable(false);
+		textEscudo.setBounds(95, 60, 47, 20);
+		textEscudo.setText(String.valueOf(escudoActual+"/"+escudoMaximo));
+		add(textEscudo);
+		
+		JTextField textSuministros = new JTextField();
+		textSuministros.setText("Suministros:");
+		textSuministros.setHorizontalAlignment(SwingConstants.CENTER);
+		textSuministros.setEditable(false);
+		textSuministros.setBounds(10, 85, 75, 20);
+		add(textSuministros);
+		
+		JTextField textSuministrosTotales = new JTextField();
+		textSuministrosTotales.setText("0");
+		textSuministrosTotales.setHorizontalAlignment(SwingConstants.CENTER);
+		textSuministrosTotales.setEditable(false);
+		textSuministrosTotales.setBounds(95, 85, 47, 20);
+		textSuministrosTotales.setText(String.valueOf(suministroGastados+"/"+suministrosTotales));
+		add(textSuministrosTotales);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
