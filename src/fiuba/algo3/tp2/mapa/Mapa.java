@@ -3,8 +3,6 @@ package fiuba.algo3.tp2.mapa;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-
 import fiuba.algo3.tp2.excepciones.PosicionInvalida;
 import fiuba.algo3.tp2.objetosDelMapa.ObjetoDelMapa;
 
@@ -18,26 +16,24 @@ public class Mapa {
 	
 	private List<CapaDeMapa> capas = new ArrayList<CapaDeMapa>();
 	
-	public Mapa(Tamanio unTamanio, ImageIcon unaImagen){
-		
-		super();
+	public Mapa(Tamanio unTamanio){
 		
 		tamanio = unTamanio;
 		
 		CapaDeMapa capaSuelo = new CapaDeMapa(unTamanio);
-		capas.add(capaSuelo);
+		capas.add(suelo.ordinal(), capaSuelo);
 		
 		CapaDeMapa capaTerrestre = new CapaDeMapa(unTamanio);
-		capas.add(capaTerrestre);
+		capas.add(tierra.ordinal(), capaTerrestre);
 		
 		CapaDeMapa capaAerea = new CapaDeMapa(unTamanio);
-		capas.add(capaAerea);
+		capas.add(aire.ordinal(), capaAerea);
 	}
 	
 	public Tamanio tamanio() {
 		return tamanio;
 	}
-
+	
 	public ObjetoDelMapa contenido(Posicion posicion, TipoDeCapa tipoDeCapa) throws PosicionInvalida {
 		
 		CapaDeMapa capa = capas.get(tipoDeCapa.ordinal());
@@ -77,7 +73,7 @@ public class Mapa {
 	
 	public ObjetoDelMapa contenidoCapaSuperior(Posicion posicion) throws PosicionInvalida {
 		
-		ObjetoDelMapa objeto = new Vacio(null);
+		ObjetoDelMapa objeto = new Vacio();
 		
 		for(int i = capas.size()-1; i>= 0; i--){
 			

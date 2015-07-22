@@ -6,7 +6,7 @@ public class EdificioEnConstruccion extends Edificio implements EnConstruccion {
 	
 	private Edificio edificioAconstruir;
 	
-	public EdificioEnConstruccion(Edificio edificio, ImageIcon unaImagen) {
+	public EdificioEnConstruccion(Edificio edificio) {
 		
 		super(edificio.nombre(), edificio.vidaMaxima(), edificio.escudoMaximo(), edificio.tiempoConstruccion(),
 				edificio.costoRecursos(), edificio.tamanio(), null);

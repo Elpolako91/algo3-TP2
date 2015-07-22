@@ -4,6 +4,7 @@ package view;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import controller.ControladorCreadorUnidades;
@@ -18,6 +19,7 @@ import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.objetosDelMapa.ObjetoDelMapa;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentral;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioDeUnidades;
+import fiuba.algo3.tp2.objetosDelMapa.unidades.Unidad;
 import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadTransporte;
 
 public class Boton {
@@ -69,22 +71,31 @@ public class Boton {
 	}
 
 	public void pintarBoton(int x, int y) throws PosicionInvalida {
-		
-		Object objeto = modelo.mapa().contenidoCapaSuperior(posicion);
- 		boton.setIcon(((ObjetoDelMapa) objeto).imagen());
-		if(objeto instanceof EdificioCentral){
-			boton.addMouseListener(new ControladorEdificioCentral(vistaConstruccionTerran, vistaConstruccionProtos, user));
-		}else{
-			if (objeto instanceof EdificioDeUnidades){
-				boton.addMouseListener(new ControladorCreadorUnidades(user, vistaUnidadesTerran, vistaUnidadProtos));
-			}else{
-				if (objeto instanceof UnidadTransporte){
-					boton.addActionListener(controladorTransporte.getVistaMenuTransporte() );
-				}else{
-					boton.addActionListener(new ControladorMenuUnidad(vista2));
-				}
-			}
+		if(! (user.jugadorActual().hayVision(posicion))){
+			boton.setIcon(new ImageIcon(Boton.class.getResource("/imagenes/sinVisibilidad.jpg")));
 		}
+		else{
+	
+			Object objeto = modelo.mapa().contenidoCapaSuperior(posicion);
+			boton.setIcon(((ObjetoDelMapa) objeto).imagen()); 		
+ 			
+ 			if(objeto instanceof EdificioCentral){
+ 				boton.addMouseListener(new ControladorEdificioCentral(vistaConstruccionTerran, vistaConstruccionProtos, user));
+ 			}else{
+ 				if (objeto instanceof EdificioDeUnidades){
+ 					boton.addMouseListener(new ControladorCreadorUnidades(user, vistaUnidadesTerran, vistaUnidadProtos));
+ 				}else{
+ 					if (objeto instanceof UnidadTransporte){
+ 						boton.addActionListener(controladorTransporte.getVistaMenuTransporte() );
+ 					}else{					
+ 						if (objeto instanceof Unidad){
+ 							boton.addActionListener(new ControladorMenuUnidad(vista2));
+ 						}
+ 					}
+ 				}
+ 			} 			 			
+ 		}
+		
 		boton.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		boton.repaint();
 	}

@@ -242,7 +242,7 @@ public class VistaMenuJugadores extends JFrame {
 						vista3.setVisible(true);
 						dispose();
 					} catch (Exception e1) {
-						//sonido alerta 
+						System.out.println("sos una Puta"); 
 					}
 			}
 		});

@@ -5,13 +5,25 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import fiuba.algo3.tp2.acciones.*;
+import fiuba.algo3.tp2.acciones.AccionColocarEdificio;
+import fiuba.algo3.tp2.acciones.AccionColocarEnSuelo;
+import fiuba.algo3.tp2.acciones.AccionColocarUnidad;
+import fiuba.algo3.tp2.acciones.AccionPreguntar;
 import fiuba.algo3.tp2.excepciones.PosicionInvalida;
 import fiuba.algo3.tp2.juego.RecursosDelJugador;
-import fiuba.algo3.tp2.mapa.*;
-import fiuba.algo3.tp2.objetosDelMapa.*;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.*;
-import fiuba.algo3.tp2.objetosDelMapa.unidades.*;
+import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.mapa.Tamanio;
+import fiuba.algo3.tp2.objetosDelMapa.Recurso;
+import fiuba.algo3.tp2.objetosDelMapa.RecursoGasVespeno;
+import fiuba.algo3.tp2.objetosDelMapa.RecursoMineral;
+import fiuba.algo3.tp2.objetosDelMapa.Terreno;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentroMineral;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioDeposito;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioRefineria;
+import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadEspectro;
+import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadGolliat;
+import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadMarine;
 
 public class TestAccionColocar {
 	
@@ -235,26 +247,6 @@ public class TestAccionColocar {
 	}
 	
 	@Test
-	public void testColocarEdificioEnConstruccionSobreTerreno(){
-				
-		EdificioEnConstruccion edificio = new EdificioEnConstruccion(new EdificioDeposito());
-		Posicion posicion = new Posicion(1, 1);
-		
-		try {
-			colocarSuelo.colocarTerrenoEnTodoElMapa();
-			colocarEdificio.realizar(posicion, edificio);
-			
-			assertTrue(preguntar.hayEnTierra(posicion, edificio));
-			assertTrue(preguntar.hayEnTierra(posicion.obtenerNuevaMovidaEn(1, 0), edificio));
-			assertTrue(preguntar.hayEnTierra(posicion.obtenerNuevaMovidaEn(0, 1), edificio));
-			assertTrue(preguntar.hayEnTierra(posicion.obtenerNuevaMovidaEn(1, 1), edificio));
-			
-			assertEquals(edificio.posicion(), posicion);
-			
-		} catch (PosicionInvalida e) {}		
-	}
-	
-	@Test
 	public void testNoDebeColocarEdificioSinTerreno(){
 				
 		EdificioDeposito edificio = new EdificioDeposito();
@@ -344,48 +336,10 @@ public class TestAccionColocar {
 	}
 	
 	@Test
-	public void testColocarEdificioRecolectorDeGasVespenoEnConstruccionSobreRecursoVespeno(){ 
+	public void testNoDebeColocarEdificioSobreOtroEdificio(){
 				
-		Recurso vespeno = new RecursoGasVespeno(2000);
-		EdificioRecolectorVespenoEnConstruccion recolectorGasVespeno = new EdificioRecolectorVespenoEnConstruccion(new EdificioRefineria(new RecursosDelJugador(1000,1000)));
-		Posicion posicion = new Posicion(4,4);
-		
-		try {
-			colocarSuelo.colocarRecurso(posicion, vespeno);
-			colocarEdificio.realizar(posicion, recolectorGasVespeno);
-			
-			assertTrue(preguntar.hayGasVespeno(posicion));
-			assertTrue(preguntar.estaOcupadoTierra(posicion));
-			assertEquals(recolectorGasVespeno.posicion(), posicion);
-						
-		} catch (PosicionInvalida e) {}	
-	}
-	
-	@Test
-	public void testNoDebeColocarEdificioRecolectorDeGasVespenoEnConstruccionSobreRecursoMineral(){ 
-				
-		Recurso mineral = new RecursoMineral(2000);
-		EdificioRecolectorVespenoEnConstruccion recolectorGasVespeno = new EdificioRecolectorVespenoEnConstruccion(new EdificioRefineria(new RecursosDelJugador(1000,1000)));
-		Posicion posicion = new Posicion(4,4);
-		
-		try {
-			colocarSuelo.colocarRecurso(posicion, mineral);
-			colocarEdificio.realizar(posicion, recolectorGasVespeno);
-						
-		} catch (PosicionInvalida e) {}	
-		
-		try {
-			assertTrue(preguntar.hayMineral(posicion));
-			assertFalse(preguntar.estaOcupadoTierra(posicion));
-			
-		} catch (PosicionInvalida e) {}		
-	}
-	
-	@Test
-	public void testNoDebeColocarEdificioEnConstruccionSobreOtro(){
-				
-		EdificioEnConstruccion edificio1 = new EdificioEnConstruccion( new EdificioDeposito());
-		EdificioEnConstruccion edificio2 = new EdificioEnConstruccion( new EdificioDeposito());
+		EdificioDeposito edificio1 = new EdificioDeposito();
+		EdificioDeposito edificio2 = new EdificioDeposito();
 		Posicion posicion1 = new Posicion(5,5);
 		Posicion posicion2 = new Posicion(6,6);
 		
@@ -414,10 +368,10 @@ public class TestAccionColocar {
 	}
 	
 	@Test
-	public void testNoDebeColocarEdificioEnConstruccionSobreOtroIgualBis(){
+	public void testNoDebeColocarEdificioSobreOtroEdificioBis(){
 				
-		EdificioEnConstruccion edificio1 = new EdificioEnConstruccion(new EdificioDeposito());
-		EdificioEnConstruccion edificio2 = new EdificioEnConstruccion(new EdificioDeposito());
+		EdificioDeposito edificio1 = new EdificioDeposito();
+		EdificioDeposito edificio2 = new EdificioDeposito();
 		Posicion posicion1 = new Posicion(5,5);
 		Posicion posicion2 = new Posicion(6,6);
 		
@@ -487,10 +441,10 @@ public class TestAccionColocar {
 	}
 	
 	@Test
-	public void testNoDebeColocarEdificioEnConstruccionSobreUnidadTerrestre(){
+	public void testNoDebeColocarEdificioSobreUnidadTerrestre(){
 				
 		UnidadMarine unidadTerrestre = new UnidadMarine();
-		EdificioEnConstruccion edificio = new EdificioEnConstruccion(new EdificioDeposito());
+		EdificioDeposito edificio = new EdificioDeposito();
 		
 		Posicion posicion1 = new Posicion(5,5);
 		Posicion posicion2 = new Posicion(6,6);

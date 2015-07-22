@@ -6,8 +6,8 @@ import fiuba.algo3.tp2.objetosDelMapa.ObjetoDelMapa;
 
 public class Vacio extends ObjetoDelMapa{
 
-	protected Vacio(ImageIcon unaImagen) {
-		super(unaImagen);
+	protected Vacio() {
+		super(null);
 	}
 
 }

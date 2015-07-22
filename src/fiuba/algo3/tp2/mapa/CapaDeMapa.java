@@ -93,7 +93,7 @@ public class CapaDeMapa {
 	/********************* PRIVADOS ************************************************/
 	
 	private void inicializarPosicion(Posicion posicion) {
-		Celda celda= new Celda(new Vacio(null));
+		Celda celda= new Celda(new Vacio());
 		mapa.put(posicion, celda);
 	}
 	

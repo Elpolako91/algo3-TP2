@@ -67,4 +67,6 @@ public class TestJuegoCraftCargarJugador {
 		
 		assertTrue(juego.jugadores().size() == 0);
 	}
+	
+	
 }

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import javax.swing.ImageIcon;
-
 import fiuba.algo3.tp2.acciones.AccionesPosibles;
 import fiuba.algo3.tp2.excepciones.CargaJugadorInvalida;
 import fiuba.algo3.tp2.excepciones.NoHayEdificiosTerminados;
@@ -58,13 +56,14 @@ public class JuegoCraft extends Observable{
 	}
 	
 	public void cargarMapa(Mapa unMapa) {
-		mapa = unMapa;		
+		mapa = unMapa;
+				
 		acciones = new AccionesPosibles(unMapa);
 		
 		// esto de a continuacion no iria
 		acciones.colocarEnSuelo().colocarTerrenoEnTodoElMapa();				
-		acciones.colocarEnSuelo().colocarRecurso(new Posicion(1, mapa.tamanio().enY()), new RecursoMineral(1000, new ImageIcon("/imagenes/mineral.jpg")));
-		acciones.colocarEnSuelo().colocarRecurso(new Posicion(mapa.tamanio().enX(), 1), new RecursoGasVespeno(1000, new ImageIcon("/imagenes/Gas_vespeno.png")));				
+		acciones.colocarEnSuelo().colocarRecurso(new Posicion(1, mapa.tamanio().enY()), new RecursoMineral(1000));
+		acciones.colocarEnSuelo().colocarRecurso(new Posicion(mapa.tamanio().enX(), 1), new RecursoGasVespeno(1000));				
 	}
 	
 	public void iniciarPartida() {
@@ -79,8 +78,10 @@ public class JuegoCraft extends Observable{
 			
 		} catch (PosicionInvalida e) {}	
 		
-		for(int i = 0; i< jugadores.size(); i++)
-				jugadores.get(i).recursos().agregar(recursosIniciales);	
+		for(int i = 0; i< jugadores.size(); i++){
+			jugadores.get(i).recursos().agregar(recursosIniciales);
+			jugadores.get(i).crearVision(mapa.tamanio());
+		}		
 	}
 
 	public Jugador jugadorActual() {
@@ -128,16 +129,23 @@ public class JuegoCraft extends Observable{
 		EnConstruccion edificioEnConstruccion = edificio.enConstruccion();
 		
 		acciones.colocarEdificio().realizar(posicion, edificioEnConstruccion);
-		this.jugadorActual().agregarEdificioEnConstruccion(edificioEnConstruccion);		
+		this.jugadorActual().agregarEdificioEnConstruccion(edificioEnConstruccion);
 	}
 
 	public void moverUnidad(Unidad unidad, Posicion posicion) throws UnidadEnemigaSeleccionada, PosicionInvalida, UnidadMovimientoTerminado {
 		
-		if(turno.jugadorActual().contieneUnidad(unidad))
-			acciones.mover().realizar(posicion, unidad);
-		else
-			throw new UnidadEnemigaSeleccionada();
-		
+		try {
+			if(turno.jugadorActual().contieneUnidad(unidad)){			
+				acciones.mover().realizar(posicion, unidad);
+				turno.jugadorActual().descubrir(unidad.posicion(),unidad.vision());
+			}			
+			else
+				throw new UnidadEnemigaSeleccionada();
+		} catch (UnidadMovimientoTerminado e) {
+			
+			turno.jugadorActual().descubrir(unidad.posicion(),unidad.vision());			
+			throw new UnidadMovimientoTerminado();			
+		}		
 	}
 
 	public void atacarTierra(Unidad unidadAtacante, Posicion posicion) throws PosicionInvalida, UnidadMovimientoTerminado, UnidadEnemigaSeleccionada {

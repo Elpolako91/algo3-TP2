@@ -4,9 +4,8 @@ import javax.swing.ImageIcon;
 
 public class RecursoGasVespeno extends Recurso {
 	
-	public RecursoGasVespeno(int cantidadInicial, ImageIcon unaImagen) {
+	public RecursoGasVespeno(int cantidadInicial) {
 		
-		super(cantidadInicial, unaImagen);
-		unaImagen = new ImageIcon(RecursoGasVespeno.class.getResource("/imagenes/Gas_vespeno.png"));
+		super(cantidadInicial, new ImageIcon(RecursoGasVespeno.class.getResource("/imagenes/Gas_vespeno.png")));
 	}
 }

@@ -4,9 +4,8 @@ import javax.swing.ImageIcon;
 
 public class RecursoMineral extends Recurso {
 
-	public RecursoMineral(int cantidadInicial, ImageIcon unaImagen) {
+	public RecursoMineral(int cantidadInicial) {
 		
-		super(cantidadInicial, unaImagen);
-		unaImagen = new ImageIcon(RecursoMineral.class.getResource("/imagenes/mineral.jpg"));
+		super(cantidadInicial, new ImageIcon(RecursoMineral.class.getResource("/imagenes/mineral.jpg")));		
 	}	
 }

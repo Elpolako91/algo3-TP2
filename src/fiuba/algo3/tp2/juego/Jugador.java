@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fiuba.algo3.tp2.excepciones.NoHayEdificiosTerminados;
+import fiuba.algo3.tp2.mapa.Posicion;
+import fiuba.algo3.tp2.mapa.Tamanio;
+import fiuba.algo3.tp2.mapa.Vision;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.*;
 import fiuba.algo3.tp2.objetosDelMapa.unidades.*;
 
@@ -12,6 +15,8 @@ public class Jugador {
 	private String nombre;
 	private String color;
 	private String raza;
+	
+	private Vision vision;
 	
 	private RecursosDelJugador recursos;
 	private Suministro suministros;
@@ -28,12 +33,13 @@ public class Jugador {
 		raza = unaRaza;
 		recursos = new RecursosDelJugador();
 		suministros = new Suministro();
-		
+				
 		if ( unaRaza == "terran")
 			base = new EdificioCentralTerran(recursos, suministros, edificios);
 		
 		if (unaRaza == "protos")
-			base = new EdificioCentralProtos(recursos, suministros, edificios);		
+			base = new EdificioCentralProtos(recursos, suministros, edificios);	
+		
 	}
 	
 	public String nombre() {
@@ -57,7 +63,8 @@ public class Jugador {
 	}
 
 	public void agregarEdificioEnConstruccion(EnConstruccion edificioEnConstruccion) {
-		edificiosEnConstruccion.add(edificioEnConstruccion);				
+		edificiosEnConstruccion.add(edificioEnConstruccion);
+		this.descubrir(edificioEnConstruccion.posicion(), edificioEnConstruccion.vision());
 	}
 
 	public void progresoPorTurno() {
@@ -128,6 +135,10 @@ public class Jugador {
 												
 					EnConstruccion edificio = edificiosEnConstruccion.get(i);
 					edificiosEnConstruccion.remove(i);
+					
+					if(edificio.edificioTerminado() instanceof EdificioDeSuministro)
+						suministros.agregar(5);
+					
 					return edificio;
 			}
 			throw new NoHayEdificiosTerminados();
@@ -150,7 +161,8 @@ public class Jugador {
 	}
 
 	public void agregarUnidad(Unidad unidad) {
-		unidades.add(unidad);		
+		unidades.add(unidad);
+		this.descubrir(unidad.posicion(), unidad.vision());
 	}
 
 	private boolean hayUnidadTerminada() {
@@ -188,5 +200,19 @@ public class Jugador {
 
 	public String raza() {
 		return raza;
+	}
+
+	
+	public void crearVision(Tamanio tamanio) {
+		vision = new Vision(tamanio);
+		this.descubrir(base.posicion(), base.vision());
+	}
+	
+	public boolean hayVision(Posicion posicion){
+		return vision.hayVisibilidad(posicion);
+	}
+
+	public void descubrir(Posicion posicion, int rango) {
+		vision.descubrir(posicion, rango);		
 	}
 }

@@ -15,7 +15,7 @@ public abstract class Edificio extends ObjetoDelJugador implements Terrestre , E
 	public Edificio(String unNombre, int vida, int escudo,
 			int unTiempoConstruccion, RecursosDelJugador costo, Tamanio unTamanio, ImageIcon unaImagen) {
 				
-		super(unNombre, vida, escudo, unTiempoConstruccion, 10, costo, unaImagen);
+		super(unNombre, vida, escudo, unTiempoConstruccion, 15, costo, unaImagen);
 		tamanio = unTamanio;
 	}
 	
@@ -24,6 +24,6 @@ public abstract class Edificio extends ObjetoDelJugador implements Terrestre , E
 	}
 	
 	public EnConstruccion enConstruccion(){		
-		return new EdificioEnConstruccion(this, imagen());
+		return new EdificioEnConstruccion(this);
 	}
 }

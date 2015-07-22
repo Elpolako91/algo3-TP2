@@ -13,4 +13,6 @@ public interface EnConstruccion extends Edificable {
 	void posicion(Posicion posicion);
 
 	boolean estaDestruido();
+	
+	int vision();
 }

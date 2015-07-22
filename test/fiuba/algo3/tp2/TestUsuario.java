@@ -9,23 +9,18 @@ import fiuba.algo3.tp2.excepciones.CargaJugadorInvalida;
 import fiuba.algo3.tp2.excepciones.PosicionInvalida;
 import fiuba.algo3.tp2.excepciones.RecursosInsuficientes;
 import fiuba.algo3.tp2.excepciones.RequerimientosInsuficientes;
-import fiuba.algo3.tp2.excepciones.UnidadEnemigaSeleccionada;
-import fiuba.algo3.tp2.excepciones.UnidadMovimientoTerminado;
 import fiuba.algo3.tp2.juego.JuegoCraft;
 import fiuba.algo3.tp2.juego.Usuario;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Tamanio;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.Edificio;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioAcceso;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioBarraca;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentralProtos;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentralTerran;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioFabrica;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioPuertoEstelarTerran;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioRefineria;
 import fiuba.algo3.tp2.objetosDelMapa.unidades.Unidad;
-import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadZealot;
 
 public class TestUsuario {
 	
@@ -102,7 +97,8 @@ public class TestUsuario {
 			this.pasarRondaDeTurnos(6);
 			
 			assertEquals(user.jugadorActual().edificios(), 1);
-			assertEquals(edificio.posicion(), posicion);			
+			assertEquals(edificio.posicion(), posicion);		
+			assertEquals(user.jugadorActual().suministros().suministroTotal(),10);
 			
 		} catch (RecursosInsuficientes | PosicionInvalida e) {}		
 	}
@@ -131,111 +127,6 @@ public class TestUsuario {
 	}	
 	
 	@Test
-	public void testMoverMarine(){
-		
-		Posicion posicion = new Posicion(5,5);
-		Posicion posicionFinal = new Posicion(5,7);
-		
-		try {
-			EdificioBarraca barraca = edCentral1.construirBarraca();
-			user.colocarEdificio(barraca, posicion);				
-			this.pasarRondaDeTurnos(12);
-			
-			Unidad marine = barraca.construirMarine();						
-			this.pasarRondaDeTurnos(3);
-			
-			user.moverUnidad(marine, posicionFinal);
-			
-			assertEquals(marine.posicion(), posicionFinal);
-			
-		} catch (RecursosInsuficientes | PosicionInvalida | UnidadEnemigaSeleccionada | UnidadMovimientoTerminado e) {}		
-	}
-	
-	@Test
-	public void testMarineAtacaAZealot(){
-		
-		Posicion posicionBarraca = new Posicion(5,5);
-		Posicion posicionAcceso = new Posicion(9,5);
-		
-		Posicion posicionFinal = new Posicion(7,7);
-		
-		try {
-			EdificioBarraca barraca = edCentral1.construirBarraca();
-			user.colocarEdificio(barraca, posicionBarraca);				
-			this.pasarRondaDeTurnos(12);
-			
-			Unidad marine = barraca.construirMarine();						
-			this.pasarRondaDeTurnos(3);
-			
-			user.moverUnidad(marine, posicionFinal);
-			
-			user.pasarTurno();
-			EdificioAcceso acceso = edCentral2.construirAcceso();
-			user.colocarEdificio(acceso, posicionAcceso);
-			this.pasarRondaDeTurnos(12);
-			
-			UnidadZealot zealot = acceso.construirZealot();
-			this.pasarRondaDeTurnos(5);
-			
-			user.pasarTurno();
-			user.atacarTierra(marine, zealot.posicion());
-			
-			assertEquals(zealot.escudoActual(), 94);
-			
-		} catch (RecursosInsuficientes | PosicionInvalida | UnidadEnemigaSeleccionada | UnidadMovimientoTerminado e) {
-			
-			assertTrue(false);
-		}		
-	}
-	
-	@Test
-	public void testMarineEliminaUnZealot(){
-		
-		Posicion posicionBarraca = new Posicion(5,5);
-		Posicion posicionAcceso = new Posicion(9,5);
-		
-		Posicion posicionFinal = new Posicion(7,7);
-		
-		try {
-			EdificioBarraca barraca = edCentral1.construirBarraca();
-			user.colocarEdificio(barraca, posicionBarraca);				
-			this.pasarRondaDeTurnos(12);
-			
-			Unidad marine = barraca.construirMarine();						
-			this.pasarRondaDeTurnos(3);
-			
-			user.moverUnidad(marine, posicionFinal);
-			
-			user.pasarTurno();
-			EdificioAcceso acceso = edCentral2.construirAcceso();
-			user.colocarEdificio(acceso, posicionAcceso);
-			this.pasarRondaDeTurnos(12);
-			
-			UnidadZealot zealot = acceso.construirZealot();
-			this.pasarRondaDeTurnos(5);
-			
-			user.pasarTurno();
-			
-			while(!zealot.estaDestruido()){
-				user.atacarTierra(marine, zealot.posicion());
-				this.pasarRondaDeTurnos(1);
-			}
-			
-			user.pasarTurno();
-
-			assertEquals(zealot.escudoActual(), 0);
-			assertEquals(zealot.vidaActual(), 0);
-			
-			assertEquals(user.jugadorActual().unidades(), 0);
-			assertEquals(user.jugadorActual().suministros().suministroGastados(), 0);	
-			
-		} catch (RecursosInsuficientes | PosicionInvalida | UnidadEnemigaSeleccionada | UnidadMovimientoTerminado e) {
-			
-			assertTrue(false);
-		}		
-	}	
-	
-	@Test
 	public void TestJugadorCreaPuertoEstelarTerranYNaveTransporteTerran(){
 		
 		try {
@@ -260,7 +151,6 @@ public class TestUsuario {
 			
 		} catch (RecursosInsuficientes | RequerimientosInsuficientes | PosicionInvalida e) {}
 		
-
 		assertEquals(user.jugadorActual().recursos().mineral(), 400);
 		assertEquals(user.jugadorActual().recursos().vespeno(), 700);
 		assertEquals(user.jugadorActual().suministros().suministroGastados(), 2);
@@ -268,31 +158,5 @@ public class TestUsuario {
 		
 		this.pasarRondaDeTurnos(7);
 		assertEquals(user.jugadorActual().unidades(), 1);
-	}
-	
-	@Test
-	public void TestJugadorCreaRefineria(){
-		
-		Posicion posicion = new Posicion(50,1);
-		
-		try {
-			Edificio refineria = edCentral1.construirRecolectorGasVespeno();
-			
-			assertEquals(user.jugadorActual().recursos().mineral(), 900);
-			assertEquals(user.jugadorActual().recursos().vespeno(), 1000);
-			
-			user.colocarEdificio(refineria, posicion);			
-			
-			assertEquals(user.jugadorActual().edificios(), 0);
-			
-			this.pasarRondaDeTurnos(6);
-			
-			assertEquals(user.jugadorActual().edificios(), 1);
-			assertEquals(refineria.posicion(), posicion);			
-			
-		} catch (RecursosInsuficientes | PosicionInvalida e) {}	
-		
-		this.pasarRondaDeTurnos(5);
-		assertEquals(user.jugadorActual().recursos().vespeno(), 1050);			
 	}
 }
