@@ -10,7 +10,7 @@ import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadTransporte;
 
 public class Usuario {
 	
-	public JuegoCraft juego;
+	private JuegoCraft juego;
 	
 	private Object objetoARealizar;
 	private Object objetoSeleccionado;

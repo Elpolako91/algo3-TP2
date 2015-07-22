@@ -118,8 +118,14 @@ public class JuegoCraft extends Observable{
 		
 			}
 		} catch (NoHayEdificiosTerminados | PosicionInvalida e) {}
-		
+					
 		turno.pasarTurno();
+		
+		if (turno.jugadorActual().edificioCentral().estaDestruido()){
+			
+			jugadores.remove(turno.jugadorActual());
+			turno = new Turno(jugadores);
+		}
 		
 		this.actualizarObservadores();
 	}
@@ -190,9 +196,15 @@ public class JuegoCraft extends Observable{
 		setChanged();
 		notifyObservers();		
 	}
-
-	/************ a eliminar!!!!! *//////
+	
 	public Mapa mapa() {
 		return mapa;
+	}
+	
+	public boolean hayGanador(){
+		if(jugadores.size() == 1)
+			return true;
+		else
+			return false;
 	}
 }

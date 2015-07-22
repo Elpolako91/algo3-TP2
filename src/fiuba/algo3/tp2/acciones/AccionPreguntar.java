@@ -138,20 +138,4 @@ public class AccionPreguntar {
 		
 		return posicionActual;
 	}
-	/***** necesidad facu *////
-	public boolean hayEdificio(Posicion posicion) throws PosicionInvalida {
-		
-		if (mapa.contenido(posicion, mapa.tierra) instanceof Edificio)
-			return true;
-		else 
-			return false;
-	}
-
-	public boolean hayUnidadAire(Posicion posicion) throws PosicionInvalida {
-		
-		if (mapa.contenido(posicion, mapa.aire) instanceof UnidadAerea)
-			return true;
-		else 
-			return false;
-	}
 }
