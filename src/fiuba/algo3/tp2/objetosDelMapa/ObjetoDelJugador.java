@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.objetosDelMapa;
 
+import javax.swing.ImageIcon;
+
 import fiuba.algo3.tp2.juego.RecursosDelJugador;
 import fiuba.algo3.tp2.mapa.Posicion;
 
@@ -19,7 +21,9 @@ public abstract class ObjetoDelJugador extends ObjetoDelMapa {
 	
 	private Posicion posicion;	
 	
-	protected ObjetoDelJugador(String unNombre, int vida, int escudo, int unTiempoConstruccion, int unaVision, RecursosDelJugador costo){
+	protected ObjetoDelJugador(String unNombre, int vida, int escudo, int unTiempoConstruccion, int unaVision, RecursosDelJugador costo, ImageIcon unaImagen){
+		
+		super(unaImagen);
 		
 		nombre = unNombre;
 		vidaActual = vidaMaxima = vida;

@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.objetosDelMapa.edificios;
 
+import javax.swing.ImageIcon;
+
 import fiuba.algo3.tp2.excepciones.RecursosInsuficientes;
 import fiuba.algo3.tp2.juego.RecursosDelJugador;
 import fiuba.algo3.tp2.juego.Suministro;
@@ -12,7 +14,7 @@ public class EdificioPuertoEstelarTerran extends EdificioDeUnidades{
 	
 	public EdificioPuertoEstelarTerran(RecursosDelJugador recursosDisponibles, Suministro suministrosDisponibles){
 		
-		super("Puerto estelar terran", 1300, 0, 10, new RecursosDelJugador(150,100), new Tamanio(2,2), recursosDisponibles, suministrosDisponibles);
+		super("Puerto estelar terran", 1300, 0, 10, new RecursosDelJugador(150,100), new Tamanio(2,2), recursosDisponibles, suministrosDisponibles, new ImageIcon(EdificioPuertoEstelarTerran.class.getResource("/imagenes/razaTerran.jpg")));
 	}
 	
 	public UnidadEspectro construirEspectro() throws RecursosInsuficientes {

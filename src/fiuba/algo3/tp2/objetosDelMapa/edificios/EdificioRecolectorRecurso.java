@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.objetosDelMapa.edificios;
 
+import javax.swing.ImageIcon;
+
 import fiuba.algo3.tp2.juego.RecursosDelJugador;
 import fiuba.algo3.tp2.mapa.Tamanio;
 import fiuba.algo3.tp2.objetosDelMapa.Recurso;
@@ -10,9 +12,9 @@ public abstract class EdificioRecolectorRecurso extends Edificio{
 	private Recurso recurso;
 
 	public EdificioRecolectorRecurso(String unNombre, int vida, int escudo,
-			int unTiempoConstruccion, RecursosDelJugador costo, RecursosDelJugador recursosDelJugador) {
+			int unTiempoConstruccion, RecursosDelJugador costo, RecursosDelJugador recursosDelJugador, ImageIcon unaImagen) {
 		
-		super(unNombre, vida, escudo, unTiempoConstruccion, costo, new Tamanio(1,1));
+		super(unNombre, vida, escudo, unTiempoConstruccion, costo, new Tamanio(1,1), unaImagen);
 		recursosAJuntar = recursosDelJugador;
 	}
 	

@@ -3,6 +3,8 @@ package fiuba.algo3.tp2.objetosDelMapa.edificios;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 import fiuba.algo3.tp2.excepciones.RecursosInsuficientes;
 import fiuba.algo3.tp2.juego.RecursosDelJugador;
 import fiuba.algo3.tp2.juego.Suministro;
@@ -16,9 +18,9 @@ public abstract class EdificioDeUnidades extends Edificio{
 	private Suministro suministros;
 
 	protected EdificioDeUnidades(String unNombre, int vida, int escudo,	int unTiempoConstruccion, RecursosDelJugador costo,
-			Tamanio unTamanio, RecursosDelJugador recursosDisponibles, Suministro suministrosDisponibles) {
+			Tamanio unTamanio, RecursosDelJugador recursosDisponibles, Suministro suministrosDisponibles, ImageIcon unaImagen) {
 		
-		super(unNombre, vida, escudo, unTiempoConstruccion, costo, unTamanio);		
+		super(unNombre, vida, escudo, unTiempoConstruccion, costo, unTamanio, unaImagen);		
 		recursos = recursosDisponibles;
 		suministros = suministrosDisponibles;		
 	}

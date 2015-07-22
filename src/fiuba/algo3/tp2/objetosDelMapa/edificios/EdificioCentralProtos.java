@@ -2,6 +2,8 @@ package fiuba.algo3.tp2.objetosDelMapa.edificios;
 
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 import fiuba.algo3.tp2.excepciones.RecursosInsuficientes;
 import fiuba.algo3.tp2.excepciones.RequerimientosInsuficientes;
 import fiuba.algo3.tp2.juego.RecursosDelJugador;
@@ -12,7 +14,7 @@ public class EdificioCentralProtos extends EdificioCentral{
 	public EdificioCentralProtos(RecursosDelJugador recursosDisponibles, Suministro suministrosDisponibles,
 			List<Edificio> edificiosJugador) {
 		
-		super("Central protos", 1000, 1000, recursosDisponibles, suministrosDisponibles, edificiosJugador);
+		super("Central protos", 1000, 1000, recursosDisponibles, suministrosDisponibles, edificiosJugador, new ImageIcon(EdificioCentralProtos.class.getResource("/imagenes/razaProtos.jpg")));
 	}
 
 	public EdificioNexoMineral construirRecolectorMineral() throws RecursosInsuficientes {

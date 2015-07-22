@@ -13,7 +13,7 @@ public class Sonido{
 	public Sonido(String audio){
 		
 		String dir = System.getProperty("user.dir");
-        dir=getPath(dir + "\\src\\vista\\" + audio);
+        dir=getPath(dir + "//src//view//" + audio);
         
 		try
 		{

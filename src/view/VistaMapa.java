@@ -41,6 +41,7 @@ public class VistaMapa extends JFrame implements Observer {
 	private JPanel panelAtributosJugador;
 	private JScrollPane panel;
 	private Usuario user;
+	private Sonido musicaFondo;
 
 	public VistaMapa(final JuegoCraft modelo, Usuario user) 
 			
@@ -55,14 +56,11 @@ public class VistaMapa extends JFrame implements Observer {
 		contentPane.setLayout(null);
 		
 		Tamanio tamanio = new Tamanio(limiteMapaX/cteTamanioBoton,limiteMapaY/cteTamanioBoton);
-		Mapa map = new Mapa(tamanio);
+		Mapa map = new Mapa(tamanio, null);
 		this.modelo = modelo;		
 		this.modelo.cargarMapa(map);
 		this.modelo.iniciarPartida();
 		this.user = user;
-		
-		Sonido musicaFondo = new Sonido("sonido_principal.au");
-		musicaFondo.reproducirIndefinidamente();
 		
 		menuJugador = new JPanel();
 		menuJugador.setBorder(new EmptyBorder(5,5,5,5));
@@ -108,6 +106,9 @@ public class VistaMapa extends JFrame implements Observer {
 		
 		this.modelo.addObserver(this);
 		
+		musicaFondo = new Sonido("sonido_principal.au");
+		musicaFondo.reproducirIndefinidamente();
+		
 	}
 	
 	
@@ -117,7 +118,7 @@ public class VistaMapa extends JFrame implements Observer {
 		botones = new Boton[limiteMapaX][limiteMapaY];
 		for (int i = 1; i<=limiteMapaX; i = i + cteTamanioBoton){
 			for (int j = 1; j<=limiteMapaY; j = j + cteTamanioBoton){
-				Boton temp = new Boton(i, j, user);
+				Boton temp = new Boton(i, j, user, modelo);
 				botones[i][j] = temp;
 				mapa.add(botones[i][j].boton());
 			}		

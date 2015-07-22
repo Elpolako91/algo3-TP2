@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import javax.swing.ImageIcon;
+
 import fiuba.algo3.tp2.acciones.AccionesPosibles;
 import fiuba.algo3.tp2.excepciones.CargaJugadorInvalida;
 import fiuba.algo3.tp2.excepciones.NoHayEdificiosTerminados;
@@ -61,8 +63,8 @@ public class JuegoCraft extends Observable{
 		
 		// esto de a continuacion no iria
 		acciones.colocarEnSuelo().colocarTerrenoEnTodoElMapa();				
-		acciones.colocarEnSuelo().colocarRecurso(new Posicion(1, mapa.tamanio().enY()), new RecursoMineral(1000));
-		acciones.colocarEnSuelo().colocarRecurso(new Posicion(mapa.tamanio().enX(), 1), new RecursoGasVespeno(1000));				
+		acciones.colocarEnSuelo().colocarRecurso(new Posicion(1, mapa.tamanio().enY()), new RecursoMineral(1000, new ImageIcon("/imagenes/mineral.jpg")));
+		acciones.colocarEnSuelo().colocarRecurso(new Posicion(mapa.tamanio().enX(), 1), new RecursoGasVespeno(1000, new ImageIcon("/imagenes/Gas_vespeno.png")));				
 	}
 	
 	public void iniciarPartida() {

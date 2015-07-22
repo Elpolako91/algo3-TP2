@@ -7,7 +7,7 @@ public class EdificioRecolectorMineralEnConstruccion extends EdificioRecolectorD
 	public EdificioRecolectorMineralEnConstruccion(EdificioRecolectorDeMineral edificio) {
 		
 		super(edificio.nombre(), edificio.vidaMaxima(), edificio.escudoMaximo(), edificio.tiempoConstruccion(), 
-				edificio.costoRecursos(), edificio.recursosJuntados());
+				edificio.costoRecursos(), edificio.recursosJuntados(), null);
 		
 		edificioAConstruir = edificio;
 	}

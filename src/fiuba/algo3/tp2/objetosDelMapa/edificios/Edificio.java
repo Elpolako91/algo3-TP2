@@ -1,5 +1,7 @@
 package fiuba.algo3.tp2.objetosDelMapa.edificios;
 
+import javax.swing.ImageIcon;
+
 import fiuba.algo3.tp2.juego.RecursosDelJugador;
 import fiuba.algo3.tp2.mapa.Tamanio;
 import fiuba.algo3.tp2.objetosDelMapa.ObjetoDelJugador;
@@ -11,9 +13,9 @@ public abstract class Edificio extends ObjetoDelJugador implements Terrestre , E
 	private Tamanio tamanio;
 		
 	public Edificio(String unNombre, int vida, int escudo,
-			int unTiempoConstruccion, RecursosDelJugador costo, Tamanio unTamanio) {
+			int unTiempoConstruccion, RecursosDelJugador costo, Tamanio unTamanio, ImageIcon unaImagen) {
 				
-		super(unNombre, vida, escudo, unTiempoConstruccion, 10, costo);
+		super(unNombre, vida, escudo, unTiempoConstruccion, 10, costo, unaImagen);
 		tamanio = unTamanio;
 	}
 	
@@ -22,6 +24,6 @@ public abstract class Edificio extends ObjetoDelJugador implements Terrestre , E
 	}
 	
 	public EnConstruccion enConstruccion(){		
-		return new EdificioEnConstruccion(this);
+		return new EdificioEnConstruccion(this, imagen());
 	}
 }

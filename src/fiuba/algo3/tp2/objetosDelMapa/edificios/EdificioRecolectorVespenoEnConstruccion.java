@@ -7,7 +7,7 @@ public class EdificioRecolectorVespenoEnConstruccion extends EdificioRecolectorD
 	public EdificioRecolectorVespenoEnConstruccion(EdificioRecolectorDeVespeno edificio) {
 		
 		super(edificio.nombre(), edificio.vidaMaxima(), edificio.escudoMaximo(), edificio.tiempoConstruccion(), 
-				edificio.costoRecursos(), edificio.recursosJuntados());
+				edificio.costoRecursos(), edificio.recursosJuntados(), null);
 		
 		edificioAConstruir = edificio;
 	}

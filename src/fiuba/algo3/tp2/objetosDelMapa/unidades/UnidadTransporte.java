@@ -3,6 +3,8 @@ package fiuba.algo3.tp2.objetosDelMapa.unidades;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 import fiuba.algo3.tp2.juego.RecursosDelJugador;
 
 public class UnidadTransporte extends UnidadAerea{
@@ -12,10 +14,10 @@ public class UnidadTransporte extends UnidadAerea{
 	
 	protected UnidadTransporte(String unNombre, int vida, int escudo, int unTiempoConstruccion, int unaVision,
 			RecursosDelJugador costoRecurso, int unCostoSuministro,	int unDanioTierra,
-			int unDanioAire, int unRangoTierra,	int unRangoAire) {
+			int unDanioAire, int unRangoTierra,	int unRangoAire, ImageIcon unaImagen) {
 		
 		super(unNombre, vida, escudo, unTiempoConstruccion, unaVision, costoRecurso, unCostoSuministro,
-				unDanioTierra, unDanioAire, unRangoTierra, unRangoAire);
+				unDanioTierra, unDanioAire, unRangoTierra, unRangoAire, unaImagen);
 	}
 
 	public boolean tieneLugar(int ocupacionTransporte) {

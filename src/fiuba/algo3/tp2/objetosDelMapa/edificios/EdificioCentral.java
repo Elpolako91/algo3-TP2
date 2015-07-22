@@ -2,6 +2,8 @@ package fiuba.algo3.tp2.objetosDelMapa.edificios;
 
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 import fiuba.algo3.tp2.juego.RecursosDelJugador;
 import fiuba.algo3.tp2.juego.Suministro;
 import fiuba.algo3.tp2.mapa.Tamanio;
@@ -16,9 +18,9 @@ public abstract class EdificioCentral extends Edificio{
 	private Suministro suministros;
 	
 	public EdificioCentral(String unNombre, int vida, int escudo, RecursosDelJugador recursosDisponibles,
-			Suministro suministrosDisponibles, List<Edificio> edificiosJugador) {
+			Suministro suministrosDisponibles, List<Edificio> edificiosJugador, ImageIcon unaImagen) {
 		
-		super(unNombre, vida, escudo, 0, null, new Tamanio(3,3));
+		super(unNombre, vida, escudo, 0, null, new Tamanio(3,3), unaImagen);
 		
 		edificios = edificiosJugador;
 		recursos = recursosDisponibles;

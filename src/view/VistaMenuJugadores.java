@@ -44,9 +44,9 @@ public class VistaMenuJugadores extends JFrame {
 	private JTextField textNombre;
 	JuegoCraft modelo;
 	private JTextField textNombre2;
-	private Usuario user;
+	Usuario user;
 
-	public VistaMenuJugadores(JuegoCraft unModelo, Usuario user) {
+	public VistaMenuJugadores(JuegoCraft unModelo, final Usuario user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(300, 100, 650, 606);
 		contentPane = new JPanel();
@@ -233,23 +233,22 @@ public class VistaMenuJugadores extends JFrame {
 				raza2 = botonesRaza2.getSelection().getActionCommand();
 				color2 = botonesColores2.getSelection().getActionCommand();
 				nombre2 = textNombre2.getText();
-				try {
-					modelo.cargarJugador(nombre1, color1, raza1);
-					modelo.cargarJugador(nombre2, color2, raza2);
-					vista3 = new VistaMapa(modelo, user);
-					vista3.setVisible(true);
-					dispose();
-				} catch (CargaJugadorInvalida e2) {
-					e2.printStackTrace();
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
+					try {
+						modelo.cargarJugador(nombre1, color1, raza1);
+						modelo.cargarJugador(nombre2, color2, raza2);
+						vista3 = new VistaMapa(modelo, user);
+						Sonido gritoInicio = new Sonido("grito.au");
+						gritoInicio.reproducir();
+						vista3.setVisible(true);
+						dispose();
+					} catch (Exception e1) {
+						//sonido alerta 
+					}
 			}
 		});
 		btnComenzar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnComenzar.setBounds(473, 487, 152, 53);
 		contentPane.add(btnComenzar);
-		
 		
 		JLabel label = new JLabel("");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
