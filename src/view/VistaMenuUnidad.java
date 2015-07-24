@@ -33,7 +33,7 @@ public class VistaMenuUnidad extends JFrame {
 	contentPane.setLayout(null);
 	
 	this.user = user;
-	controlador = new ControladorAtaque(user);
+	controlador = new ControladorAtaque(this.user);
 	
 	final JButton btnAire = new JButton("Aire");
 	btnAire.setFont(new Font("ComicSans",Font.PLAIN,15));

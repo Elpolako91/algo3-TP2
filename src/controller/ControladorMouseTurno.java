@@ -23,8 +23,10 @@ public class ControladorMouseTurno extends MouseAdapter {
 		user.pasarTurno();
 /*		Window[] win = Window.getWindows();
 		for(int i = 2; i <= win.length; i++){
-			
-			win[i].dispose();
+			try{
+				win[i].dispose();
+				
+			}catch(ArrayIndexOutOfBoundsException exception){}
 		}*/
 		
 	}

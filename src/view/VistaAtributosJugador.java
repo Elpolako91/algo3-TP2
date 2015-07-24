@@ -28,9 +28,9 @@ public class VistaAtributosJugador extends JPanel {
 		this.setBounds(0, 0, 2000, 77);
 		setLayout(null);
 		
-		nombre = user.jugadorActual().nombre();
-		raza = user.jugadorActual().raza();
-		color = user.jugadorActual().color();
+		nombre = this.user.jugadorActual().nombre();
+		raza = this.user.jugadorActual().raza();
+		color = this.user.jugadorActual().color();
 		
 		JTextField txtNombreJugador = new JTextField();
 		txtNombreJugador.setText(nombre);
@@ -70,8 +70,8 @@ public class VistaAtributosJugador extends JPanel {
 		txtGasVespeno.setForeground(Color.BLUE);
 		this.add(txtGasVespeno);
 		
-		int mineral =user.jugadorActual().recursos().mineral();
-		int gas = user.jugadorActual().recursos().vespeno();
+		int mineral = this.user.jugadorActual().recursos().mineral();
+		int gas = this.user.jugadorActual().recursos().vespeno();
 
 		JTextField mineralDelJugador = new JTextField();
 		mineralDelJugador.setEditable(false);

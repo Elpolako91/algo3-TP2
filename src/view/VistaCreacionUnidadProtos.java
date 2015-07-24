@@ -29,7 +29,7 @@ public class VistaCreacionUnidadProtos extends JFrame {
 		contentPane.setLayout(null);
 	
 		this.user = user;
-		controladorUnidad = new ControladorUnidadProtos(user);
+		controladorUnidad = new ControladorUnidadProtos(this.user);
 		
 		JButton btnZealot = new JButton("Zealot");
 		btnZealot.setBounds(200, 0, 100, 100);

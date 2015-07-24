@@ -1,9 +1,5 @@
 package view;
 
-
-import java.awt.Color;
-
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -55,7 +51,7 @@ public class Boton {
 		boton.setBounds(x, y, cteTamanioBoton, cteTamanioBoton);
 		this.pintarBoton(x, y);
 		
-		ml = new ControladorMouseVistaMapa(posicion, user, boton);
+		ml = new ControladorMouseVistaMapa(posicion, user, this.modelo);
 		boton.addMouseListener(ml);
 		
 	}
@@ -96,7 +92,6 @@ public class Boton {
  			} 			 			
  		}
 		
-		boton.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		boton.repaint();
 	}
 }

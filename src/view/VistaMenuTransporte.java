@@ -31,7 +31,7 @@ public class VistaMenuTransporte extends JFrame {
 	contentPane.setLayout(null);
 	
 	this.user = user;
-	controlador = new ControladorTransporte(user);
+	controlador = new ControladorTransporte(this.user);
 	
 	final JButton btnDescargar = new JButton("Descargar");
 	btnDescargar.setFont(new Font("Dialog", Font.PLAIN, 18));

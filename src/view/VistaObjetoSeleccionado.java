@@ -34,7 +34,7 @@ public class VistaObjetoSeleccionado extends JPanel {
 		this.setLayout(null);
 
 		this.user = user;
-		contenido = user.objetoSeleccionado();
+		contenido = this.user.objetoSeleccionado();
 		
 		if (contenido instanceof Unidad){
 			
@@ -53,8 +53,8 @@ public class VistaObjetoSeleccionado extends JPanel {
 					escudoActual = ((Edificio) contenido).escudoActual();
 					vidaMaxima = ((Edificio) contenido).vidaMaxima();
 					escudoMaximo = ((Edificio) contenido).escudoMaximo();
-					suministroGastados = user.jugadorActual().suministros().suministroGastados();
-					suministrosTotales = user.jugadorActual().suministros().suministroTotal();
+					suministroGastados = this.user.jugadorActual().suministros().suministroGastados();
+					suministrosTotales = this.user.jugadorActual().suministros().suministroTotal();
 			}
 		}
 		

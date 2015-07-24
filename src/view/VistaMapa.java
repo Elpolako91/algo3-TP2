@@ -23,7 +23,6 @@ import fiuba.algo3.tp2.excepciones.PosicionInvalida;
 import fiuba.algo3.tp2.juego.JuegoCraft;
 import fiuba.algo3.tp2.juego.Usuario;
 import fiuba.algo3.tp2.mapa.Mapa;
-import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Tamanio;
 
 
@@ -131,26 +130,34 @@ public class VistaMapa extends JFrame implements Observer {
 
 	public void update(Observable arg0, Object arg1) {
 	
-		for (int i = 1; i<=limiteMapaX; i = i + cteTamanioBoton){
-			for (int j = 1; j<=limiteMapaY; j = j + cteTamanioBoton){
-				try {
-					botones[i][j].pintarBoton(i, j);					
-				} catch (PosicionInvalida e) {
-					e.printStackTrace();
+		if (modelo.hayGanador()){
+			musicaFondo.detener();
+			VistaGanador vistaGanador = new VistaGanador(modelo.jugadorActual().nombre());
+			vistaGanador.setVisible(true);
+			this.dispose();
+		}else{
+			
+			for (int i = 1; i<=limiteMapaX; i = i + cteTamanioBoton){
+				for (int j = 1; j<=limiteMapaY; j = j + cteTamanioBoton){
+					try {
+						botones[i][j].pintarBoton(i, j);					
+					} catch (PosicionInvalida e) {
+						e.printStackTrace();
+					}
 				}
 			}
-		}
-		
-		menuJugador.remove(panelAtributosJugador);
-		panelAtributosJugador = new VistaAtributosJugador(user);
-		panelAtributosJugador.setBounds(0, 0, 2000, 60);
-		menuJugador.add(panelAtributosJugador);
+			
+			menuJugador.remove(panelAtributosJugador);
+			panelAtributosJugador = new VistaAtributosJugador(user);
+			panelAtributosJugador.setBounds(0, 0, 2000, 60);
+			menuJugador.add(panelAtributosJugador);
 
-		menuJugador.remove(panelObjetoSeleccionado);
-		panelObjetoSeleccionado = new VistaObjetoSeleccionado(user);
-		panelObjetoSeleccionado.setBounds(0, 50, 161, 139);
-		menuJugador.add(panelObjetoSeleccionado);
-		menuJugador.repaint();
+			menuJugador.remove(panelObjetoSeleccionado);
+			panelObjetoSeleccionado = new VistaObjetoSeleccionado(user);
+			panelObjetoSeleccionado.setBounds(0, 50, 161, 139);
+			menuJugador.add(panelObjetoSeleccionado);
+			menuJugador.repaint();
+		}
 	}	
 }
 

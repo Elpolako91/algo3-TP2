@@ -29,7 +29,7 @@ public class VistaCreacionUnidadTerran extends JFrame {
 		contentPane.setLayout(null);
 	
 		this.user = user;
-		controladorUnidad = new ControladorUnidadTerran(user);
+		controladorUnidad = new ControladorUnidadTerran(this.user);
 		
 		JButton btnMarine = new JButton("Marine");
 		btnMarine.setBounds(0, 0, 100, 100);

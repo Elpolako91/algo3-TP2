@@ -33,7 +33,7 @@ public class VistaConstruccionProtos extends JFrame {
 	contentPane.setLayout(null);
 	
 	this.user = user;
-	controlador = new ControladorCreadorEdificiosProtos(user);
+	controlador = new ControladorCreadorEdificiosProtos(this.user);
 	
 	final JButton botonAcceso = new JButton("Acceso");
 	botonAcceso.setBounds(120, 120, 138, 32);

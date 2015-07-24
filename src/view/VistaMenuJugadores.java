@@ -21,7 +21,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JTextField;
 
-import fiuba.algo3.tp2.excepciones.CargaJugadorInvalida;
 import fiuba.algo3.tp2.juego.JuegoCraft;
 import fiuba.algo3.tp2.juego.Usuario;
 

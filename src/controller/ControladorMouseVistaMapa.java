@@ -1,15 +1,12 @@
 package controller;
 
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
 
 import fiuba.algo3.tp2.excepciones.PosicionInvalida;
 import fiuba.algo3.tp2.excepciones.UnidadEnemigaSeleccionada;
 import fiuba.algo3.tp2.excepciones.UnidadMovimientoTerminado;
+import fiuba.algo3.tp2.juego.JuegoCraft;
 import fiuba.algo3.tp2.juego.Usuario;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Vacio;
@@ -20,20 +17,18 @@ public class ControladorMouseVistaMapa extends MouseAdapter {
 	
 	private Posicion posicion;
 	private Object contenido;
-	private JButton boton;
 	private Usuario user;
+	private JuegoCraft modelo;
 	
-	public ControladorMouseVistaMapa(Posicion unaPosicion, Usuario user, JButton boton) {
+	public ControladorMouseVistaMapa(Posicion unaPosicion, Usuario user, JuegoCraft modelo) {
 		
 		this.posicion = unaPosicion;
 		this.user = user;
-		this.boton = boton;
+		this.modelo = modelo;
 	}
 	
 	public void mousePressed (MouseEvent e){
-				
-		boton.setBorder(BorderFactory.createLineBorder(Color.BLUE, 3));
-		
+						
 		if( user.getColocarEdificio() ){
 			
 			try {
@@ -89,14 +84,14 @@ public class ControladorMouseVistaMapa extends MouseAdapter {
 								}
 								Posicion posicion2 = new Posicion(posicion.x(), posicion.y());
 									try {
-										contenido = user.juego.mapa().contenido(posicion2,user.juego.mapa().aire);
+										contenido = modelo.mapa().contenido(posicion2, modelo.mapa().aire);
 									} catch (PosicionInvalida e1) {}
 							
 									if( contenido instanceof Vacio){
 								
 										posicion2 = new Posicion(posicion.x(), posicion.y());
 										try {
-											contenido = user.juego.mapa().contenido(posicion2, user.juego.mapa().tierra);
+											contenido = modelo.mapa().contenido(posicion2, modelo.mapa().tierra);
 										} catch (PosicionInvalida e1) {}
 										user.objetoSeleccionado(contenido);
 								
@@ -111,6 +106,6 @@ public class ControladorMouseVistaMapa extends MouseAdapter {
 				}
 			}
 		}
-		user.juego.actualizarObservadores();
+		modelo.actualizarObservadores();
 	}
 }

@@ -13,7 +13,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controller.ControladorCreadorEdificiosTerran;
-import fiuba.algo3.tp2.juego.JuegoCraft;
 import fiuba.algo3.tp2.juego.Usuario;
 
 public class VistaConstruccionTerran extends JFrame {
@@ -34,7 +33,7 @@ public class VistaConstruccionTerran extends JFrame {
 	contentPane.setLayout(null);
 	
 	this.user = user;
-	controlador = new ControladorCreadorEdificiosTerran(user);
+	controlador = new ControladorCreadorEdificiosTerran(this.user);
 	
 	final JButton botonBarraca = new JButton("Barraca");
 	botonBarraca.setBounds(120, 120, 138, 32);
