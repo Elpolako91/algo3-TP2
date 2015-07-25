@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

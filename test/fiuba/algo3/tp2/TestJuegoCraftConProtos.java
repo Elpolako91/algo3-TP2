@@ -8,6 +8,7 @@ import org.junit.Test;
 import fiuba.algo3.tp2.excepciones.CargaJugadorInvalida;
 import fiuba.algo3.tp2.excepciones.PosicionInvalida;
 import fiuba.algo3.tp2.excepciones.RecursosInsuficientes;
+import fiuba.algo3.tp2.excepciones.RequerimientosInsuficientes;
 import fiuba.algo3.tp2.juego.JuegoCraft;
 import fiuba.algo3.tp2.juego.Jugador;
 import fiuba.algo3.tp2.mapa.Mapa;
@@ -23,8 +24,8 @@ import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioPuertoEstelarProtos;
 
 public class TestJuegoCraftConProtos {
 
-	private JuegoCraft juego;
-	private Mapa mapa1;
+	private JuegoCraft juego = new JuegoCraft();
+	private Mapa mapa1 = new Mapa(new Tamanio(10,10));
 	private Jugador jugador1;
 	private EdificioCentralProtos edCentral;
 	
@@ -33,20 +34,22 @@ public class TestJuegoCraftConProtos {
 	
 	@Before
 	public void setUp() {
-		juego = new JuegoCraft();
-		mapa1 = new Mapa(new Tamanio(10,10));
-		juego.cargarMapa(mapa1);
+		
 		try {
-			jugador1 = juego.cargarJugador("martin", "verde", "protos");
+			juego.cargarJugador("martin", "verde", "protos");
 		} catch (CargaJugadorInvalida e) {}
+		
+		juego.cargarMapa(mapa1);
 		juego.iniciarPartida();
+		
+		jugador1 = juego.jugadores().get(0);
 		edCentral = (EdificioCentralProtos) jugador1.edificioCentral();
 	}
 	
 	private void pasarTurno(int max){
 		
 		for(int i = 0; i<max; i++){
-			jugador1.pasarTurno();
+			juego.pasarTurno();
 		}
 	}
 	
@@ -63,7 +66,7 @@ public class TestJuegoCraftConProtos {
 		
 		try {
 			EdificioNexoMineral nexo = edCentral.construirRecolectorMineral();
-			jugador1.construirEdificio(posicionMineral, nexo);
+			juego.colocarEdificio(nexo, posicionMineral);
 		
 		} catch (RecursosInsuficientes | PosicionInvalida e) {}
 				
@@ -82,7 +85,7 @@ public class TestJuegoCraftConProtos {
 		
 		try {
 			EdificioAsimilador asimilador = edCentral.construirRecolectorGasVespeno();
-			jugador1.construirEdificio(posicionGasVespeno, asimilador);
+			juego.colocarEdificio(asimilador, posicionGasVespeno);
 			
 		} catch (RecursosInsuficientes | PosicionInvalida e) {}
 		
@@ -105,7 +108,7 @@ public class TestJuegoCraftConProtos {
 		try {
 			EdificioPilon pilon = edCentral.construirAsentamiento();
 			Posicion posicion = new Posicion(5,5);			
-			jugador1.construirEdificio(posicion, pilon);
+			juego.colocarEdificio(pilon, posicion);
 			
 		} catch (RecursosInsuficientes | PosicionInvalida e) {}
 			
@@ -122,7 +125,7 @@ public class TestJuegoCraftConProtos {
 		try {
 			EdificioAcceso acceso = edCentral.construirAcceso();
 			Posicion posicion = new Posicion(5,6);			
-			jugador1.construirEdificio(posicion, acceso);
+			juego.colocarEdificio(acceso, posicion);
 			
 		} catch (RecursosInsuficientes | PosicionInvalida e) {}
 				
@@ -138,15 +141,15 @@ public class TestJuegoCraftConProtos {
 		try {
 			EdificioAcceso acceso = edCentral.construirAcceso();
 			Posicion posicion = new Posicion(3,6);		
-			jugador1.construirEdificio(posicion, acceso);
+			juego.colocarEdificio(acceso, posicion);
 					
 			this.pasarTurno(8);
 			
 			EdificioPuertoEstelarProtos puerto = edCentral.construirPuertoEstelarProtos();
-			Posicion posicionBarraca = new Posicion(7,6);
-			jugador1.construirEdificio(posicionBarraca, puerto);
+			Posicion posicionPuerto = new Posicion(7,6);
+			juego.colocarEdificio(puerto, posicionPuerto);
 			
-		} catch (RecursosInsuficientes | PosicionInvalida e) {}		
+		} catch (RecursosInsuficientes | PosicionInvalida | RequerimientosInsuficientes e) {}		
 						
 		this.pasarTurno(10);
 		
@@ -161,21 +164,21 @@ public class TestJuegoCraftConProtos {
 		try {
 			EdificioAcceso acceso = edCentral.construirAcceso();
 			Posicion posicion = new Posicion(3,6);		
-			jugador1.construirEdificio(posicion, acceso);
+			juego.colocarEdificio(acceso, posicion);
 					
 			this.pasarTurno(8);
 			
 			EdificioPuertoEstelarProtos puerto = edCentral.construirPuertoEstelarProtos();
-			Posicion posicionBarraca = new Posicion(7,6);
-			jugador1.construirEdificio(posicionBarraca, puerto);
+			Posicion posicionPuerto = new Posicion(7,6);
+			juego.colocarEdificio(puerto, posicionPuerto);
 					
 			this.pasarTurno(10);
 			
 			EdificioArchivosTemplarios archivosTemplarios = edCentral.crearArchivosTemplarios();
 			Posicion posicionArchivosTemplarios = new Posicion(1,4);
-			jugador1.construirEdificio(posicionArchivosTemplarios, archivosTemplarios);
+			juego.colocarEdificio(archivosTemplarios, posicionArchivosTemplarios);
 			
-		} catch (RecursosInsuficientes | PosicionInvalida e) {}		
+		} catch (RecursosInsuficientes | PosicionInvalida | RequerimientosInsuficientes e) {}		
 		
 		this.pasarTurno(9);
 		
@@ -191,7 +194,7 @@ public class TestJuegoCraftConProtos {
 		try {
 			EdificioAcceso acceso = edCentral.construirAcceso();
 			Posicion posicion = new Posicion(3,6);		
-			jugador1.construirEdificio(posicion, acceso);
+			juego.colocarEdificio(acceso, posicion);
 					
 			this.pasarTurno(8);			
 			acceso.construirZealot();
@@ -216,20 +219,20 @@ public class TestJuegoCraftConProtos {
 		try {
 			EdificioAcceso acceso = edCentral.construirAcceso();
 			Posicion posicion = new Posicion(3,6);		
-			jugador1.construirEdificio(posicion, acceso);
+			juego.colocarEdificio(acceso, posicion);
 					
 			this.pasarTurno(8);
 			
 			EdificioPuertoEstelarProtos puerto = edCentral.construirPuertoEstelarProtos();
 			Posicion posicionPuerto = new Posicion(1,4);
-			jugador1.construirEdificio(posicionPuerto, puerto);
+			juego.colocarEdificio(puerto, posicionPuerto);
 					
 			this.pasarTurno(10);
 			
 			puerto.construirScout();
 			puerto.construirNaveTransporte();
 			
-		} catch (RecursosInsuficientes | PosicionInvalida e) {}		
+		} catch (RecursosInsuficientes | PosicionInvalida | RequerimientosInsuficientes e) {}		
 				
 		assertEquals(jugador1.recursos().mineral(), 200);
 		assertEquals(jugador1.recursos().vespeno(), 700);
@@ -239,7 +242,7 @@ public class TestJuegoCraftConProtos {
 		this.pasarTurno(8);
 		assertEquals(jugador1.unidades(), 1);
 		
-		jugador1.pasarTurno();
+		juego.pasarTurno();
 		assertEquals(jugador1.unidades(), 2);		
 	}
 	
@@ -249,25 +252,25 @@ public class TestJuegoCraftConProtos {
 		try {
 			EdificioAcceso acceso = edCentral.construirAcceso();
 			Posicion posicion = new Posicion(3,6);		
-			jugador1.construirEdificio(posicion, acceso);
+			juego.colocarEdificio(acceso, posicion);
 					
 			this.pasarTurno(8);
 			
 			EdificioPuertoEstelarProtos puerto = edCentral.construirPuertoEstelarProtos();
 			Posicion posicionPuerto = new Posicion(1,4);
-			jugador1.construirEdificio(posicionPuerto, puerto);
+			juego.colocarEdificio(puerto, posicionPuerto);
 					
 			this.pasarTurno(10);
 			
 			EdificioArchivosTemplarios arch = edCentral.crearArchivosTemplarios();
 			Posicion posicionArch = new Posicion(1,7);
-			jugador1.construirEdificio(posicionArch, arch);
+			juego.colocarEdificio(arch, posicionArch);
 			
 			this.pasarTurno(9);
 			
 			arch.construirAltoTemplario();
 			
-		} catch (RecursosInsuficientes | PosicionInvalida e) {}		
+		} catch (RecursosInsuficientes | PosicionInvalida | RequerimientosInsuficientes e) {}		
 				
 		assertEquals(jugador1.suministros().suministroGastados(), 2);
 		assertEquals(jugador1.unidades(), 0);

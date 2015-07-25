@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import fiuba.algo3.tp2.excepciones.CargaJugadorInvalida;
 import fiuba.algo3.tp2.juego.JuegoCraft;
-import fiuba.algo3.tp2.juego.Jugador;
 
 public class TestJuegoCraftCargarJugador {
 	
@@ -16,10 +15,10 @@ public class TestJuegoCraftCargarJugador {
 		JuegoCraft juego = new JuegoCraft();
 		
 		try{
-			Jugador jugador = juego.cargarJugador("facu","rojo","terran");
-			assertEquals(jugador.nombre(),"facu");
-			assertEquals(jugador.color(), "rojo");
-			assertEquals(jugador.raza(), "terran");
+			juego.cargarJugador("facu","rojo","terran");
+			assertEquals(juego.jugadores().get(0).nombre(),"facu");
+			assertEquals(juego.jugadores().get(0).color(), "rojo");
+			assertEquals(juego.jugadores().get(0).raza(), "terran");
 		}
 		catch(CargaJugadorInvalida e){}
 		
@@ -67,6 +66,4 @@ public class TestJuegoCraftCargarJugador {
 		
 		assertTrue(juego.jugadores().size() == 0);
 	}
-	
-	
 }

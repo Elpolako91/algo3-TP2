@@ -5,30 +5,18 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import fiuba.algo3.tp2.excepciones.CargaJugadorInvalida;
-import fiuba.algo3.tp2.excepciones.PosicionInvalida;
-import fiuba.algo3.tp2.excepciones.RecursosInsuficientes;
-import fiuba.algo3.tp2.excepciones.RequerimientosInsuficientes;
+import fiuba.algo3.tp2.excepciones.*;
 import fiuba.algo3.tp2.juego.JuegoCraft;
 import fiuba.algo3.tp2.juego.Usuario;
-import fiuba.algo3.tp2.mapa.Mapa;
-import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.mapa.Tamanio;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.Edificio;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioBarraca;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentralProtos;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentralTerran;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioFabrica;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioPuertoEstelarTerran;
-import fiuba.algo3.tp2.objetosDelMapa.unidades.Unidad;
-
+import fiuba.algo3.tp2.mapa.*;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.*;
+import fiuba.algo3.tp2.objetosDelMapa.unidades.*;
 public class TestUsuario {
 	
 	private JuegoCraft juego;
 	private Usuario user;
 	
 	private EdificioCentralTerran edCentral1;
-	private EdificioCentralProtos edCentral2;
 	
 	@Before
 	public void setUp(){
@@ -47,7 +35,6 @@ public class TestUsuario {
 		juego.iniciarPartida();
 		
 		edCentral1 = (EdificioCentralTerran) juego.jugadores().get(0).edificioCentral();
-		edCentral2 = (EdificioCentralProtos) juego.jugadores().get(1).edificioCentral();
 	}
 	
 	private void pasarRondaDeTurnos(int cantidadTurnos){

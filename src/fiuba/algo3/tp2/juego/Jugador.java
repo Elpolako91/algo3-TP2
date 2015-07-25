@@ -162,7 +162,6 @@ public class Jugador {
 
 	public void agregarUnidad(Unidad unidad) {
 		unidades.add(unidad);
-		this.descubrir(unidad.posicion(), unidad.vision());
 	}
 
 	private boolean hayUnidadTerminada() {

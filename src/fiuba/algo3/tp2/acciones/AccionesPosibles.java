@@ -30,6 +30,7 @@ public class AccionesPosibles {
 		atacarAire = new AccionAtacarAire(unMapa);
 		
 		cargarUnidad = new AccionCargarUnidad(unMapa);
+		descargarUnidad = new AccionDescargarUnidad(unMapa);
 		
 		preguntar = new AccionPreguntar(unMapa);
 	}

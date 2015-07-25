@@ -6,45 +6,40 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fiuba.algo3.tp2.excepciones.*;
-import fiuba.algo3.tp2.juego.JuegoCraft;
-import fiuba.algo3.tp2.juego.Jugador;
-import fiuba.algo3.tp2.mapa.Mapa;
-import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.mapa.Tamanio;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioBarraca;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentralTerran;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentroMineral;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioDeposito;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioFabrica;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioPuertoEstelarTerran;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioRefineria;
+import fiuba.algo3.tp2.juego.*;
+import fiuba.algo3.tp2.mapa.*;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.*;
 
 public class TestJuegoCraftConTerran {
 	
-	private JuegoCraft juego;
-	private Mapa mapa1;
-	private Jugador jugador1;
+	private JuegoCraft juego = new JuegoCraft();
+	private Mapa mapa1 = new Mapa(new Tamanio(10,10));
+	
 	private EdificioCentralTerran edCentral;
 	
 	private Posicion posicionMineral = new Posicion(1,10);
 	private Posicion posicionGasVespeno = new Posicion(10,1);
 	
+	private Jugador jugador1;
+	
 	@Before
 	public void setUp() {
-		juego = new JuegoCraft();
-		mapa1 = new Mapa(new Tamanio(10,10));
-		juego.cargarMapa(mapa1);
+				
 		try {
-			jugador1 = juego.cargarJugador("facu", "rojo", "terran");
+			juego.cargarJugador("facu", "rojo", "terran");
 		} catch (CargaJugadorInvalida e) {}
+		
+		juego.cargarMapa(mapa1);		
 		juego.iniciarPartida();
+		
+		jugador1 = juego.jugadores().get(0);
 		edCentral = (EdificioCentralTerran) jugador1.edificioCentral();
 	}
 	
 	private void pasarTurno(int max){
 		
 		for(int i = 0; i<max; i++){
-			jugador1.pasarTurno();
+			juego.pasarTurno();
 		}
 	}
 	
@@ -65,7 +60,7 @@ public class TestJuegoCraftConTerran {
 			
 		try {
 			EdificioCentroMineral centroDeMineral = edCentral.construirRecolectorMineral();
-			jugador1.construirEdificio(posicionMineral, centroDeMineral);
+			juego.colocarEdificio(centroDeMineral, posicionMineral);
 			
 		} catch (RecursosInsuficientes | PosicionInvalida e) {}
 					
@@ -84,17 +79,17 @@ public class TestJuegoCraftConTerran {
 								
 		try {
 			EdificioRefineria refineria = edCentral.construirRecolectorGasVespeno();
-			jugador1.construirEdificio(posicionGasVespeno, refineria);
+			juego.colocarEdificio(refineria, posicionGasVespeno);
 			
 		} catch (RecursosInsuficientes | PosicionInvalida e) {}
 						
 		assertEquals(jugador1.edificios(), 0);
-			
-		this.pasarTurno(6);
-		assertEquals(jugador1.edificios(), 1);
 		assertEquals(jugador1.recursos().mineral(),900);
 		assertEquals(jugador1.recursos().vespeno(),1000);
 			
+		this.pasarTurno(6);
+		assertEquals(jugador1.edificios(), 1);
+		
 		this.pasarTurno(5);
 		assertEquals(jugador1.recursos().vespeno(),1050);	
 	}
@@ -107,7 +102,7 @@ public class TestJuegoCraftConTerran {
 		try {
 			EdificioDeposito deposito = edCentral.construirAsentamiento();
 			Posicion posicion = new Posicion(5,5);
-			jugador1.construirEdificio(posicion, deposito);
+			juego.colocarEdificio(deposito, posicion);
 			
 		} catch (RecursosInsuficientes | PosicionInvalida e){}		
 			
@@ -124,7 +119,7 @@ public class TestJuegoCraftConTerran {
 		try {
 			EdificioBarraca barraca = edCentral.construirBarraca();
 			Posicion posicion = new Posicion(5,6);
-			jugador1.construirEdificio(posicion, barraca);
+			juego.colocarEdificio(barraca, posicion);
 			
 		} catch (RecursosInsuficientes | PosicionInvalida e) {}
 					
@@ -140,13 +135,13 @@ public class TestJuegoCraftConTerran {
 		try {
 			EdificioBarraca barraca = edCentral.construirBarraca();
 			Posicion posicionBarraca = new Posicion(5,6);
-			jugador1.construirEdificio(posicionBarraca, barraca);
+			juego.colocarEdificio(barraca, posicionBarraca);
 			
 			this.pasarTurno(12);			
 		
 			EdificioFabrica fabrica = edCentral.construirFabrica();
 			Posicion posicionFabrica = new Posicion(1,4);
-			jugador1.construirEdificio(posicionFabrica, fabrica);
+			juego.colocarEdificio(fabrica, posicionFabrica);
 			
 		} catch (RecursosInsuficientes | RequerimientosInsuficientes | PosicionInvalida  e) {	}
 		
@@ -162,19 +157,19 @@ public class TestJuegoCraftConTerran {
 		try {
 			EdificioBarraca barraca = edCentral.construirBarraca();
 			Posicion posicionBarraca = new Posicion(5,6);
-			jugador1.construirEdificio(posicionBarraca, barraca);
+			juego.colocarEdificio(barraca, posicionBarraca);
 
 			this.pasarTurno(12);
 			
 			EdificioFabrica fabrica = edCentral.construirFabrica();
 			Posicion posicionFabrica = new Posicion(1,4);
-			jugador1.construirEdificio(posicionFabrica, fabrica);
+			juego.colocarEdificio(fabrica, posicionFabrica);
 			
 			this.pasarTurno(12);
 			
 			EdificioPuertoEstelarTerran puerto = edCentral.construirPuertoEstelarTerran();
 			Posicion posicionPuerto = new Posicion(1,7);
-			jugador1.construirEdificio(posicionPuerto, puerto);
+			juego.colocarEdificio(puerto, posicionPuerto);
 			
 		} catch (RecursosInsuficientes | RequerimientosInsuficientes | PosicionInvalida e) {}
 		
@@ -192,7 +187,7 @@ public class TestJuegoCraftConTerran {
 		try {
 			EdificioBarraca barraca = edCentral.construirBarraca();
 			Posicion posicion = new Posicion(5,6);
-			jugador1.construirEdificio(posicion, barraca);
+			juego.colocarEdificio(barraca, posicion);
 			
 			this.pasarTurno(12);			
 			barraca.construirMarine();
@@ -211,13 +206,13 @@ public class TestJuegoCraftConTerran {
 		try {
 			EdificioBarraca barraca = edCentral.construirBarraca();
 			Posicion posicionBarraca = new Posicion(5,6);
-			jugador1.construirEdificio(posicionBarraca, barraca);
+			juego.colocarEdificio(barraca, posicionBarraca);
 
 			this.pasarTurno(12);
 			
 			EdificioFabrica fabrica = edCentral.construirFabrica();
 			Posicion posicionFabrica = new Posicion(1,4);
-			jugador1.construirEdificio(posicionFabrica, fabrica);
+			juego.colocarEdificio(fabrica, posicionFabrica);
 			
 			this.pasarTurno(12);			
 			fabrica.crearGolliat();
@@ -239,19 +234,19 @@ public class TestJuegoCraftConTerran {
 		try {
 			EdificioBarraca barraca = edCentral.construirBarraca();
 			Posicion posicionBarraca = new Posicion(5,6);
-			jugador1.construirEdificio(posicionBarraca, barraca);
+			juego.colocarEdificio(barraca, posicionBarraca);
 				
 			this.pasarTurno(12);
 			
 			EdificioFabrica fabrica = edCentral.construirFabrica();
 			Posicion posicionFabrica = new Posicion(1,4);
-			jugador1.construirEdificio(posicionFabrica, fabrica);
+			juego.colocarEdificio(fabrica, posicionFabrica);
 			
 			this.pasarTurno(12);
 			
 			EdificioPuertoEstelarTerran puerto = edCentral.construirPuertoEstelarTerran();
 			Posicion posicionPuerto = new Posicion(1,7);
-			jugador1.construirEdificio(posicionPuerto, puerto);
+			juego.colocarEdificio(puerto, posicionPuerto);
 			
 			this.pasarTurno(10);			
 			puerto.construirEspectro();
@@ -273,19 +268,19 @@ public class TestJuegoCraftConTerran {
 		try {
 			EdificioBarraca barraca = edCentral.construirBarraca();
 			Posicion posicionBarraca = new Posicion(5,6);
-			jugador1.construirEdificio(posicionBarraca, barraca);
+			juego.colocarEdificio(barraca, posicionBarraca);
 			
 			this.pasarTurno(12);
 			
 			EdificioFabrica fabrica = edCentral.construirFabrica();
 			Posicion posicionFabrica = new Posicion(1,4);
-			jugador1.construirEdificio(posicionFabrica, fabrica);
+			juego.colocarEdificio(fabrica, posicionFabrica);
 
 			this.pasarTurno(12);
 			
 			EdificioPuertoEstelarTerran puerto = edCentral.construirPuertoEstelarTerran();
 			Posicion posicionPuerto = new Posicion(1,7);
-			jugador1.construirEdificio(posicionPuerto, puerto);
+			juego.colocarEdificio(puerto, posicionPuerto);
 					
 			this.pasarTurno(10);
 			puerto.construirNaveCiencia();
@@ -307,19 +302,19 @@ public class TestJuegoCraftConTerran {
 		try {
 			EdificioBarraca barraca = edCentral.construirBarraca();
 			Posicion posicionBarraca = new Posicion(5,6);
-			jugador1.construirEdificio(posicionBarraca, barraca);
+			juego.colocarEdificio(barraca, posicionBarraca);
 			
 			this.pasarTurno(12);
 			
 			EdificioFabrica fabrica = edCentral.construirFabrica();
 			Posicion posicionFabrica = new Posicion(1,4);
-			jugador1.construirEdificio(posicionFabrica, fabrica);
+			juego.colocarEdificio(fabrica, posicionFabrica);
 			
 			this.pasarTurno(12);
 			
 			EdificioPuertoEstelarTerran puerto = edCentral.construirPuertoEstelarTerran();
 			Posicion posicionPuerto = new Posicion(1,7);
-			jugador1.construirEdificio(posicionPuerto, puerto);
+			juego.colocarEdificio(puerto, posicionPuerto);
 					
 			this.pasarTurno(10);
 			puerto.construirNaveTransporte();

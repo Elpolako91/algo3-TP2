@@ -20,6 +20,7 @@ import fiuba.algo3.tp2.objetosDelMapa.RecursoMineral;
 import fiuba.algo3.tp2.objetosDelMapa.Terreno;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioCentroMineral;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioDeposito;
+import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioEnConstruccion;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioRefineria;
 import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadEspectro;
 import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadGolliat;
@@ -32,7 +33,9 @@ public class TestAccionColocar {
 	
 	private AccionColocarEnSuelo colocarSuelo;
 	private AccionColocarUnidad	colocarUnidad;
-	private AccionColocarEdificio colocarEdificio;	
+	private AccionColocarEdificio colocarEdificio;
+	
+	private EdificioEnConstruccion edificioEnConstruccion = new EdificioEnConstruccion(new EdificioDeposito());
 		
 	@Before
 	public void setUp(){
@@ -336,41 +339,40 @@ public class TestAccionColocar {
 	}
 	
 	@Test
-	public void testNoDebeColocarEdificioSobreOtroEdificio(){
+	public void testNoDebeColocarEdificioEnConstruccionSobreOtroIgual(){
 				
-		EdificioDeposito edificio1 = new EdificioDeposito();
-		EdificioDeposito edificio2 = new EdificioDeposito();
+		EdificioEnConstruccion edificio2 = new EdificioEnConstruccion( new EdificioDeposito());
 		Posicion posicion1 = new Posicion(5,5);
 		Posicion posicion2 = new Posicion(6,6);
 		
 		try {
 			colocarSuelo.colocarTerrenoEnTodoElMapa();
-			colocarEdificio.realizar(posicion1, edificio1);
+			colocarEdificio.realizar(posicion1, edificioEnConstruccion);
 			colocarEdificio.realizar(posicion2, edificio2);
 			
 		} catch (PosicionInvalida e) {}
 		
 				
 		try {
-			assertTrue(preguntar.hayEnTierra(posicion1, edificio1));
-			assertTrue(preguntar.hayEnTierra(posicion1.obtenerNuevaMovidaEn(1, 0), edificio1));
-			assertTrue(preguntar.hayEnTierra(posicion1.obtenerNuevaMovidaEn(0, 1), edificio1));
-			assertTrue(preguntar.hayEnTierra(posicion2, edificio1));
+			assertTrue(preguntar.hayEnTierra(posicion1, edificioEnConstruccion));
+			assertTrue(preguntar.hayEnTierra(posicion1.obtenerNuevaMovidaEn(1, 0), edificioEnConstruccion));
+			assertTrue(preguntar.hayEnTierra(posicion1.obtenerNuevaMovidaEn(0, 1), edificioEnConstruccion));
+			assertTrue(preguntar.hayEnTierra(posicion2, edificioEnConstruccion));
 			
 			assertFalse(preguntar.estaOcupadoTierra(posicion2.obtenerNuevaMovidaEn(1, 0)));
 			assertFalse(preguntar.estaOcupadoTierra(posicion2.obtenerNuevaMovidaEn(0, 1)));
 			assertFalse(preguntar.estaOcupadoTierra(posicion2.obtenerNuevaMovidaEn(1, 1)));
 			
-			assertEquals(edificio1.posicion(), posicion1);
+			assertEquals(edificioEnConstruccion.posicion(), posicion1);
 			assertEquals(edificio2.posicion(), null);
 			
 		} catch (PosicionInvalida e) {}
 	}
 	
 	@Test
-	public void testNoDebeColocarEdificioSobreOtroEdificioBis(){
+	public void testNoDebeColocarEdificioEnConstruccionSobreOtroIgualBis(){
 				
-		EdificioDeposito edificio1 = new EdificioDeposito();
+		EdificioEnConstruccion edificio1 = new EdificioEnConstruccion( new EdificioDeposito());
 		EdificioDeposito edificio2 = new EdificioDeposito();
 		Posicion posicion1 = new Posicion(5,5);
 		Posicion posicion2 = new Posicion(6,6);
@@ -378,7 +380,7 @@ public class TestAccionColocar {
 		try {
 			colocarSuelo.colocarTerrenoEnTodoElMapa();
 			colocarEdificio.realizar(posicion2, edificio2);
-			colocarEdificio.realizar(posicion1, edificio1);
+			colocarEdificio.realizar(posicion1, edificioEnConstruccion);
 			
 		} catch (PosicionInvalida e) {}
 						
@@ -441,10 +443,9 @@ public class TestAccionColocar {
 	}
 	
 	@Test
-	public void testNoDebeColocarEdificioSobreUnidadTerrestre(){
+	public void testNoDebeColocarEdificioEnConstruccionSobreUnidadTerrestre(){
 				
 		UnidadMarine unidadTerrestre = new UnidadMarine();
-		EdificioDeposito edificio = new EdificioDeposito();
 		
 		Posicion posicion1 = new Posicion(5,5);
 		Posicion posicion2 = new Posicion(6,6);
@@ -452,7 +453,7 @@ public class TestAccionColocar {
 		try {
 			colocarSuelo.colocarTerrenoEnTodoElMapa();
 			colocarUnidad.realizar(posicion2, unidadTerrestre);
-			colocarEdificio.realizar(posicion1, edificio);
+			colocarEdificio.realizar(posicion1, edificioEnConstruccion);
 			
 		} catch (PosicionInvalida e) {}
 		
@@ -461,7 +462,7 @@ public class TestAccionColocar {
 			assertFalse(preguntar.estaOcupadoAire(posicion1.obtenerNuevaMovidaEn(1, 0)));
 			assertFalse(preguntar.estaOcupadoAire(posicion1.obtenerNuevaMovidaEn(0, 1)));
 			
-			assertEquals(edificio.posicion(), null);
+			assertEquals(edificioEnConstruccion.posicion(), null);
 			
 			assertTrue(preguntar.hayEnTierra(posicion2, unidadTerrestre));
 			
@@ -469,22 +470,21 @@ public class TestAccionColocar {
 	}
 	
 	@Test
-	public void testColocarEdificioYUnidadAerea(){
+	public void testColocarEdificioEnConstruccionYUnidadAerea(){
 				
 		UnidadEspectro unidadAerea = new UnidadEspectro();
-		EdificioDeposito edificio = new EdificioDeposito();
 		
 		Posicion posicion = new Posicion(5,5);
 		
 		try {
 			colocarSuelo.colocarTerrenoEnTodoElMapa();
 			colocarUnidad.realizar(posicion, unidadAerea);
-			colocarEdificio.realizar(posicion, edificio);
+			colocarEdificio.realizar(posicion, edificioEnConstruccion);
 			
 		} catch (PosicionInvalida e) {}
 		
 		try {
-			assertTrue(preguntar.hayEnTierra(posicion, edificio));
+			assertTrue(preguntar.hayEnTierra(posicion, edificioEnConstruccion));
 			assertTrue(preguntar.hayEnAire(posicion, unidadAerea));
 			
 		} catch (PosicionInvalida e) {}		

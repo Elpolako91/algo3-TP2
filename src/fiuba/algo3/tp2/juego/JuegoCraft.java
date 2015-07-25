@@ -74,7 +74,9 @@ public class JuegoCraft extends Observable{
 			
 		try {
 			acciones.colocarEdificio().realizar(new Posicion(1,1), jugadores.get(0).edificioCentral());
-			acciones.colocarEdificio().realizar(new Posicion(mapa.tamanio().enX()-2, mapa.tamanio().enY()-2), jugadores.get(1).edificioCentral());
+			
+			if (jugadores.size() == 2)
+				acciones.colocarEdificio().realizar(new Posicion(mapa.tamanio().enX()-2, mapa.tamanio().enY()-2), jugadores.get(1).edificioCentral());
 			
 		} catch (PosicionInvalida e) {}	
 		
