@@ -96,7 +96,6 @@ public class ControladorMouseVistaMapa extends MouseAdapter {
 										user.objetoSeleccionado(contenido);
 								
 									}else{
-								
 										user.objetoSeleccionado(contenido);
 
 								}
@@ -106,6 +105,7 @@ public class ControladorMouseVistaMapa extends MouseAdapter {
 				}
 			}
 		}
+		user.inicializar();
 		modelo.actualizarObservadores();
 	}
 }

@@ -17,12 +17,15 @@ public class AccionDescargarUnidad extends AccionDelJugador{
 	}
 
 	@Override
-	public void realizar(Posicion unaPosicion, ObjetoDelMapa objeto) throws PosicionInvalida {
+	public void realizar(Posicion unaPosicion, ObjetoDelMapa objeto) {
 		
 		UnidadTransporte transporte = (UnidadTransporte) objeto;
 		UnidadTerrestre unidad = transporte.descargarUnidad();
 				
-		colocarUnidad.realizar(transporte.posicion(), unidad);						
-		transporte.cargar(unidad);		
+		try {
+			colocarUnidad.realizar(transporte.posicion(), unidad);
+		} catch (PosicionInvalida e) {
+			transporte.cargar(unidad);	
+		}			
 	}
 }

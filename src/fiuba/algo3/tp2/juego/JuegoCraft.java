@@ -6,7 +6,7 @@ import java.util.Observable;
 
 import fiuba.algo3.tp2.acciones.AccionesPosibles;
 import fiuba.algo3.tp2.excepciones.CargaJugadorInvalida;
-import fiuba.algo3.tp2.excepciones.NoHayEdificiosTerminados;
+import fiuba.algo3.tp2.excepciones.NoHayObjetosTerminados;
 import fiuba.algo3.tp2.excepciones.PosicionInvalida;
 import fiuba.algo3.tp2.excepciones.UnidadEnemigaSeleccionada;
 import fiuba.algo3.tp2.excepciones.UnidadMovimientoTerminado;
@@ -99,7 +99,7 @@ public class JuegoCraft extends Observable{
 				acciones.colocarEdificio().realizar(edificio.posicion(), edificio.edificioTerminado());
 				this.jugadorActual().agregarEdificio(edificio.edificioTerminado());				
 			}			
-		} catch (NoHayEdificiosTerminados | PosicionInvalida e) {}
+		} catch (NoHayObjetosTerminados | PosicionInvalida e) {}
 		
 		try {
 			while (true){				
@@ -117,7 +117,7 @@ public class JuegoCraft extends Observable{
 				this.jugadorActual().agregarUnidad(unidad);
 		
 			}
-		} catch (NoHayEdificiosTerminados | PosicionInvalida e) {}
+		} catch (NoHayObjetosTerminados | PosicionInvalida e) {}
 					
 		turno.pasarTurno();
 		
@@ -132,10 +132,24 @@ public class JuegoCraft extends Observable{
 
 	public void colocarEdificio(Edificio edificio, Posicion posicion) throws PosicionInvalida {
 		
-		EnConstruccion edificioEnConstruccion = edificio.enConstruccion();
-		
-		acciones.colocarEdificio().realizar(posicion, edificioEnConstruccion);
-		this.jugadorActual().agregarEdificioEnConstruccion(edificioEnConstruccion);
+		if(this.jugadorActual().hayVision(posicion)){
+			
+			EnConstruccion edificioEnConstruccion = edificio.enConstruccion();
+			try{
+				acciones.colocarEdificio().realizar(posicion, edificioEnConstruccion);
+				this.jugadorActual().agregarEdificioEnConstruccion(edificioEnConstruccion);	
+			
+			}catch(PosicionInvalida e){
+				
+				this.jugadorActual().recursos().agregar(edificio.costoRecursos());
+				throw e;
+			}			
+			
+		}
+		else{
+			this.jugadorActual().recursos().agregar(edificio.costoRecursos());
+			throw new PosicionInvalida();	
+		}				
 	}
 
 	public void moverUnidad(Unidad unidad, Posicion posicion) throws UnidadEnemigaSeleccionada, PosicionInvalida, UnidadMovimientoTerminado {

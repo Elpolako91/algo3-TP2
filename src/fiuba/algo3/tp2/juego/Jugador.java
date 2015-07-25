@@ -3,7 +3,7 @@ package fiuba.algo3.tp2.juego;
 import java.util.ArrayList;
 import java.util.List;
 
-import fiuba.algo3.tp2.excepciones.NoHayEdificiosTerminados;
+import fiuba.algo3.tp2.excepciones.NoHayObjetosTerminados;
 import fiuba.algo3.tp2.mapa.Posicion;
 import fiuba.algo3.tp2.mapa.Tamanio;
 import fiuba.algo3.tp2.mapa.Vision;
@@ -126,7 +126,7 @@ public class Jugador {
 		return false;
 	}
 
-	public EnConstruccion obtenerEdificioTerminado() throws NoHayEdificiosTerminados {			
+	public EnConstruccion obtenerEdificioTerminado() throws NoHayObjetosTerminados {			
 		
 		if(this.hayEdificiosTerminados()){
 			
@@ -141,11 +141,11 @@ public class Jugador {
 					
 					return edificio;
 			}
-			throw new NoHayEdificiosTerminados();
+			throw new NoHayObjetosTerminados();
 				
 		}
 		else
-			throw new NoHayEdificiosTerminados();
+			throw new NoHayObjetosTerminados();
 	}
 
 	public void agregarEdificio(Edificio edificio) {
@@ -175,7 +175,7 @@ public class Jugador {
 		return false;
 	}
 	
-	public Unidad obtenerUnidadTerminada() throws NoHayEdificiosTerminados {
+	public Unidad obtenerUnidadTerminada() throws NoHayObjetosTerminados {
 		
 		if(this.hayUnidadTerminada()){
 			
@@ -187,7 +187,7 @@ public class Jugador {
 					return unidad;
 				}			
 		}		
-		throw new NoHayEdificiosTerminados();			
+		throw new NoHayObjetosTerminados();			
 	}
 
 	public boolean contieneUnidad(Unidad unidad) {

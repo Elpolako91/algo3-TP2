@@ -10,8 +10,6 @@ import fiuba.algo3.tp2.objetosDelMapa.RecursoGasVespeno;
 import fiuba.algo3.tp2.objetosDelMapa.RecursoMineral;
 import fiuba.algo3.tp2.objetosDelMapa.Terreno;
 import fiuba.algo3.tp2.objetosDelMapa.Terrestre;
-import fiuba.algo3.tp2.objetosDelMapa.edificios.Edificio;
-import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadAerea;
 import fiuba.algo3.tp2.objetosDelMapa.unidades.UnidadTerrestre;
 
 

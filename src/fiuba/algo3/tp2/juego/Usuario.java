@@ -32,7 +32,17 @@ public class Usuario {
 	}
 
 	public void pasarTurno() {
+		this.inicializar();
 		juego.pasarTurno();
+	}
+
+	public void inicializar() {
+		colocarEdificio = false;
+		mover= false;
+		atacarTierra = false;
+		atacarAire = false;
+		cargarUnidad = false;
+		descargarUnidad = false;		
 	}
 
 	public void colocarEdificio(Edificio edificio, Posicion posicion) throws PosicionInvalida {
