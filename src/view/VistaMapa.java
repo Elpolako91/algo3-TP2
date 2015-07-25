@@ -23,6 +23,7 @@ import fiuba.algo3.tp2.excepciones.PosicionInvalida;
 import fiuba.algo3.tp2.juego.JuegoCraft;
 import fiuba.algo3.tp2.juego.Usuario;
 import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.*;
 import fiuba.algo3.tp2.mapa.Tamanio;
 
 
@@ -56,7 +57,7 @@ public class VistaMapa extends JFrame implements Observer {
 		contentPane.setLayout(null);
 		
 		Tamanio tamanio = new Tamanio(limiteMapaX/cteTamanioBoton,limiteMapaY/cteTamanioBoton);
-		Mapa map = new Mapa(tamanio);
+		Mapa map = new Mapa1(tamanio);
 		this.modelo = modelo;		
 		this.modelo.cargarMapa(map);
 		this.modelo.iniciarPartida();

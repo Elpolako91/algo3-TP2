@@ -12,7 +12,6 @@ import fiuba.algo3.tp2.excepciones.UnidadEnemigaSeleccionada;
 import fiuba.algo3.tp2.excepciones.UnidadMovimientoTerminado;
 import fiuba.algo3.tp2.mapa.Mapa;
 import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.objetosDelMapa.*;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.*;
 import fiuba.algo3.tp2.objetosDelMapa.unidades.*;
 
@@ -56,14 +55,9 @@ public class JuegoCraft extends Observable{
 	}
 	
 	public void cargarMapa(Mapa unMapa) {
-		mapa = unMapa;
-				
-		acciones = new AccionesPosibles(unMapa);
 		
-		// esto de a continuacion no iria
-		acciones.colocarEnSuelo().colocarTerrenoEnTodoElMapa();				
-		acciones.colocarEnSuelo().colocarRecurso(new Posicion(1, mapa.tamanio().enY()), new RecursoMineral(1000));
-		acciones.colocarEnSuelo().colocarRecurso(new Posicion(mapa.tamanio().enX(), 1), new RecursoGasVespeno(1000));				
+		mapa = unMapa;				
+		acciones = new AccionesPosibles(unMapa);
 	}
 	
 	public void iniciarPartida() {

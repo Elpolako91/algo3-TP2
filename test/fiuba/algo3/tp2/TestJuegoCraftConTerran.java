@@ -13,7 +13,7 @@ import fiuba.algo3.tp2.objetosDelMapa.edificios.*;
 public class TestJuegoCraftConTerran {
 	
 	private JuegoCraft juego = new JuegoCraft();
-	private Mapa mapa1 = new Mapa(new Tamanio(10,10));
+	private Mapa mapa1 = new MapaDePrueba();
 	
 	private EdificioCentralTerran edCentral;
 	

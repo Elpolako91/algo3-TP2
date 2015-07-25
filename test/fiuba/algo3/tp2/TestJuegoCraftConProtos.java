@@ -12,8 +12,8 @@ import fiuba.algo3.tp2.excepciones.RequerimientosInsuficientes;
 import fiuba.algo3.tp2.juego.JuegoCraft;
 import fiuba.algo3.tp2.juego.Jugador;
 import fiuba.algo3.tp2.mapa.Mapa;
+import fiuba.algo3.tp2.mapa.MapaDePrueba;
 import fiuba.algo3.tp2.mapa.Posicion;
-import fiuba.algo3.tp2.mapa.Tamanio;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioAcceso;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioArchivosTemplarios;
 import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioAsimilador;
@@ -25,7 +25,7 @@ import fiuba.algo3.tp2.objetosDelMapa.edificios.EdificioPuertoEstelarProtos;
 public class TestJuegoCraftConProtos {
 
 	private JuegoCraft juego = new JuegoCraft();
-	private Mapa mapa1 = new Mapa(new Tamanio(10,10));
+	private Mapa mapa1 = new MapaDePrueba();
 	private Jugador jugador1;
 	private EdificioCentralProtos edCentral;
 	

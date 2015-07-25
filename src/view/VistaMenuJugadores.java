@@ -240,9 +240,7 @@ public class VistaMenuJugadores extends JFrame {
 						gritoInicio.reproducir();
 						vista3.setVisible(true);
 						dispose();
-					} catch (Exception e1) {
-						System.out.println("sos una Puta"); 
-					}
+					} catch (Exception e1) {}
 			}
 		});
 		btnComenzar.setFont(new Font("Tahoma", Font.PLAIN, 20));
